@@ -49,14 +49,17 @@ export default component$(() => {
             </Link>
 
             <nav class={'flex w-[100%]'}>
-                <ul class={`ml-[146px] flex flex-row items-center`}>
+                <ul class={`
+                    hidden lg:flex flex-row items-center
+                    ml-[146px] lg:ml-[100px]
+                `}>
                     {
                         navigation.map((menuItem) => {
                             return <li key={menuItem.id} class={`
                             p-[5px] pl-[10px] pr-[10px] 
                             font-medium
                             text-grayscale-100 dark:text-grayscale-10
-                            transition-all
+                            transition-all 
                             hover:text-primary dark:hover:text-primary
                         `}>
                                 <Link href={menuItem.link}>

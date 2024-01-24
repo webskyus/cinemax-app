@@ -3,9 +3,9 @@ import type {RequestHandler} from "@builder.io/qwik-city";
 
 import Header from "../components/starter/header/header";
 import {Sidebar} from "~/components/starter/sidebar";
+import {Widgets} from "~/components/starter/widgets";
 
 import styles from "./styles.css?inline";
-import {SIZES} from "~/utils/sizes";
 
 
 export const onGet: RequestHandler = async ({cacheControl}) => {
@@ -20,19 +20,22 @@ export const onGet: RequestHandler = async ({cacheControl}) => {
 };
 
 export default component$(() => {
-    const MAIN_PL = useSignal(String(SIZES.SIDEBAR + SIZES.MAIN_PL));
-    const MAIN_PR = useSignal(String(SIZES.WIDGETS + SIZES.MAIN_PR));
-    const MAIN_PT = useSignal(String(SIZES.MAIN_PT));
-    const MAIN_PB = useSignal(String(SIZES.MAIN_PB));
-
     useStyles$(styles);
 
     return (
         <>
             <Header/>
-            <main class={`h-[100%] pl-[${MAIN_PL.value}px] pr-[${MAIN_PR.value}px] pt-[${MAIN_PT.value}px] pb-[${MAIN_PB}px]`}>
-                {<Sidebar/>}
+            <main class={`
+                h-[100%] pl-[15px] xl:pl-[272px] pr-[15] 2xl:pr-[272px] 
+                pt-[15px] pb-[15px] max-w-[2200px]
+                overflow-auto scrollbar-hide
+                [@media(min-width:2720px)]:pl-[15px]
+                [@media(min-width:2720px)]:pr-[15px]
+                [@media(min-width:2720px)]:mx-[auto]
+            `}>
+                <Sidebar/>
                 <Slot/>
+                <Widgets/>
             </main>
         </>
     );
