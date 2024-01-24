@@ -3,7 +3,6 @@ import type {RequestHandler} from "@builder.io/qwik-city";
 
 import Header from "../components/starter/header/header";
 import {Sidebar} from "~/components/starter/sidebar";
-import {Widgets} from "~/components/starter/widgets";
 
 import styles from "./styles.css?inline";
 
@@ -26,16 +25,15 @@ export default component$(() => {
         <>
             <Header/>
             <main class={`
-                h-[100%] pl-[15px] xl:pl-[272px] pr-[15] 2xl:pr-[272px] 
-                pt-[15px] pb-[15px] max-w-[2200px]
+                h-[100%] pl-[24px] xl:pl-[293px] pr-[24px]
+                pt-[33px] pb-[33px] max-w-[2200px]
                 overflow-auto scrollbar-hide
-                [@media(min-width:2720px)]:pl-[15px]
-                [@media(min-width:2720px)]:pr-[15px]
-                [@media(min-width:2720px)]:mx-[auto]
+                [@media(min-width:2620px)]:pl-[15px]
+                [@media(min-width:2620px)]:pr-[15px]
+                [@media(min-width:2620px)]:mx-[auto]
             `}>
                 <Sidebar/>
                 <Slot/>
-                <Widgets/>
             </main>
         </>
     );

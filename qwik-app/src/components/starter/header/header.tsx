@@ -30,15 +30,15 @@ export default component$(() => {
         },
         {
             id: 5,
-            name: 'Animation',
-            link: URLS.ANIMATION
+            name: 'Cartoons',
+            link: URLS.CARTOONS
         }
     ]);
 
     return (
         <header class={` 
         flex items-center
-        pl-[56px] pr-[56px] pt-[22px] pb-[22px]
+        pl-[24px] pr-[24px] pt-[22px] pb-[22px]
         bg-grayscale-10 dark:bg-additional-dark-smooth
     `}>
             <Link href={URLS.MAIN} title="CineMax Logo">
