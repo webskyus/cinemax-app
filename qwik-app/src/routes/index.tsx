@@ -3,7 +3,7 @@ import type {DocumentHead} from "@builder.io/qwik-city";
 
 export default component$(() => {
     return (
-        <>
+        <div class={"text-white"}>
             <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate eligendi esse explicabo
                 fugiat incidunt ipsa itaque modi molestiae molestias nemo nesciunt nobis optio placeat possimus, quae
                 recusandae rerum vel.
@@ -204,7 +204,7 @@ export default component$(() => {
                 maiores minima nulla officiis optio praesentium ratione rerum similique tempora, temporibus tenetur ut
                 voluptate voluptates?
             </div>
-        </>
+        </div>
     );
 });
 
