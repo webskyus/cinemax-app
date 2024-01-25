@@ -2,6 +2,7 @@ import {$, component$, Signal, useSignal, useStylesScoped$, useTask$, useVisible
 import styles from "./style.css?inline";
 import {Moon} from "~/components/starter/icons/moon";
 import {Sun} from "~/components/starter/icons/sun";
+import {QWIK_LOADER} from "@builder.io/qwik/loader";
 
 const enum ThemeIndex {
     LIGHT = 0,
@@ -15,12 +16,13 @@ const enum ThemeName {
 
 export const ThemeSwitch = component$(() => {
     const activeThemeIndex = useSignal<ThemeIndex>(ThemeIndex.LIGHT);
+
     useStylesScoped$(styles);
 
     useVisibleTask$(async () => {
         const theme = document.documentElement.className;
 
-        if (theme === ThemeName.DARK) {
+        if (theme.includes(ThemeName.DARK)) {
             activeThemeIndex.value = ThemeIndex.DARK;
         }
     }, {strategy: "document-ready"})
@@ -28,7 +30,7 @@ export const ThemeSwitch = component$(() => {
     const handleSwitchTheme = $((themeIndex: ThemeIndex) => {
         const theme = document.documentElement.className;
 
-        if (theme === ThemeName.LIGHT && themeIndex === ThemeIndex.DARK) {
+        if (theme.includes(ThemeName.LIGHT) && themeIndex === ThemeIndex.DARK) {
             document.documentElement.className = ThemeName.DARK;
 
             localStorage.setItem("theme", ThemeName.DARK);
@@ -50,7 +52,7 @@ export const ThemeSwitch = component$(() => {
     }
 
     return (
-        <ul class={`relative flex items-stretch p-[5px] bg-grayscale-30 dark:bg-primary rounded-[6px] transition-all`}>
+        <ul class={`relative flex items-stretch p-[5px] bg-grayscale-30 dark:bg-label-gradient rounded-[6px] transition-all`}>
             <li class={`
                     absolute z-0 top-[5px] bottom-[5px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'left-[calc(50%-5px)]', 'left-[5px]')}
                     flex items-center w-[50%] 

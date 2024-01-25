@@ -5,32 +5,33 @@ import {Logo} from "../icons/logo";
 import {URLS} from "~/utils/urls";
 import {Search} from "~/components/starter/icons/search";
 import {ThemeSwitch} from "~/components/theme-switcher";
+import {CATEGORY} from "~/components/label";
 
 export default component$(() => {
     const navigation = useStore([
         {
             id: 1,
-            name: 'Movies',
+            name: CATEGORY.MOVIES,
             link: URLS.MOVIES
         },
         {
             id: 2,
-            name: 'TV Shows',
+            name: CATEGORY.TV_SHOWS,
             link: URLS.TV_SHOWS
         },
         {
             id: 3,
-            name: 'Anime',
+            name: CATEGORY.ANIME,
             link: URLS.ANIME
         },
         {
             id: 4,
-            name: 'People',
+            name: CATEGORY.PEOPLE,
             link: URLS.PEOPLE
         },
         {
             id: 5,
-            name: 'Cartoons',
+            name: CATEGORY.CARTOONS,
             link: URLS.CARTOONS
         }
     ]);
