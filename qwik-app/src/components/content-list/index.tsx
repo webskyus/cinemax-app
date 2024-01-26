@@ -411,11 +411,19 @@ interface ContentListProps {
 }
 
 export const ContentList = component$((props: ContentListProps) => {
-    return <section class={`pt-[12px] pb-[12px]`}>
-        <h2 class={`mb-[24px]`}>Movies</h2>
+    return <section class={`pt-[24px] pb-[24px]`}>
+        <h2 class={`
+            mb-[24px] 
+            font-bold text-h3-sm sm:text-h3-lg
+            text-transparent bg-clip-text bg-gradient-to-br from-primary to-grayscale-70
+        `}>Movies</h2>
 
         <section class={`
-                flex flex-wrap 
+               grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
+               
+               [@media(min-width:1600px)]:grid-cols-5
+               [@media(min-width:1919px)]:grid-cols-6
+               [@media(min-width:2419px)]:grid-cols-8
         `}>
             {
                 moviesList.results.map((movie: Movie) => {

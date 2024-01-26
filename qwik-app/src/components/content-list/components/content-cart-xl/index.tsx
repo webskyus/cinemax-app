@@ -1,4 +1,6 @@
 import {component$} from "@builder.io/qwik";
+import { Image } from '@unpic/qwik';
+import {Link} from "@builder.io/qwik-city";
 
 export interface Movie {
     adult: boolean,
@@ -30,7 +32,16 @@ export const ContentCartXL = component$((props: ContentCartXLProps) => {
         }
     } = props;
 
-    return <article class={`relative mr-[10px] mb-[10px]`}>
-        <img src={`https://image.tmdb.org/t/p/w400/${poster_path}`} width={314} height={472} alt="Movie poster"/>
-    </article>
+    return <Link href={'/'} class={`relative hover:scale-[105%] transition-all`}>
+            <Image src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                   layout="constrained"
+                   width={400}
+                   height={600}
+                   class={`
+                        [@media(min-width:2419px)]:!max-w-[800px]
+                        [@media(min-width:2419px)]:!max-h-[1000px]
+                   `}
+                   alt="Movie poster"
+            />
+        </Link>
 })

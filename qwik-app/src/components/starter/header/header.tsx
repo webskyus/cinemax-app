@@ -72,12 +72,12 @@ export default component$(() => {
                 </ul>
 
                 <ul class={`flex flex-row items-center ml-auto`}>
-                    <li class={`mr-[20px]`}>
+                    <li class={`sm:mr-[20px]`}>
                         <Link href={URLS.SEARCH} title={"Search..."}>
                             <Search class={`fill-background dark:fill-white`}/>
                         </Link>
                     </li>
-                    <li>
+                    <li class={`hidden sm:flex`}>
                         <ThemeSwitch/>
                     </li>
                 </ul>

@@ -24,16 +24,16 @@ export const HeadBanner = component$(() => {
             pr-[12px]
         `}>
             <Label type={CATEGORY.TV_SHOWS}/>
-            <h1 class={'mt-auto mb-[12px] font-bold text-h2-lg'}>Avengers: Endgame</h1>
+            <h1 class={'mt-auto mb-[12px] font-bold text-h2-sm sm:text-h2-lg'}>Avengers: Endgame</h1>
 
             <ul class={`
-                flex items-center mb-[12px]
+                flex flex-wrap sm:flex-nowrap items-center mb-[12px]
                 text-grayscale-50 font-semibold
             `}>
-                <li class={`mr-[10px]`}>1 Season</li>
-                <li class={`mr-[10px]`}>6 Episodes</li>
-                <li class={`mr-[10px]`}>Superhero</li>
-                <li class={`mr-[10px]`}>Marvel</li>
+                <li class={`m-[4px] sm:mr-[12px]`}>1 Season</li>
+                <li class={`m-[4px] sm:mr-[12px]`}>6 Episodes</li>
+                <li class={`m-[4px] sm:mr-[12px]`}>Superhero</li>
+                <li class={`m-[4px] sm:mr-[12px]`}>Marvel</li>
             </ul>
         </article>
 
