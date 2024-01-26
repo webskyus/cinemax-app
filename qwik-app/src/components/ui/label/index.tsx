@@ -14,9 +14,9 @@ interface Props {
 
 export const Label = component$((props: Props) => {
     return <article class={`
-        inline-block 
-        p-[5px] pl-[10px] pr-[10px] mb-[48px]
-        bg-label-gradient
+        inline-block mb-[12px] 
+        font-semibold
+        
     `}>
         {props.type}
     </article>

@@ -1,9 +1,13 @@
 import {component$} from "@builder.io/qwik";
-import {CATEGORY, Label} from "~/components/label";
+import {CATEGORY, Label} from "../ui/label";
+import {Play} from "~/components/starter/icons/play";
+import {Watchlist} from "~/components/starter/icons/watchlist";
+import {EyeOff} from "~/components/starter/icons/eye-off";
+import {Button, BUTTON_TYPE} from "~/components/ui/button";
 
 export const HeadBanner = component$(() => {
     return <section class={`
-        relative 
+        relative flex flex-col
         w-[100%] min-h-[400px] p-[24px]
         bg-pink-300 bg-head-banner bg-no-repeat bg-center bg-cover
         rounded-[6px]
@@ -16,43 +20,37 @@ export const HeadBanner = component$(() => {
         [@media(min-width:2400px)]:h-[1000px]
     `}>
         <article class={`
-            relative z-10 
-            flex-col h-[100%] pr-[12px]
+            relative z-10 mt-auto mb-[32px]
+            h-[100%] pr-[12px]
         `}>
             <Label type={CATEGORY.TV_SHOWS}/>
-            <h1 class={'mt-auto mb-[12px] font-bold text-h1-lg'}>Avengers: Endgame</h1>
+            <h1 class={'mt-auto mb-[12px] font-bold text-h2-lg'}>Avengers: Endgame</h1>
 
             <ul class={`
                 flex items-center mb-[12px]
                 text-grayscale-50 font-semibold
             `}>
-                <li class={`mr-[10px]`}>Popular</li>
-                <li class={`mr-[10px]`}>6.8</li>
-                <li class={`mr-[10px]`}>2022</li>
-                <li class={`mr-[10px]`}>приключения боевик Испания</li>
-                <li class={`mr-[10px]`}>1ч 56мин</li>
-                <li class={`mr-[10px]`}>12+</li>
+                <li class={`mr-[10px]`}>1 Season</li>
+                <li class={`mr-[10px]`}>6 Episodes</li>
+                <li class={`mr-[10px]`}>Superhero</li>
+                <li class={`mr-[10px]`}>Marvel</li>
             </ul>
-
-            <p class={`w-[55%] text-h6-md line`}>
-                Отчаянные авантюристы ищут золото Магеллана. Том Холланд и Марк Уолберг в блокбастере по культовой
-                видеоигре
-            </p>
-
-            <button>Watch</button>
-            <button>Add to favorites</button>
-            <button>Watched</button>
         </article>
 
-        <nav class={`hidden`}>
-            <ul>
-                <li>
-                    <button>About</button>
-                </li>
-                <li>
-                    <button>Details</button>
-                </li>
-            </ul>
-        </nav>
+
+     <nav class={`relative z-10 flex items-center`}>
+         <Button>
+             <Play width={20} height={20} class={`mr-[12px]`}/>
+             Watch
+         </Button>
+
+         <Button customClass={`ml-[12px] mr-[12px]`} type={BUTTON_TYPE.TEXT}>
+            <Watchlist class={`hover:animate-pulse`} width={20} height={20}/>
+        </Button>
+
+         <Button type={BUTTON_TYPE.TEXT}>
+            <EyeOff class={`hover:animate-pulse`} width={20} height={20}/>
+        </Button>
+     </nav>
     </section>
 })

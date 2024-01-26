@@ -5,7 +5,7 @@ import {Logo} from "../icons/logo";
 import {URLS} from "~/utils/urls";
 import {Search} from "~/components/starter/icons/search";
 import {ThemeSwitch} from "~/components/theme-switcher";
-import {CATEGORY} from "~/components/label";
+import {CATEGORY} from "../../ui/label";
 
 export default component$(() => {
     const navigation = useStore([
