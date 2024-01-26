@@ -1,10 +1,18 @@
 /** @type {import("tailwindcss").Config} */
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
     extend: {
+      background: {
+        "label-gradient": "var(--color-label-gradient)",
+      },
+      backgroundImage: {
+        "head-banner": `url(/img/banner.jpg)`,
+        "label-gradient": "var(--color-label-gradient)",
+      },
       fontFamily: {
         Inter: ["Inter", ...defaultTheme.fontFamily.sans],
       },

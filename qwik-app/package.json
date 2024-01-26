@@ -44,6 +44,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
+    "@unpic/qwik": "^0.0.39",
     "sharp": "^0.33.2",
     "tailwind-scrollbar-hide": "^1.1.7"
   }

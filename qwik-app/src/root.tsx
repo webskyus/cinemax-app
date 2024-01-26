@@ -37,15 +37,6 @@ export default component$(() => {
                                 setTheme('light');
                             }
                         })();
-                            
-                        window.addEventListener('load', function() {
-                            var systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                            var themeSwitch = document.getElementById('hide-checkbox');
-                            
-               
-                            
-                            themeSwitch.checked = Boolean(localStorage.getItem('theme') !== 'light');
-                        });
                   `}/>
             </head>
             <body lang="en">

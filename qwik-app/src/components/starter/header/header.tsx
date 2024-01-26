@@ -5,32 +5,33 @@ import {Logo} from "../icons/logo";
 import {URLS} from "~/utils/urls";
 import {Search} from "~/components/starter/icons/search";
 import {ThemeSwitch} from "~/components/theme-switcher";
+import {CATEGORY} from "../../ui/label";
 
 export default component$(() => {
     const navigation = useStore([
         {
             id: 1,
-            name: 'Movies',
+            name: CATEGORY.MOVIES,
             link: URLS.MOVIES
         },
         {
             id: 2,
-            name: 'TV Shows',
+            name: CATEGORY.TV_SHOWS,
             link: URLS.TV_SHOWS
         },
         {
             id: 3,
-            name: 'Anime',
+            name: CATEGORY.ANIME,
             link: URLS.ANIME
         },
         {
             id: 4,
-            name: 'People',
+            name: CATEGORY.PEOPLE,
             link: URLS.PEOPLE
         },
         {
             id: 5,
-            name: 'Cartoons',
+            name: CATEGORY.CARTOONS,
             link: URLS.CARTOONS
         }
     ]);
@@ -71,12 +72,12 @@ export default component$(() => {
                 </ul>
 
                 <ul class={`flex flex-row items-center ml-auto`}>
-                    <li class={`mr-[20px]`}>
+                    <li class={`sm:mr-[20px]`}>
                         <Link href={URLS.SEARCH} title={"Search..."}>
                             <Search class={`fill-background dark:fill-white`}/>
                         </Link>
                     </li>
-                    <li>
+                    <li class={`hidden sm:flex`}>
                         <ThemeSwitch/>
                     </li>
                 </ul>
