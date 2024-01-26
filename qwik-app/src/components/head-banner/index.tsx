@@ -21,7 +21,7 @@ export const HeadBanner = component$(() => {
     `}>
         <article class={`
             relative z-10 mt-auto mb-[32px]
-            h-[100%] pr-[12px]
+            pr-[12px]
         `}>
             <Label type={CATEGORY.TV_SHOWS}/>
             <h1 class={'mt-auto mb-[12px] font-bold text-h2-lg'}>Avengers: Endgame</h1>

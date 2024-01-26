@@ -10,12 +10,8 @@ interface ButtonProps {
     customClass?: string
 }
 
-export const Button = component$((
-    {
-        type = BUTTON_TYPE.PRIMARY,
-        customClass = ''
-    }: ButtonProps
-) => {
+export const Button = component$((props: ButtonProps) => {
+    const {type = BUTTON_TYPE.PRIMARY, customClass = ''} = props;
     const defaultStyles = useStore({
         [BUTTON_TYPE.PRIMARY]: `p-[10px] pl-[48px] pr-[48px] bg-label-gradient`,
         [BUTTON_TYPE.TEXT]: `p-[10px]`,
