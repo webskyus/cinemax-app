@@ -4,7 +4,7 @@ import {Link} from "@builder.io/qwik-city";
 import {Logo} from "../icons/logo";
 import {URLS} from "~/utils/urls";
 import {Search} from "~/components/starter/icons/search";
-import {ThemeSwitch} from "~/components/theme-switcher";
+import {ThemeSwitch} from "../../ui/theme-switcher";
 import {CATEGORY} from "../../ui/label";
 
 export default component$(() => {
@@ -21,19 +21,9 @@ export default component$(() => {
         },
         {
             id: 3,
-            name: CATEGORY.ANIME,
-            link: URLS.ANIME
-        },
-        {
-            id: 4,
             name: CATEGORY.PEOPLE,
             link: URLS.PEOPLE
         },
-        {
-            id: 5,
-            name: CATEGORY.CARTOONS,
-            link: URLS.CARTOONS
-        }
     ]);
 
     return (

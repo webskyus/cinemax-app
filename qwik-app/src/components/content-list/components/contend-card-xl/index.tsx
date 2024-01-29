@@ -1,6 +1,8 @@
 import {component$} from "@builder.io/qwik";
 import { Image } from '@unpic/qwik';
 import {Link} from "@builder.io/qwik-city";
+import {CONTENT_TYPE} from "~/components/content-list";
+import {IMAGES_API_URL} from "~/api";
 
 export interface Movie {
     adult: boolean,
@@ -21,19 +23,23 @@ export interface Movie {
 
 interface ContentCartXLProps {
     data: Movie
+    type: keyof typeof CONTENT_TYPE
 }
 
-export const ContentCartXL = component$((props: ContentCartXLProps) => {
+export const ContentCardXL = component$((props: ContentCartXLProps) => {
     const {
+        type,
         data: {
+            id,
             title,
-            original_title,
             poster_path
         }
     } = props;
+    const getContentApiType = CONTENT_TYPE[type].API_TYPE;
+    const getContentTitleType = CONTENT_TYPE[type].TITLE;
 
-    return <Link href={'/'} class={`relative hover:scale-[105%] transition-all`}>
-            <Image src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+    return <Link href={`/${getContentApiType}/${id}`} class={`relative hover:scale-[105%] transition-all`}>
+            <Image src={`${IMAGES_API_URL}/${poster_path}`}
                    layout="constrained"
                    width={400}
                    height={600}
@@ -41,7 +47,8 @@ export const ContentCartXL = component$((props: ContentCartXLProps) => {
                         [@media(min-width:2419px)]:!max-w-[800px]
                         [@media(min-width:2419px)]:!max-h-[1000px]
                    `}
-                   alt="Movie poster"
+                   title={title}
+                   alt={`${getContentTitleType} poster`}
             />
         </Link>
 })
