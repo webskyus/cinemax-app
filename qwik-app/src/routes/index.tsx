@@ -16,7 +16,7 @@ export default component$(() => {
         <section class={"text-white"}>
             <HeadBanner/>
 
-            <ContentList/>
+            <ContentList />
         </section>
     );
 });

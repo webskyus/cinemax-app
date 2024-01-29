@@ -57,7 +57,7 @@ export default component$(() => {
                     {
                         navigation.map((menuItem) => {
                             return <li key={menuItem.id} class={`
-                            p-[5px] pl-[10px] pr-[10px] 
+                            p-[6px] pl-[12px] pr-[12px] 
                             font-medium
                             text-grayscale-100 dark:text-grayscale-10
                             transition-all 

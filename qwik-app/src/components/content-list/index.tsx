@@ -1,5 +1,7 @@
-import {component$} from "@builder.io/qwik";
+import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {Movie, ContentCartXL} from "~/components/content-list/components/content-cart-xl";
+import {Button, BUTTON_TYPE} from "~/components/ui/button";
+import {Next} from "~/components/starter/icons/next";
 
 const moviesList = {
     "page": 1,
@@ -411,12 +413,28 @@ interface ContentListProps {
 }
 
 export const ContentList = component$((props: ContentListProps) => {
+    const moviesList = useResource$(async () => {
+        const res = await fetch(`${API_URL}/discover/movie`, OPTIONS);
+        const json = await res.json();
+
+        return json.results as Movie[];
+    });
+
     return <section class={`pt-[24px] pb-[24px]`}>
-        <h2 class={`
+        <nav class={`
+            flex items-center justify-between  
             mb-[24px] 
+        `}>
+            <h2 class={`
             font-bold text-h3-sm sm:text-h3-lg
             text-transparent bg-clip-text bg-gradient-to-br from-primary to-grayscale-70
         `}>Movies</h2>
+
+            <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
+                <Next class={`mr-[12px]`}/>
+                See all
+            </Button>
+        </nav>
 
         <section class={`
                grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
@@ -425,11 +443,18 @@ export const ContentList = component$((props: ContentListProps) => {
                [@media(min-width:1919px)]:grid-cols-6
                [@media(min-width:2419px)]:grid-cols-8
         `}>
-            {
-                moviesList.results.map((movie: Movie) => {
-                    return <ContentCartXL key={movie.id} data={movie}/>
-                })
-            }
+            {/*{*/}
+            {/*    moviesList.results.map((movie: Movie) => {*/}
+            {/*        return <ContentCartXL key={movie.id} data={movie}/>*/}
+            {/*    })*/}
+            {/*}*/}
+            <Resource value={moviesList}
+                      onResolved={(movies) => {
+                         return <ContentList data={}/>
+                      }}
+                      onPending={() => <>Loading...</>}
+                      onRejected={() => <>Empty movies list</>}
+            />
         </section>
     </section>
 })
