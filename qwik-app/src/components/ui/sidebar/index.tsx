@@ -22,49 +22,49 @@ export const Sidebar = component$(() => {
         {
             id: 0,
             name: 'Discovery',
-            icon: <Discovery class={`mr-[10px]`}/>,
+            icon: <Discovery class={`mr-[12px]`}/>,
             link: URLS.DISCOVERY
         },
         {
             id: 1,
             name: 'Top Rated',
-            icon: <TopRated class={`mr-[10px]`}/>,
+            icon: <TopRated class={`mr-[12px]`}/>,
             link: URLS.TOP_RATED
         },
         {
             id: 2,
             name: 'Popular',
-            icon: <Popular class={`mr-[10px]`}/>,
+            icon: <Popular class={`mr-[12px]`}/>,
             link: URLS.POPULAR
         },
         {
             id: 3,
             name: 'Now playing',
-            icon: <NowPlaying class={`mr-[10px]`}/>,
+            icon: <NowPlaying class={`mr-[12px]`}/>,
             link: URLS.NOW_PLAYING
         },
         {
             id: 4,
             name: 'Coming Soon',
-            icon: <ComingSoon class={`mr-[10px]`}/>,
+            icon: <ComingSoon class={`mr-[12px]`}/>,
             link: URLS.COMING_SOON
         },
         {
             id: 5,
             name: 'Trending',
-            icon: <Trending class={`mr-[10px]`}/>,
+            icon: <Trending class={`mr-[12px]`}/>,
             link: URLS.TRENDING
         },
         {
             id: 6,
             name: 'On TV',
-            icon: <OnTV class={`mr-[10px]`}/>,
+            icon: <OnTV class={`mr-[12px]`}/>,
             link: URLS.ON_TV
         },
         {
             id: 7,
             name: 'Airing Today',
-            icon: <AiringToday class={`mr-[10px]`}/>,
+            icon: <AiringToday class={`mr-[12px]`}/>,
             link: URLS.AIRING_TODAY
         }
     ])
@@ -82,7 +82,7 @@ export const Sidebar = component$(() => {
                     menu.map((menuItem) => {
                         return <li key={menuItem.id} class={`
                             relative
-                            p-[10px] pl-[24px] pr-[24px]
+                            p-[12px] pl-[24px] pr-[24px]
                             transition-all
                             hover:text-primary
                             hover:after:opacity-100

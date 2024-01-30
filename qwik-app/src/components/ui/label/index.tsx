@@ -3,9 +3,7 @@ import {component$} from "@builder.io/qwik";
 export enum CATEGORY {
     TV_SHOWS = 'TV Shows',
     MOVIES = 'Movies',
-    ANIME = 'Anime',
     PEOPLE = 'People',
-    CARTOONS = 'Cartoons',
 }
 
 interface Props {

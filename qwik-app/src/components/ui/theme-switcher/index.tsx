@@ -1,8 +1,7 @@
-import {$, component$, Signal, useSignal, useStylesScoped$, useTask$, useVisibleTask$} from "@builder.io/qwik";
+import {$, component$, Signal, useSignal, useStylesScoped$, useVisibleTask$} from "@builder.io/qwik";
 import styles from "./style.css?inline";
 import {Moon} from "~/components/starter/icons/moon";
 import {Sun} from "~/components/starter/icons/sun";
-import {QWIK_LOADER} from "@builder.io/qwik/loader";
 
 const enum ThemeIndex {
     LIGHT = 0,
@@ -52,11 +51,11 @@ export const ThemeSwitch = component$(() => {
     }
 
     return (
-        <ul class={`relative flex items-stretch p-[5px] bg-grayscale-30 dark:bg-label-gradient rounded-[6px] transition-all`}>
+        <ul class={`relative flex items-stretch p-[6px] bg-grayscale-30 dark:bg-label-gradient rounded-[6px] transition-all`}>
             <li class={`
-                    absolute z-0 top-[5px] bottom-[5px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'left-[calc(50%-5px)]', 'left-[5px]')}
+                    absolute z-0 top-[6px] bottom-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'left-[calc(50%-5px)]', 'left-[5px]')}
                     flex items-center w-[50%] 
-                    mr-[5px] p-[20px] pt-[5px] pb-[5px]
+                    mr-[6px] p-[20px] pt-[6px] pb-[6px]
                     font-medium 
                     bg-primary dark:bg-grayscale-100 rounded-[6px] transition-all
                 `}/>
@@ -64,12 +63,12 @@ export const ThemeSwitch = component$(() => {
                 <button class={`
                     relative
                     flex items-center w-[100%] 
-                    p-[20px] pt-[5px] pb-[5px]
+                    p-[20px] pt-[6px] pb-[6px]
                     font-medium 
                     rounded-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.LIGHT, 'text-white', '')}
                 `}>
                     <Sun
-                        class={`mr-[5px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.LIGHT, 'animate-spin', '')}`}/>
+                        class={`mr-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.LIGHT, 'animate-spin', '')}`}/>
                     Light
                 </button>
             </li>
@@ -77,12 +76,12 @@ export const ThemeSwitch = component$(() => {
                 <button class={`
                     relative
                     flex items-center w-[100%] 
-                    mr-[2px] p-[20px] pt-[5px] pb-[5px]
+                    mr-[2px] p-[20px] pt-[6px] pb-[6px]
                     font-medium
                     rounded-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'text-white', '')}
                 `}>
                     <Moon
-                        class={`mr-[5px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'animate-pulse', '')}`}/>
+                        class={`mr-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'animate-pulse', '')}`}/>
                     Dark
                 </button>
             </li>
