@@ -3,7 +3,7 @@ import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 import {IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
-import errorPlaceholder from "../../../public/img/error-placeholder.svg";
+import errorPlaceholder from "/img/error-placeholder.svg";
 
 export interface Movie {
     adult: boolean,

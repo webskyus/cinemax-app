@@ -4,7 +4,7 @@ import {IMAGES_API_URL} from "~/api";
 import {URLS} from "~/utils/urls";
 import {People} from "~/components/people-list";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
-import errorPlaceholder from "../../../../../public/img/error-placeholder.svg";
+import errorPlaceholder from "/img/error-placeholder.svg";
 
 export interface PeopleCartXLProps {
     data: People

@@ -4,7 +4,6 @@ export const API_ROOT_URL = 'https://api.themoviedb.org';
 export const API_V = '3';
 export const API_URL = `${API_ROOT_URL}/${API_V}`;
 export const IMAGES_API_URL = 'https://image.tmdb.org/t/p/w500';
-
 export const OPTIONS = {
     method: 'GET',
     headers: {
@@ -12,3 +11,9 @@ export const OPTIONS = {
         Authorization: `Bearer ${API_ACCESS_TOKEN}`
     }
 };
+export enum MOVIE_LIST_CHART_API_URL {
+    NOW_PLAYING = 'now_playing',
+    POPULAR = 'popular',
+    TOP_RATED = 'top_rated',
+    UP_COMING = 'up_coming',
+}

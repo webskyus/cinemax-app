@@ -4,7 +4,7 @@ import {HeadBanner} from "~/components/head-banner";
 import {ContentList} from "~/components/content-list";
 import {CATEGORY} from "~/components/ui/label";
 import {PeopleList} from "~/components/people-list";
-import {ContentRatedList} from "~/components/content-rated-list";
+import {ContentChartList} from "~/components/content-chart-list";
 
 export default component$(() => {
     return (
@@ -12,7 +12,7 @@ export default component$(() => {
             <HeadBanner/>
 
             {/*POPULAR MOVIES GENRES*/}
-            <ContentRatedList type={CATEGORY.MOVIES}/>
+            <ContentChartList type={CATEGORY.MOVIES}/>
 
             {/*MOVIES*/}
             <ContentList type={CATEGORY.MOVIES} />
