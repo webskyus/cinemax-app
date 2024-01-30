@@ -1,11 +1,12 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
-import {Movie, ContentCardXL} from "~/components/content-list/components/contend-card-xl";
+import {Movie, ContentCardXL} from "../contend-card-xl";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {Next} from "~/components/starter/icons/next";
 import {EmptyMessage} from "../ui/empty-message";
 import {Loader} from "~/components/ui/loader";
 import {API_URL, OPTIONS} from '~/api';
 import {CATEGORY} from "../ui/label";
+import {Link} from "@builder.io/qwik-city";
 
 interface ContentListProps {
     type: keyof typeof CONTENT_TYPE
@@ -49,10 +50,12 @@ export const ContentList = component$((props: ContentListProps) => {
                 {CONTENT_TYPE[type].TITLE}
             </h2>
 
-            <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
-                <Next class={`mr-[12px]`}/>
-                See all
-            </Button>
+           <Link href={`/${CONTENT_TYPE[type].API_TYPE}`}>
+               <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
+                   <Next class={`mr-[12px]`}/>
+                   discovery
+               </Button>
+           </Link>
         </nav>
 
         <section class={`

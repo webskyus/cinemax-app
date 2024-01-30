@@ -4,8 +4,6 @@ export const enum URLS {
     // Header Menu
     MOVIES = '/movies',
     TV_SHOWS = '/tv-shows',
-    CARTOONS = '/cartoons',
-    ANIME = '/anime',
     PEOPLE = '/people',
     SEARCH = '/search',
 

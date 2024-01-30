@@ -1,8 +1,9 @@
-import {component$} from "@builder.io/qwik";
-import { Image } from '@unpic/qwik';
+import {$, component$} from "@builder.io/qwik";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 import {IMAGES_API_URL} from "~/api";
+import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
+import errorPlaceholder from "../../../public/img/error-placeholder.svg";
 
 export interface Movie {
     adult: boolean,
@@ -36,19 +37,36 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         }
     } = props;
     const getContentApiType = CONTENT_TYPE[type].API_TYPE;
-    const getContentTitleType = CONTENT_TYPE[type].TITLE;
+    const getContentTitle = CONTENT_TYPE[type].TITLE;
+
+    const imageTransformer$ = $(
+        ({ src }: ImageTransformerProps): string => {
+            if (src) return `${IMAGES_API_URL}/${src}`;
+
+            return errorPlaceholder;
+        }
+    );
+
+    // Global Provider (required)
+    useImageProvider({
+        // You can set this prop to overwrite default values [3840, 1920, 1280, 960, 640]
+        resolutions: [960],
+        imageTransformer$,
+    });
 
     return <Link href={`/${getContentApiType}/${id}`} class={`relative hover:scale-[105%] transition-all`}>
-            <Image src={`${IMAGES_API_URL}/${poster_path}`}
+            <Image src={poster_path}
                    layout="constrained"
                    width={400}
                    height={600}
-                   class={`
+                   class={` 
+                        h-[100%]
                         [@media(min-width:2419px)]:!max-w-[800px]
                         [@media(min-width:2419px)]:!max-h-[1000px]
                    `}
+                   placeholder={"var(--grayscale-10)"}
                    title={title}
-                   alt={`${getContentTitleType} poster`}
+                   alt={`${getContentTitle} poster`}
             />
         </Link>
 })
