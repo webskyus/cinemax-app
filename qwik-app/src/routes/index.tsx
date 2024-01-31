@@ -7,6 +7,7 @@ import {CATEGORY} from "~/components/ui/label";
 export default component$(() => {
     return (
         <section class={"text-white pb-[96px]"}>
+            {/*POPULAR TV BANNER*/}
             <HeadBanner/>
 
             {/*MOVIES*/}

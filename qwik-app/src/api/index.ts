@@ -3,7 +3,7 @@ export const API_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTYwNGI5YmJmZj
 export const API_ROOT_URL = 'https://api.themoviedb.org';
 export const API_V = '3';
 export const API_URL = `${API_ROOT_URL}/${API_V}`;
-export const IMAGES_API_URL = 'https://image.tmdb.org/t/p/w500';
+export const CONFIGURATE_IMAGES_API_URL = (size = 'w780') => `https://image.tmdb.org/t/p/${size}`;
 export const OPTIONS = {
     method: 'GET',
     headers: {
@@ -16,4 +16,10 @@ export enum MOVIE_LIST_CHART_API_URL {
     POPULAR = 'popular',
     TOP_RATED = 'top_rated',
     UP_COMING = 'up_coming',
+}
+
+export enum API_URL_TYPES {
+    MOVIE = 'discover/movie',
+    TV_SHOWS = 'discover/tv',
+    PEOPLE = 'trending/person/week',
 }

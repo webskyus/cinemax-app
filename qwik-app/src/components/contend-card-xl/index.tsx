@@ -1,7 +1,7 @@
 import {$, component$} from "@builder.io/qwik";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
-import {IMAGES_API_URL} from "~/api";
+import {CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {CATEGORY} from "~/components/ui/label";
@@ -21,6 +21,11 @@ export interface Movie {
     video: boolean,
     vote_average: number,
     vote_count: number
+}
+
+export interface TV extends Exclude<Movie, "title"> {
+    name: string,
+    origin_country: string[]
 }
 
 export interface PeopleKnownFor {
@@ -64,14 +69,14 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         type,
         data
     } = props;
-    const getContentApiType = CONTENT_TYPE[type].API_TYPE;
+    const getContentUrl = CONTENT_TYPE[type].URL;
     const getContentTitle = CONTENT_TYPE[type].TITLE;
     const poster = type === CATEGORY.PEOPLE ? (data as People).profile_path : (data as Movie).poster_path;
     const title = type === CATEGORY.PEOPLE ? (data as People).name : (data as Movie).title;
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {
-            if (src) return `${IMAGES_API_URL}/${src}`;
+            if (src) return `${CONFIGURATE_IMAGES_API_URL()}/${src}`;
 
             return errorPlaceholder;
         }
@@ -84,7 +89,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         imageTransformer$,
     });
 
-    return <Link href={`/${getContentApiType}/${data.id}`} class={`relative hover:scale-[105%] transition-all`}>
+    return <Link href={`${getContentUrl}/${data.id}`} class={`relative hover:scale-[105%] transition-all`}>
             <Image src={poster}
                    layout="constrained"
                    width={400}

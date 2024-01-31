@@ -4,9 +4,10 @@ import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {Next} from "~/components/starter/icons/next";
 import {EmptyMessage} from "../ui/empty-message";
 import {Loader} from "~/components/ui/loader";
-import {API_URL, OPTIONS} from '~/api';
+import {API_URL, API_URL_TYPES, OPTIONS} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {Link} from "@builder.io/qwik-city";
+import {URLS} from "~/utils/urls";
 
 interface ContentListProps {
     type: keyof typeof CONTENT_TYPE
@@ -15,20 +16,24 @@ interface ContentListProps {
 type CONTENT_TYPE_ITEMS = {
     API_TYPE: string
     TITLE: string
+    URL: URLS
 }
 
 export const CONTENT_TYPE: Record<CATEGORY, CONTENT_TYPE_ITEMS> = {
     [CATEGORY.MOVIES]: {
-        API_TYPE: 'discover/movie',
+        API_TYPE: API_URL_TYPES.MOVIE,
         TITLE: CATEGORY.MOVIES,
-    },
-    [CATEGORY.TV_SHOWS]: {
-        API_TYPE: 'discover/tv',
-        TITLE: CATEGORY.TV_SHOWS,
+        URL: URLS.MOVIES
     },
     [CATEGORY.PEOPLE]: {
-        API_TYPE: 'trending/person/week',
+        API_TYPE: API_URL_TYPES.PEOPLE,
         TITLE: CATEGORY.PEOPLE,
+        URL: URLS.PEOPLE
+    },
+    [CATEGORY.TV_SHOWS]: {
+        API_TYPE: API_URL_TYPES.TV_SHOWS,
+        TITLE: CATEGORY.TV_SHOWS,
+        URL: URLS.TV_SHOWS
     },
 }
 
@@ -54,7 +59,7 @@ export const ContentList = component$((props: ContentListProps) => {
                 {CONTENT_TYPE[type].TITLE}
             </h2>
 
-           <Link href={`/${CONTENT_TYPE[type].API_TYPE}`}>
+           <Link href={`${CONTENT_TYPE[type].URL}`}>
                <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
                    <Next class={`mr-[12px]`}/>
                    discovery

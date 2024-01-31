@@ -71,7 +71,7 @@ export const Sidebar = component$(() => {
 
     return (
         <aside class={`
-            fixed top-[87px] left-0 bottom-0
+            fixed top-[93px] left-0 bottom-0
             hidden xl:block
             w-[257px] h-[100%] pt-[22px]
             border-t-[2px] border-solid border-grayscale-20 dark:border-background-dark
