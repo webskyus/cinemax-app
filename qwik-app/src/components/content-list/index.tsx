@@ -1,5 +1,5 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
-import {Movie, ContentCardXL} from "../contend-card-xl";
+import {Movie, ContentCardXL, People} from "../contend-card-xl";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {Next} from "~/components/starter/icons/next";
 import {EmptyMessage} from "../ui/empty-message";
@@ -17,14 +17,18 @@ type CONTENT_TYPE_ITEMS = {
     TITLE: string
 }
 
-export const CONTENT_TYPE: Record<Exclude<CATEGORY, CATEGORY.PEOPLE>, CONTENT_TYPE_ITEMS> = {
+export const CONTENT_TYPE: Record<CATEGORY, CONTENT_TYPE_ITEMS> = {
     [CATEGORY.MOVIES]: {
-        API_TYPE: 'movie',
+        API_TYPE: 'discover/movie',
         TITLE: CATEGORY.MOVIES,
     },
     [CATEGORY.TV_SHOWS]: {
-        API_TYPE: 'tv',
+        API_TYPE: 'discover/tv',
         TITLE: CATEGORY.TV_SHOWS,
+    },
+    [CATEGORY.PEOPLE]: {
+        API_TYPE: 'trending/person/week',
+        TITLE: CATEGORY.PEOPLE,
     },
 }
 
@@ -32,10 +36,10 @@ export const ContentList = component$((props: ContentListProps) => {
     const {type} = props;
     const contentList = useResource$(async () => {
         const getContentApiType = CONTENT_TYPE[type].API_TYPE;
-        const res = await fetch(`${API_URL}/discover/${getContentApiType}?sort_by=popularity.desc`, OPTIONS);
+        const res = await fetch(`${API_URL}/${getContentApiType}`, OPTIONS);
         const json = await res.json();
 
-        return json.results as Movie[];
+        return json.results as Movie[] | People[];
     });
 
     return <section class={`pt-[24px] pb-[24px]`}>
