@@ -63,7 +63,7 @@ export const HeadBanner = component$(() => {
                                  <Button onClick={handleAddToWishlist}
                                          customClass={`ml-[12px] mr-[12px]`}
                                          type={BUTTON_TYPE.TEXT}>
-                                     <Watchlist class={`hover:animate-pulse ${window.localStorage.getItem('wishlist') === String(TV.id) ? 'fill-grayscale-10' : 'fill-primary'}`}
+                                     <Watchlist class={`hover:animate-pulse ${'fill-grayscale-10' || 'fill-primary'}`}
                                                 width={20}
                                                 height={20}
                                      />
