@@ -1,41 +1,51 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
-import {Movie, ContentCardXL} from "../contend-card-xl";
+import {Movie, ContentCardXL, People} from "../contend-card-xl";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {Next} from "~/components/starter/icons/next";
 import {EmptyMessage} from "../ui/empty-message";
 import {Loader} from "~/components/ui/loader";
-import {API_URL, OPTIONS} from '~/api';
+import {API_URL, API_URL_TYPES, OPTIONS} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {Link} from "@builder.io/qwik-city";
+import {URLS} from "~/utils/urls";
 
 interface ContentListProps {
-    type: keyof typeof CONTENT_TYPE
+    type: keyof typeof CONTENT_TYPE,
+    page?: number
 }
 
 type CONTENT_TYPE_ITEMS = {
     API_TYPE: string
     TITLE: string
+    URL: URLS
 }
 
-export const CONTENT_TYPE: Record<Exclude<CATEGORY, CATEGORY.PEOPLE>, CONTENT_TYPE_ITEMS> = {
+export const CONTENT_TYPE: Record<CATEGORY, CONTENT_TYPE_ITEMS> = {
     [CATEGORY.MOVIES]: {
-        API_TYPE: 'movie',
+        API_TYPE: API_URL_TYPES.MOVIE,
         TITLE: CATEGORY.MOVIES,
+        URL: URLS.MOVIES
+    },
+    [CATEGORY.PEOPLE]: {
+        API_TYPE: API_URL_TYPES.PEOPLE,
+        TITLE: CATEGORY.PEOPLE,
+        URL: URLS.PEOPLE
     },
     [CATEGORY.TV_SHOWS]: {
-        API_TYPE: 'tv',
+        API_TYPE: API_URL_TYPES.TV_SHOWS,
         TITLE: CATEGORY.TV_SHOWS,
+        URL: URLS.TV_SHOWS
     },
 }
 
 export const ContentList = component$((props: ContentListProps) => {
-    const {type} = props;
+    const {type, page = 1} = props;
     const contentList = useResource$(async () => {
         const getContentApiType = CONTENT_TYPE[type].API_TYPE;
-        const res = await fetch(`${API_URL}/discover/${getContentApiType}?sort_by=popularity.desc`, OPTIONS);
+        const res = await fetch(`${API_URL}/${getContentApiType}?page=${page}`, OPTIONS);
         const json = await res.json();
 
-        return json.results as Movie[];
+        return json.results as Movie[] | People[];
     });
 
     return <section class={`pt-[24px] pb-[24px]`}>
@@ -49,13 +59,6 @@ export const ContentList = component$((props: ContentListProps) => {
                 `}>
                 {CONTENT_TYPE[type].TITLE}
             </h2>
-
-           <Link href={`/${CONTENT_TYPE[type].API_TYPE}`}>
-               <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
-                   <Next class={`mr-[12px]`}/>
-                   discovery
-               </Button>
-           </Link>
         </nav>
 
         <section class={`

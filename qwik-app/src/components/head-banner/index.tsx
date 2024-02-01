@@ -1,56 +1,71 @@
-import {component$} from "@builder.io/qwik";
+import {$, component$, Resource, useResource$, useSignal, useVisibleTask$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
 import {Play} from "~/components/starter/icons/play";
 import {Watchlist} from "~/components/starter/icons/watchlist";
-import {EyeOff} from "~/components/starter/icons/eye-off";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
+import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
+import {Movie, TV} from "~/components/contend-card-xl";
+import {Loader} from "~/components/ui/loader";
+import {EmptyMessage} from "~/components/ui/empty-message";
+import {Link} from "@builder.io/qwik-city";
+import {CONTENT_TYPE} from "~/components/content-list";
 
-export const HeadBanner = component$(() => {
-    return <section class={`
-        relative flex flex-col
-        w-[100%] min-h-[400px] p-[24px]
-        bg-pink-300 bg-head-banner bg-no-repeat bg-center bg-cover
-        rounded-[6px]
-        
-        after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-50 -z-1
-        
-        [@media(min-width:1900px)]:h-[500px]
-        [@media(min-width:2100px)]:h-[600px]
-        [@media(min-width:2200px)]:h-[800px]
-        [@media(min-width:2400px)]:h-[1000px]
-    `}>
-        <article class={`
-            relative z-10 mt-auto mb-[32px]
-            pr-[12px]
-        `}>
-            <Label type={CATEGORY.TV_SHOWS}/>
-            <h1 class={'mt-auto mb-[12px] font-bold text-h2-sm sm:text-h2-lg'}>Avengers: Endgame</h1>
+interface HeadBannerProps {
+    type: CATEGORY.MOVIES | CATEGORY.TV_SHOWS
+}
 
-            <ul class={`
-                flex flex-wrap sm:flex-nowrap items-center mb-[12px]
-                text-grayscale-50 font-semibold
-            `}>
-                <li class={`m-[4px] sm:mr-[12px]`}>1 Season</li>
-                <li class={`m-[4px] sm:mr-[12px]`}>6 Episodes</li>
-                <li class={`m-[4px] sm:mr-[12px]`}>Superhero</li>
-                <li class={`m-[4px] sm:mr-[12px]`}>Marvel</li>
-            </ul>
-        </article>
+export const HeadBanner = component$((props: HeadBannerProps) => {
+    const {type} = props;
+    const random = Math.floor(Math.random()*(10-1))+1;
+
+    const singleContentItem = useResource$(async () => {
+        const res = await fetch(`${API_URL}/${CONTENT_TYPE[type].API_TYPE}`, OPTIONS);
+        const json = await res.json();
+
+        if (type === CATEGORY.TV_SHOWS) return json.results[random] as TV;
+
+        return json.results[random] as Movie;
+    });
+
+    return <Resource value={singleContentItem}
+                     onResolved={(content) => {
+                         const title = type === CATEGORY.TV_SHOWS ? (content as TV).name : content.title;
+
+                         return <section
+                             style={{background: `var(--color-alerts-error) url(${CONFIGURATE_IMAGES_API_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
+                             class={`
+                                                relative flex flex-col
+                                                w-[100%] min-h-[500px] p-[24px] bg
+                                                bg-label-gradient bg-no-repeat bg-center bg-cover
+                                                rounded-[6px]
+                                                
+                                                after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-70 -z-1
+                                                
+                                              
+                                                [@media(min-width:2100px)]:h-[600px]
+                                                [@media(min-width:2200px)]:h-[800px]
+                                `}>
+                             <article class={`
+                                            z-10 mt-auto mb-[12px]
+                                            pr-[12px]
+                             `}>
+                                 <Label type={CONTENT_TYPE[type].TITLE}/>
+                                 <h1 class={'mt-auto mb-[12px] font-bold text-h2-xs sm:text-h2-lg'}>{title}</h1>
+                                 <p class={'mt-auto mb-[4px] text-h6-xs sm:text-h6-md'}>{content.overview}</p>
+                             </article>
+
+                             <nav class={`relative z-10 flex items-center`}>
+                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOWS].API_TYPE}/${content.id}`}>
+                                     <Button>
+                                         <Play width={20} height={20} class={`mr-[12px]`}/>
+                                         Watch
+                                     </Button>
+                                 </Link>
+                             </nav>
+                         </section>
+                     }}
+                     onPending={() => <Loader/>}
+                     onRejected={() => <EmptyMessage/>}/>
 
 
-     <nav class={`relative z-10 flex items-center`}>
-         <Button>
-             <Play width={20} height={20} class={`mr-[12px]`}/>
-             Watch
-         </Button>
-
-         <Button customClass={`ml-[12px] mr-[12px]`} type={BUTTON_TYPE.TEXT}>
-            <Watchlist class={`hover:animate-pulse`} width={20} height={20}/>
-        </Button>
-
-         <Button type={BUTTON_TYPE.TEXT}>
-            <EyeOff class={`hover:animate-pulse`} width={20} height={20}/>
-        </Button>
-     </nav>
-    </section>
 })

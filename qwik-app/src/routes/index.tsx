@@ -3,16 +3,12 @@ import type {DocumentHead} from "@builder.io/qwik-city";
 import {HeadBanner} from "~/components/head-banner";
 import {ContentList} from "~/components/content-list";
 import {CATEGORY} from "~/components/ui/label";
-import {PeopleList} from "~/components/people-list";
-import {ContentRatedList} from "~/components/content-rated-list";
 
 export default component$(() => {
     return (
         <section class={"text-white pb-[96px]"}>
-            <HeadBanner/>
-
-            {/*POPULAR MOVIES GENRES*/}
-            <ContentRatedList type={CATEGORY.MOVIES}/>
+            {/*POPULAR TV BANNER*/}
+            <HeadBanner type={CATEGORY.TV_SHOWS}/>
 
             {/*MOVIES*/}
             <ContentList type={CATEGORY.MOVIES} />
@@ -23,7 +19,7 @@ export default component$(() => {
             <ContentList type={CATEGORY.TV_SHOWS} />
 
             {/*PEOPLE*/}
-            <PeopleList/>
+            <ContentList type={CATEGORY.PEOPLE} />
         </section>
     );
 });

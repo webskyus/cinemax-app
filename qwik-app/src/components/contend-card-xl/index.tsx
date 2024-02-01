@@ -1,9 +1,10 @@
 import {$, component$} from "@builder.io/qwik";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
-import {IMAGES_API_URL} from "~/api";
+import {CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
-import errorPlaceholder from "../../../public/img/error-placeholder.svg";
+import errorPlaceholder from "/img/error-placeholder.svg";
+import {CATEGORY} from "~/components/ui/label";
 
 export interface Movie {
     adult: boolean,
@@ -22,26 +23,60 @@ export interface Movie {
     vote_count: number
 }
 
+export interface TV extends Exclude<Movie, "title"> {
+    name: string,
+    origin_country: string[]
+}
+
+export interface PeopleKnownFor {
+    adult: boolean
+    backdrop_path: string
+    id: number
+    title: string
+    original_language: string
+    original_title: string
+    overview: string
+    poster_path: string
+    media_type: string
+    genre_ids: number[]
+    popularity: number
+    release_date: string
+    video: boolean | string
+    vote_average: number
+    vote_count: number
+}
+
+export interface People {
+    adult: boolean
+    id: number
+    name: string
+    original_name: string
+    known_for_department: string
+    profile_path: string
+    media_type: number
+    popularity: number
+    gender: number
+    known_for: PeopleKnownFor[]
+}
+
 interface ContentCartXLProps {
-    data: Movie
+    data: Movie | People
     type: keyof typeof CONTENT_TYPE
 }
 
 export const ContentCardXL = component$((props: ContentCartXLProps) => {
     const {
         type,
-        data: {
-            id,
-            title,
-            poster_path
-        }
+        data
     } = props;
-    const getContentApiType = CONTENT_TYPE[type].API_TYPE;
+    const getContentUrl = CONTENT_TYPE[type].URL;
     const getContentTitle = CONTENT_TYPE[type].TITLE;
+    const poster = type === CATEGORY.PEOPLE ? (data as People).profile_path : (data as Movie).poster_path;
+    const title = type === CATEGORY.PEOPLE ? (data as People).name : (data as Movie).title;
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {
-            if (src) return `${IMAGES_API_URL}/${src}`;
+            if (src) return `${CONFIGURATE_IMAGES_API_URL()}/${src}`;
 
             return errorPlaceholder;
         }
@@ -54,8 +89,8 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         imageTransformer$,
     });
 
-    return <Link href={`/${getContentApiType}/${id}`} class={`relative hover:scale-[105%] transition-all`}>
-            <Image src={poster_path}
+    return <Link href={`${getContentUrl}/${data.id}`} class={`relative hover:scale-[105%] transition-all`}>
+            <Image src={poster}
                    layout="constrained"
                    width={400}
                    height={600}

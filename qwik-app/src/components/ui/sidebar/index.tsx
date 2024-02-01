@@ -22,58 +22,58 @@ export const Sidebar = component$(() => {
         {
             id: 0,
             name: 'Discovery',
-            icon: <Discovery class={`mr-[12px]`}/>,
+            icon: <Discovery/>,
             link: URLS.DISCOVERY
         },
         {
             id: 1,
             name: 'Top Rated',
-            icon: <TopRated class={`mr-[12px]`}/>,
+            icon: <TopRated/>,
             link: URLS.TOP_RATED
         },
         {
             id: 2,
             name: 'Popular',
-            icon: <Popular class={`mr-[12px]`}/>,
+            icon: <Popular/>,
             link: URLS.POPULAR
         },
         {
             id: 3,
             name: 'Now playing',
-            icon: <NowPlaying class={`mr-[12px]`}/>,
+            icon: <NowPlaying/>,
             link: URLS.NOW_PLAYING
         },
         {
             id: 4,
             name: 'Coming Soon',
-            icon: <ComingSoon class={`mr-[12px]`}/>,
+            icon: <ComingSoon/>,
             link: URLS.COMING_SOON
         },
         {
             id: 5,
             name: 'Trending',
-            icon: <Trending class={`mr-[12px]`}/>,
+            icon: <Trending/>,
             link: URLS.TRENDING
         },
         {
             id: 6,
             name: 'On TV',
-            icon: <OnTV class={`mr-[12px]`}/>,
+            icon: <OnTV/>,
             link: URLS.ON_TV
         },
         {
             id: 7,
             name: 'Airing Today',
-            icon: <AiringToday class={`mr-[12px]`}/>,
+            icon: <AiringToday/>,
             link: URLS.AIRING_TODAY
         }
     ])
 
     return (
         <aside class={`
-            fixed top-[87px] left-0 bottom-0
+            fixed top-[93px] left-0 bottom-0
             hidden xl:block
-            w-[257px] h-[100%] pt-[22px]
+            w-[80px] h-[100%] pt-[22px]
             border-t-[2px] border-solid border-grayscale-20 dark:border-background-dark
             bg-grayscale-10 dark:bg-additional-dark-smooth
        `}>
@@ -81,8 +81,7 @@ export const Sidebar = component$(() => {
                 {
                     menu.map((menuItem) => {
                         return <li key={menuItem.id} class={`
-                            relative
-                            p-[12px] pl-[24px] pr-[24px]
+                            relative flex justify-center
                             transition-all
                             hover:text-primary
                             hover:after:opacity-100
@@ -92,11 +91,11 @@ export const Sidebar = component$(() => {
                             after:bg-primary after:opacity-0
                             after:transition-all
                         `}>
-                            <Link href={menuItem.link} class={`
-                                 flex items-center 
+                            <Link href={menuItem.link} title={menuItem.name} class={`
+                                 flex items-center
+                                 p-[12px] pl-[24px] pr-[24px]
                             `}>
                                 {menuItem.icon}
-                                {menuItem.name}
                             </Link>
                         </li>
                     })

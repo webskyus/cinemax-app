@@ -1,5 +1,5 @@
-import {component$, useStore} from "@builder.io/qwik";
-import {Link} from "@builder.io/qwik-city";
+import {component$, useStore, useVisibleTask$} from "@builder.io/qwik";
+import {Link, useLocation} from "@builder.io/qwik-city";
 
 import {Logo} from "../icons/logo";
 import {URLS} from "~/utils/urls";
@@ -8,6 +8,7 @@ import {ThemeSwitch} from "../../ui/theme-switcher";
 import {CATEGORY} from "../../ui/label";
 
 export default component$(() => {
+    const {url: {pathname}} = useLocation();
     const navigation = useStore([
         {
             id: 1,
@@ -51,7 +52,9 @@ export default component$(() => {
                             font-medium
                             text-grayscale-100 dark:text-grayscale-10
                             transition-all 
-                            hover:text-primary dark:hover:text-primary
+                            hover:text-primary dark:hover:text-primary 
+                            
+                            ${pathname.includes(menuItem.link) ? '!text-primary' : ''}
                         `}>
                                 <Link href={menuItem.link}>
                                     {menuItem.name}

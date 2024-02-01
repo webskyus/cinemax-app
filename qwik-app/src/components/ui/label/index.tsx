@@ -7,14 +7,14 @@ export enum CATEGORY {
 }
 
 interface Props {
-    type: CATEGORY
+    type: string
 }
 
 export const Label = component$((props: Props) => {
     const {type} = props;
 
     return <article class={`
-        inline-block mb-[12px] 
+        inline-block mb-[12px]
         font-semibold
     `}>
         {type}
