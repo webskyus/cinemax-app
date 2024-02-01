@@ -2,7 +2,7 @@ export const enum URLS {
     MAIN = '/',
 
     // Header Menu
-    MOVIES = '/movies',
+    MOVIES = '/movie',
     TV_SHOWS = '/tv',
     PEOPLE = '/people',
     SEARCH = '/search',

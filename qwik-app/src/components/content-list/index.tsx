@@ -10,7 +10,8 @@ import {Link} from "@builder.io/qwik-city";
 import {URLS} from "~/utils/urls";
 
 interface ContentListProps {
-    type: keyof typeof CONTENT_TYPE
+    type: keyof typeof CONTENT_TYPE,
+    page?: number
 }
 
 type CONTENT_TYPE_ITEMS = {
@@ -38,10 +39,10 @@ export const CONTENT_TYPE: Record<CATEGORY, CONTENT_TYPE_ITEMS> = {
 }
 
 export const ContentList = component$((props: ContentListProps) => {
-    const {type} = props;
+    const {type, page = 1} = props;
     const contentList = useResource$(async () => {
         const getContentApiType = CONTENT_TYPE[type].API_TYPE;
-        const res = await fetch(`${API_URL}/${getContentApiType}`, OPTIONS);
+        const res = await fetch(`${API_URL}/${getContentApiType}?page=${page}`, OPTIONS);
         const json = await res.json();
 
         return json.results as Movie[] | People[];

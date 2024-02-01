@@ -1,38 +1,42 @@
-import {$, component$, Resource, useResource$, useSignal} from "@builder.io/qwik";
+import {$, component$, Resource, useResource$, useSignal, useVisibleTask$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
 import {Play} from "~/components/starter/icons/play";
 import {Watchlist} from "~/components/starter/icons/watchlist";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
-import {API_URL, API_URL_TYPES, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
+import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
 import {Movie, TV} from "~/components/contend-card-xl";
 import {Loader} from "~/components/ui/loader";
 import {EmptyMessage} from "~/components/ui/empty-message";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 
-export const HeadBanner = component$(() => {
-    const id = useSignal<null | number>(null);
+interface HeadBannerProps {
+    type: CATEGORY.MOVIES | CATEGORY.TV_SHOWS
+}
+
+export const HeadBanner = component$((props: HeadBannerProps) => {
+    const {type} = props;
+    const random = Math.floor(Math.random()*(10-1))+1;
+
     const singleContentItem = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${API_URL_TYPES.TV_SHOWS}`, OPTIONS);
+        const res = await fetch(`${API_URL}/${CONTENT_TYPE[type].API_TYPE}`, OPTIONS);
         const json = await res.json();
 
-        id.value = json.results[0].id;
+        if (type === CATEGORY.TV_SHOWS) return json.results[random] as TV;
 
-        return json.results[0] as TV;
+        return json.results[random] as Movie;
     });
 
-    const handleAddToWishlist = $(() => {
-            localStorage.setItem('wishlist', String(id.value));
-    })
-
     return <Resource value={singleContentItem}
-                     onResolved={(TV) => {
+                     onResolved={(content) => {
+                         const title = type === CATEGORY.TV_SHOWS ? (content as TV).name : content.title;
+
                          return <section
-                             style={{background: `url(${CONFIGURATE_IMAGES_API_URL('original')}/${TV.backdrop_path}) no-repeat top/cover`}}
+                             style={{background: `var(--color-alerts-error) url(${CONFIGURATE_IMAGES_API_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                              class={`
                                                 relative flex flex-col
-                                                w-[100%] min-h-[500px] p-[24px]
-                                                bg-pink-300 bg-no-repeat bg-center bg-cover
+                                                w-[100%] min-h-[500px] p-[24px] bg
+                                                bg-label-gradient bg-no-repeat bg-center bg-cover
                                                 rounded-[6px]
                                                 
                                                 after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-70 -z-1
@@ -42,31 +46,21 @@ export const HeadBanner = component$(() => {
                                                 [@media(min-width:2200px)]:h-[800px]
                                 `}>
                              <article class={`
-                                            z-10 mt-auto mb-[32px]
+                                            z-10 mt-auto mb-[12px]
                                             pr-[12px]
                              `}>
-                                 <Label type={CATEGORY.TV_SHOWS}/>
-                                 <h1 class={'mt-auto mb-[12px] font-bold text-h2-sm sm:text-h2-lg'}>{TV.name}</h1>
-                                 <p class={'mt-auto mb-[12px] text-h6-sm sm:text-h6-md'}>{TV.overview}</p>
-
+                                 <Label type={CONTENT_TYPE[type].TITLE}/>
+                                 <h1 class={'mt-auto mb-[12px] font-bold text-h2-xs sm:text-h2-lg'}>{title}</h1>
+                                 <p class={'mt-auto mb-[4px] text-h6-xs sm:text-h6-md'}>{content.overview}</p>
                              </article>
 
                              <nav class={`relative z-10 flex items-center`}>
-                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOWS].API_TYPE}/${TV.id}`}>
+                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOWS].API_TYPE}/${content.id}`}>
                                      <Button>
                                          <Play width={20} height={20} class={`mr-[12px]`}/>
                                          Watch
                                      </Button>
                                  </Link>
-
-                                 <Button onClick={handleAddToWishlist}
-                                         customClass={`ml-[12px] mr-[12px]`}
-                                         type={BUTTON_TYPE.TEXT}>
-                                     <Watchlist class={`hover:animate-pulse ${'fill-grayscale-10' || 'fill-primary'}`}
-                                                width={20}
-                                                height={20}
-                                     />
-                                 </Button>
                              </nav>
                          </section>
                      }}

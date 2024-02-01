@@ -8,7 +8,7 @@ export default component$(() => {
     return (
         <section class={"text-white pb-[96px]"}>
             {/*POPULAR TV BANNER*/}
-            <HeadBanner/>
+            <HeadBanner type={CATEGORY.TV_SHOWS}/>
 
             {/*MOVIES*/}
             <ContentList type={CATEGORY.MOVIES} />

@@ -7,7 +7,7 @@ export enum CATEGORY {
 }
 
 interface Props {
-    type: CATEGORY
+    type: string
 }
 
 export const Label = component$((props: Props) => {
