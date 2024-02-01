@@ -58,13 +58,6 @@ export const ContentList = component$((props: ContentListProps) => {
                 `}>
                 {CONTENT_TYPE[type].TITLE}
             </h2>
-
-           <Link href={`${CONTENT_TYPE[type].URL}`}>
-               <Button customClass={`uppercase`} type={BUTTON_TYPE.PRIMARY_SMALL}>
-                   <Next class={`mr-[12px]`}/>
-                   discovery
-               </Button>
-           </Link>
         </nav>
 
         <section class={`

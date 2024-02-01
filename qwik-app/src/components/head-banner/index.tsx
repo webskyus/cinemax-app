@@ -28,19 +28,18 @@ export const HeadBanner = component$(() => {
     return <Resource value={singleContentItem}
                      onResolved={(TV) => {
                          return <section
-                             style={{background: `url(${CONFIGURATE_IMAGES_API_URL('original')}/${TV.backdrop_path}) no-repeat center/cover`}}
+                             style={{background: `url(${CONFIGURATE_IMAGES_API_URL('original')}/${TV.backdrop_path}) no-repeat top/cover`}}
                              class={`
                                                 relative flex flex-col
-                                                w-[100%] min-h-[400px] p-[24px]
+                                                w-[100%] min-h-[500px] p-[24px]
                                                 bg-pink-300 bg-no-repeat bg-center bg-cover
                                                 rounded-[6px]
                                                 
                                                 after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-70 -z-1
                                                 
-                                                [@media(min-width:1900px)]:h-[500px]
+                                              
                                                 [@media(min-width:2100px)]:h-[600px]
                                                 [@media(min-width:2200px)]:h-[800px]
-                                                [@media(min-width:2400px)]:h-[1000px]
                                 `}>
                              <article class={`
                                             z-10 mt-auto mb-[32px]

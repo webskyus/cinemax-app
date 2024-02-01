@@ -25,7 +25,7 @@ export default component$(() => {
         <>
             <Header/>
             <main class={`
-                h-[100%] pl-[24px] xl:pl-[293px] pr-[24px]
+                h-[100%] pl-[24px] xl:pl-[104px] pr-[24px]
                 pt-[33px] pb-[33px] 
                 overflow-auto scrollbar-hide
             `}>
