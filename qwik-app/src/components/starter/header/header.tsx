@@ -12,13 +12,13 @@ export default component$(() => {
     const navigation = useStore([
         {
             id: 1,
-            name: CATEGORY.MOVIES,
-            link: URLS.MOVIES
+            name: CATEGORY.MOVIE,
+            link: URLS.MOVIE
         },
         {
             id: 2,
-            name: CATEGORY.TV_SHOWS,
-            link: URLS.TV_SHOWS
+            name: CATEGORY.TV_SHOW,
+            link: URLS.TV_SHOW
         },
         {
             id: 3,
@@ -67,7 +67,7 @@ export default component$(() => {
                 <ul class={`flex flex-row items-center ml-auto`}>
                     <li class={`sm:mr-[20px]`}>
                         <Link href={URLS.SEARCH} title={"Search..."}>
-                            <Search class={`fill-background dark:fill-white`}/>
+                            <Search class={`fill-grayscale-100 dark:fill-grayscale-10`}/>
                         </Link>
                     </li>
                     <li class={`hidden sm:flex`}>

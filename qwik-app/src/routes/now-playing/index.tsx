@@ -8,7 +8,7 @@ export default component$(() => {
         {/*POPULAR TV BANNER*/}
         <HeadBanner type={CATEGORY.MOVIE}/>
 
-        {/*MOVIE*/}
-        <ContentList type={CATEGORY.MOVIE} page={2}/>
+        {/*MOVIES*/}
+        <ContentList type={CATEGORY.NOW_PLAYING} page={3}/>
     </section>
 })

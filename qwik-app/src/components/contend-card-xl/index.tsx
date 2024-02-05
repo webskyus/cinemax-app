@@ -71,8 +71,8 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
     } = props;
     const getContentUrl = CONTENT_TYPE[type].URL;
     const getContentTitle = CONTENT_TYPE[type].TITLE;
-    const poster = type === CATEGORY.PEOPLE ? (data as People).profile_path : (data as Movie).poster_path;
-    const title = type === CATEGORY.PEOPLE ? (data as People).name : (data as Movie).title;
+    const poster = (data as People).profile_path || (data as Movie).poster_path;
+    const title = (data as People).name || (data as Movie).title;
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {

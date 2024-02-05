@@ -6,9 +6,15 @@ import {HeadBanner} from "~/components/head-banner";
 export default component$(() => {
     return <section class={"text-white pb-[96px]"}>
         {/*POPULAR TV BANNER*/}
-        <HeadBanner type={CATEGORY.MOVIE}/>
+        <HeadBanner type={CATEGORY.TV_SHOW}/>
 
         {/*MOVIE*/}
-        <ContentList type={CATEGORY.MOVIE} page={2}/>
+        <ContentList type={CATEGORY.POPULAR_MOVIE} page={1}/>
+
+        {/*TV SHOW*/}
+        <ContentList type={CATEGORY.POPULAR_TV_SHOW} page={1}/>
+
+        {/*PEOPLE*/}
+        <ContentList type={CATEGORY.POPULAR_PEOPLE}/>
     </section>
 })

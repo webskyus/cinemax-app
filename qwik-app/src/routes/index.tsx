@@ -1,5 +1,4 @@
 import {component$} from "@builder.io/qwik";
-import type {DocumentHead} from "@builder.io/qwik-city";
 import {HeadBanner} from "~/components/head-banner";
 import {ContentList} from "~/components/content-list";
 import {CATEGORY} from "~/components/ui/label";
@@ -8,15 +7,17 @@ export default component$(() => {
     return (
         <section class={"text-white pb-[96px]"}>
             {/*POPULAR TV BANNER*/}
-            <HeadBanner type={CATEGORY.TV_SHOWS}/>
+            <HeadBanner type={CATEGORY.TV_SHOW}/>
 
-            {/*MOVIES*/}
-            <ContentList type={CATEGORY.MOVIES} />
+            {/*GENRES*/}
 
-            {/*POPULAR TV SHOWS GENRES*/}
+            {/*MOVIE*/}
+            <ContentList type={CATEGORY.MOVIE} page={2} />
 
-            {/*TV SHOWS*/}
-            <ContentList type={CATEGORY.TV_SHOWS} />
+            {/*POPULAR TV SHOW GENRES*/}
+
+            {/*TV SHOW*/}
+            <ContentList type={CATEGORY.TV_SHOW} />
 
             {/*PEOPLE*/}
             <ContentList type={CATEGORY.PEOPLE} />
@@ -24,12 +25,3 @@ export default component$(() => {
     );
 });
 
-export const head: DocumentHead = {
-    title: "CineMax - your online cinema",
-    meta: [
-        {
-            name: "description",
-            content: "CineMax movie streaming web app. You can watch all your favorite movie and tv shows, also check new trending video content-list.",
-        },
-    ],
-};

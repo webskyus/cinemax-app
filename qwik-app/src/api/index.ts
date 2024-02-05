@@ -11,15 +11,34 @@ export const OPTIONS = {
         Authorization: `Bearer ${API_ACCESS_TOKEN}`
     }
 };
-export enum MOVIE_LIST_CHART_API_URL {
-    NOW_PLAYING = 'now_playing',
-    POPULAR = 'popular',
-    TOP_RATED = 'top_rated',
-    UP_COMING = 'up_coming',
-}
 
-export enum API_URL_TYPES {
+export enum API_REQUEST_URLS {
     MOVIE = 'discover/movie',
     TV_SHOWS = 'discover/tv',
-    PEOPLE = 'trending/person/week',
+    PEOPLE = 'person/popular',
+
+    SEARCH = 'search/multi',
+
+    TOP_RATED_MOVIE = 'movie/top_rated',
+    TOP_RATED_TV_SHOW = 'tv/top_rated',
+
+    POPULAR_MOVIE = 'movie/popular',
+    POPULAR_TV_SHOW = 'tv/popular',
+
+    NOW_PLAYING = 'movie/now_playing',
+
+    COMING_SOON = 'movie/upcoming',
+
+    TRENDING_MOVIE = 'trending/movie/week',
+    TRENDING_TV_SHOW = 'trending/tv/week',
+    TRENDING_PEOPLE = 'trending/person/week',
+
+    ON_THE_AIR = 'tv/on_the_air',
+    AIRING_TODAY = 'tv/airing_today',
+}
+
+export enum API_MEDIA_TYPE {
+    MOVIE = 'movie',
+    TV = 'tv',
+    PERSON = 'person',
 }
