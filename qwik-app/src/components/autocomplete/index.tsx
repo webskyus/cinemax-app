@@ -47,13 +47,13 @@ export const SuggestionsListComponent = (props: { state: IState }) => {
 
     return searchResults?.length
         ? searchResults.map((content) => {
-            const convertedTypes = {
+            const convertedTypes: Record<API_MEDIA_TYPE, Extract<CATEGORY, CATEGORY.MOVIE | CATEGORY.TV_SHOW | CATEGORY.PEOPLE>> = {
                 [API_MEDIA_TYPE.MOVIE]: CATEGORY.MOVIE,
                 [API_MEDIA_TYPE.TV]: CATEGORY.TV_SHOW,
                 [API_MEDIA_TYPE.PERSON]: CATEGORY.PEOPLE,
             };
 
-            return <ContentCardXL key={content.id} data={content} type={convertedTypes[content.media_type]}/>
+            return <ContentCardXL key={content.id} data={content} type={convertedTypes[content.media_type as API_MEDIA_TYPE]}/>
         })
         : <p>
             Empty list...
