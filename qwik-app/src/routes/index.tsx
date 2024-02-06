@@ -2,6 +2,7 @@ import {component$} from "@builder.io/qwik";
 import {HeadBanner} from "~/components/head-banner";
 import {ContentList} from "~/components/content-list";
 import {CATEGORY} from "~/components/ui/label";
+import ContentGenres from "~/components/content-genres";
 
 export default component$(() => {
     return (
@@ -10,6 +11,7 @@ export default component$(() => {
             <HeadBanner type={CATEGORY.TV_SHOW}/>
 
             {/*GENRES*/}
+            <ContentGenres/>
 
             {/*MOVIE*/}
             <ContentList type={CATEGORY.MOVIE} page={2} />
