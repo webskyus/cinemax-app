@@ -4,7 +4,7 @@
 
 ### **Description**
 
-This my pet project with Tailwind and TS for check top popular new js frameworks. 
+This my pet project with Tailwind, TS and TheMovieDB API for check top popular new js frameworks. 
 
 ----
 
