@@ -17,6 +17,7 @@ export enum CATEGORY {
     NOW_PLAYING = 'Now Playing',
     COMING_SOON = 'Coming Soon',
 
+    TRENDING = 'Trending',
     TRENDING_MOVIE = 'Trending Movie',
     TRENDING_TV_SHOW = 'Trending TV Show',
     TRENDING_PEOPLE = 'Trending People',

@@ -1,7 +1,7 @@
 import {component$, Slot, useSignal, useStyles$} from "@builder.io/qwik";
 import type {DocumentHead, RequestHandler} from "@builder.io/qwik-city";
 
-import Header from "../components/starter/header/header";
+import Header from "~/components/ui/header/header";
 import {Sidebar} from "../components/ui/sidebar";
 
 import styles from "./styles.css?inline";

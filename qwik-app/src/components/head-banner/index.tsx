@@ -63,8 +63,8 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                              </nav>
                          </section>
                      }}
-                     onPending={() => <Loader/>}
-                     onRejected={() => <EmptyList/>}/>
+                     onPending={() => <Loader isVisible={true}/>}
+                     onRejected={() => <EmptyList isVisible={true}/>}/>
 
 
 })
