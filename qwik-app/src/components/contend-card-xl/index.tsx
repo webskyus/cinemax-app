@@ -1,7 +1,7 @@
 import {$, component$} from "@builder.io/qwik";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
-import {CONFIGURATE_IMAGES_API_URL} from "~/api";
+import {API_MEDIA_TYPE, CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {CATEGORY} from "~/components/ui/label";
@@ -19,6 +19,7 @@ export interface Movie {
     release_date: string,
     title: string,
     video: boolean,
+    media_type: API_MEDIA_TYPE,
     vote_average: number,
     vote_count: number
 }
@@ -71,8 +72,8 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
     } = props;
     const getContentUrl = CONTENT_TYPE[type].URL;
     const getContentTitle = CONTENT_TYPE[type].TITLE;
-    const poster = type === CATEGORY.PEOPLE ? (data as People).profile_path : (data as Movie).poster_path;
-    const title = type === CATEGORY.PEOPLE ? (data as People).name : (data as Movie).title;
+    const poster = (data as People).profile_path || (data as Movie).poster_path;
+    const title = (data as People).name || (data as Movie).title;
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {

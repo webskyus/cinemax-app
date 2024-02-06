@@ -1,24 +1,24 @@
 import {component$, useStore, useVisibleTask$} from "@builder.io/qwik";
 import {Link, useLocation} from "@builder.io/qwik-city";
 
-import {Logo} from "../icons/logo";
+import {Logo} from "~/components/icons/logo";
 import {URLS} from "~/utils/urls";
-import {Search} from "~/components/starter/icons/search";
-import {ThemeSwitch} from "../../ui/theme-switcher";
-import {CATEGORY} from "../../ui/label";
+import {Search} from "~/components/icons/search";
+import {ThemeSwitch} from "../theme-switcher";
+import {CATEGORY} from "../label";
 
 export default component$(() => {
     const {url: {pathname}} = useLocation();
     const navigation = useStore([
         {
             id: 1,
-            name: CATEGORY.MOVIES,
-            link: URLS.MOVIES
+            name: CATEGORY.MOVIE,
+            link: URLS.MOVIE
         },
         {
             id: 2,
-            name: CATEGORY.TV_SHOWS,
-            link: URLS.TV_SHOWS
+            name: CATEGORY.TV_SHOW,
+            link: URLS.TV_SHOW
         },
         {
             id: 3,
@@ -67,7 +67,7 @@ export default component$(() => {
                 <ul class={`flex flex-row items-center ml-auto`}>
                     <li class={`sm:mr-[20px]`}>
                         <Link href={URLS.SEARCH} title={"Search..."}>
-                            <Search class={`fill-background dark:fill-white`}/>
+                            <Search class={`fill-grayscale-100 dark:fill-grayscale-10 ${pathname.includes(URLS.SEARCH) ? '!fill-primary' : ''}`}/>
                         </Link>
                     </li>
                     <li class={`hidden sm:flex`}>

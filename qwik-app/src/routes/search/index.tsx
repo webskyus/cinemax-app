@@ -1,0 +1,8 @@
+import {component$, useStore, useTask$} from "@builder.io/qwik";
+import {AutoComplete} from "~/components/autocomplete";
+
+export default component$(() => {
+    return <>
+        <AutoComplete/>
+    </>
+})

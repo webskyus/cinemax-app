@@ -1,7 +1,7 @@
 import {$, component$, Signal, useSignal, useStylesScoped$, useVisibleTask$} from "@builder.io/qwik";
 import styles from "./style.css?inline";
-import {Moon} from "~/components/starter/icons/moon";
-import {Sun} from "~/components/starter/icons/sun";
+import {Moon} from "~/components/icons/moon";
+import {Sun} from "~/components/icons/sun";
 
 const enum ThemeIndex {
     LIGHT = 0,

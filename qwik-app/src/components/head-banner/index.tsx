@@ -1,17 +1,16 @@
-import {$, component$, Resource, useResource$, useSignal, useVisibleTask$} from "@builder.io/qwik";
+import {$, component$, Resource, useResource$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
-import {Play} from "~/components/starter/icons/play";
-import {Watchlist} from "~/components/starter/icons/watchlist";
-import {Button, BUTTON_TYPE} from "~/components/ui/button";
+import {Play} from "~/components/icons/play";
+import {Button} from "~/components/ui/button";
 import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
 import {Movie, TV} from "~/components/contend-card-xl";
 import {Loader} from "~/components/ui/loader";
-import {EmptyMessage} from "~/components/ui/empty-message";
+import {EmptyList} from "~/components/ui/empty-list";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 
 interface HeadBannerProps {
-    type: CATEGORY.MOVIES | CATEGORY.TV_SHOWS
+    type: CATEGORY.MOVIE | CATEGORY.TV_SHOW
 }
 
 export const HeadBanner = component$((props: HeadBannerProps) => {
@@ -22,14 +21,14 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
         const res = await fetch(`${API_URL}/${CONTENT_TYPE[type].API_TYPE}`, OPTIONS);
         const json = await res.json();
 
-        if (type === CATEGORY.TV_SHOWS) return json.results[random] as TV;
+        if (type === CATEGORY.TV_SHOW) return json.results[random] as TV;
 
         return json.results[random] as Movie;
     });
 
     return <Resource value={singleContentItem}
                      onResolved={(content) => {
-                         const title = type === CATEGORY.TV_SHOWS ? (content as TV).name : content.title;
+                         const title = type === CATEGORY.TV_SHOW ? (content as TV).name : content.title;
 
                          return <section
                              style={{background: `var(--color-alerts-error) url(${CONFIGURATE_IMAGES_API_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
@@ -55,7 +54,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                              </article>
 
                              <nav class={`relative z-10 flex items-center`}>
-                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOWS].API_TYPE}/${content.id}`}>
+                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOW].API_TYPE}/${content.id}`}>
                                      <Button>
                                          <Play width={20} height={20} class={`mr-[12px]`}/>
                                          Watch
@@ -64,8 +63,8 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                              </nav>
                          </section>
                      }}
-                     onPending={() => <Loader/>}
-                     onRejected={() => <EmptyMessage/>}/>
+                     onPending={() => <Loader isVisible={true}/>}
+                     onRejected={() => <EmptyList isVisible={true}/>}/>
 
 
 })

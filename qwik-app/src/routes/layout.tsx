@@ -1,7 +1,7 @@
 import {component$, Slot, useSignal, useStyles$} from "@builder.io/qwik";
-import type {RequestHandler} from "@builder.io/qwik-city";
+import type {DocumentHead, RequestHandler} from "@builder.io/qwik-city";
 
-import Header from "../components/starter/header/header";
+import Header from "~/components/ui/header/header";
 import {Sidebar} from "../components/ui/sidebar";
 
 import styles from "./styles.css?inline";
@@ -35,3 +35,13 @@ export default component$(() => {
         </>
     );
 });
+
+export const head: DocumentHead = {
+    title: "CineMax - your online cinema",
+    meta: [
+        {
+            name: "description",
+            content: "CineMax movie streaming web app. You can watch all your favorite movie and tv show, also check new trending video content-list.",
+        },
+    ],
+};
