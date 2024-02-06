@@ -1,12 +1,9 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {Movie, ContentCardXL, People} from "../contend-card-xl";
-import {Button, BUTTON_TYPE} from "~/components/ui/button";
-import {Next} from "~/components/starter/icons/next";
-import {EmptyMessage} from "../ui/empty-message";
+import {EmptyList} from "../ui/empty-list";
 import {Loader} from "~/components/ui/loader";
 import {API_URL, API_REQUEST_URLS, OPTIONS} from '~/api';
 import {CATEGORY} from "../ui/label";
-import {Link} from "@builder.io/qwik-city";
 import {URLS} from "~/utils/urls";
 
 interface ContentListProps {
@@ -143,8 +140,8 @@ export const ContentList = component$((props: ContentListProps) => {
                               }
                           </>
                       }}
-                      onPending={() => <Loader/>}
-                      onRejected={() => <EmptyMessage/>}
+                      onPending={() => <Loader isVisible={true}/>}
+                      onRejected={() => <EmptyList isVisible={true}/>}
             />
         </section>
     </section>

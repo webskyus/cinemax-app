@@ -1,12 +1,11 @@
-import {$, component$, Resource, useResource$, useSignal, useVisibleTask$} from "@builder.io/qwik";
+import {$, component$, Resource, useResource$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
-import {Play} from "~/components/starter/icons/play";
-import {Watchlist} from "~/components/starter/icons/watchlist";
-import {Button, BUTTON_TYPE} from "~/components/ui/button";
+import {Play} from "~/components/icons/play";
+import {Button} from "~/components/ui/button";
 import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
 import {Movie, TV} from "~/components/contend-card-xl";
 import {Loader} from "~/components/ui/loader";
-import {EmptyMessage} from "~/components/ui/empty-message";
+import {EmptyList} from "~/components/ui/empty-list";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 
@@ -65,7 +64,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                          </section>
                      }}
                      onPending={() => <Loader/>}
-                     onRejected={() => <EmptyMessage/>}/>
+                     onRejected={() => <EmptyList/>}/>
 
 
 })

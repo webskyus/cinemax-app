@@ -11,3 +11,11 @@ export const debounce = <F extends (...args: any) => any>(fn: F, delay = 500) =>
         });
     };
 }
+
+
+export const generateRandomLetter = () => {
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    const random = Math.round(Math.random() * 26);
+
+    return letters.charAt(random);
+}

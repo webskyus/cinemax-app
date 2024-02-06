@@ -1,9 +1,9 @@
 import {component$, useStore, useVisibleTask$} from "@builder.io/qwik";
 import {Link, useLocation} from "@builder.io/qwik-city";
 
-import {Logo} from "../icons/logo";
+import {Logo} from "~/components/icons/logo";
 import {URLS} from "~/utils/urls";
-import {Search} from "~/components/starter/icons/search";
+import {Search} from "~/components/icons/search";
 import {ThemeSwitch} from "../../ui/theme-switcher";
 import {CATEGORY} from "../../ui/label";
 
