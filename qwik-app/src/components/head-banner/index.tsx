@@ -16,9 +16,10 @@ interface HeadBannerProps {
 export const HeadBanner = component$((props: HeadBannerProps) => {
     const {type} = props;
     const random = Math.floor(Math.random()*(10-1))+1;
+    const getApiRequestUrl = CONTENT_TYPE[type].API_URL;
 
     const singleContentItem = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${CONTENT_TYPE[type].API_TYPE}`, OPTIONS);
+        const res = await fetch(`${API_URL}/${getApiRequestUrl}`, OPTIONS);
         const json = await res.json();
 
         if (type === CATEGORY.TV_SHOW) return json.results[random] as TV;
@@ -54,7 +55,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                              </article>
 
                              <nav class={`relative z-10 flex items-center`}>
-                                 <Link href={`${CONTENT_TYPE[CATEGORY.TV_SHOW].API_TYPE}/${content.id}`}>
+                                 <Link href={`${getApiRequestUrl}/${content.id}`}>
                                      <Button>
                                          <Play width={20} height={20} class={`mr-[12px]`}/>
                                          Watch

@@ -5,6 +5,9 @@ export enum CATEGORY {
     MOVIE = 'Movie',
     PEOPLE = 'People',
 
+    GENRES_MOVIE = 'Genres for Movie',
+    GENRES_TV_SHOW = 'Genres for TV Show',
+
     TOP_RATED = 'Top Rated',
     TOP_RATED_MOVIE = 'Top Rated Movie',
     TOP_RATED_TV_SHOW = 'Top Rated TV Show',

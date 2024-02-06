@@ -4,7 +4,6 @@ import {CONTENT_TYPE} from "~/components/content-list";
 import {API_MEDIA_TYPE, CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import errorPlaceholder from "/img/error-placeholder.svg";
-import {CATEGORY} from "~/components/ui/label";
 
 export interface Movie {
     adult: boolean,
@@ -70,7 +69,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         type,
         data
     } = props;
-    const getContentUrl = CONTENT_TYPE[type].URL;
+    const getContentUrl = CONTENT_TYPE[type].PAGE_URL;
     const getContentTitle = CONTENT_TYPE[type].TITLE;
     const poster = (data as People).profile_path || (data as Movie).poster_path;
     const title = (data as People).name || (data as Movie).title;
