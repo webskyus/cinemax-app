@@ -4,6 +4,7 @@ import {CONTENT_TYPE} from "~/components/content-list";
 import {API_MEDIA_TYPE, CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import errorPlaceholder from "/img/error-placeholder.svg";
+import {Genres} from "~/components/content-genres";
 
 export interface Movie {
     adult: boolean,
@@ -20,7 +21,8 @@ export interface Movie {
     video: boolean,
     media_type: API_MEDIA_TYPE,
     vote_average: number,
-    vote_count: number
+    vote_count: number,
+    genres: Genres[]
 }
 
 export interface TV extends Exclude<Movie, "title"> {
@@ -82,9 +84,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         }
     );
 
-    // Global Provider (required)
     useImageProvider({
-        // You can set this prop to overwrite default values [3840, 1920, 1280, 960, 640]
         resolutions: [960],
         imageTransformer$,
     });

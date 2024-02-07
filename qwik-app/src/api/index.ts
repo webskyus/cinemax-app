@@ -38,6 +38,10 @@ export enum API_REQUEST_URLS {
 
     ON_THE_AIR = 'tv/on_the_air',
     AIRING_TODAY = 'tv/airing_today',
+
+    DETAILS_MOVIE = 'movie',
+    DETAILS_TV = 'tv',
+    DETAILS_PERSON = 'person',
 }
 
 export enum API_MEDIA_TYPE {
