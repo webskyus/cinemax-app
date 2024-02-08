@@ -9,8 +9,9 @@ import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
 import {Movie, TV} from "~/api/models";
 import errorPlaceholder from "/img/error-placeholder.svg";
-import {convertMinutes} from "~/utils";
+import {convertMinutes, formatterForBudget} from "~/utils";
 import {VoteCountIcon} from "~/components/icons/vote-count-icon";
+import { Modal } from "~/components/ui/modal";
 
 interface ContentViewHeadProps {
     contentId: string
@@ -32,6 +33,8 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
 
         return json as Movie | TV;
     });
+
+    const changeModalVisibility = $(() => isModalVisibility.value = !isModalVisibility.value)
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {
@@ -79,9 +82,11 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                           </aside>
 
                           <article class={`relative z-10 sm:pl-[24px]`}>
-                              <h1 class={`font-bold text-h3-sm md:text-h3-sm lg:sm:text-h3-lg mb-[8px]`}>{content.title}</h1>
+                              <h1 class={`font-bold text-h3-sm md:text-h3-sm lg:sm:text-h3-lg mb-[8px]`}>
+                                  {content.title}
+                              </h1>
 
-                              <ul class={`flex flex-wrap lg:flex-nowrap font-semibold text-h6-xs sm:text-h6-sm`}>
+                              <ul class={`flex flex-wrap xl:flex-nowrap font-semibold text-h6-xs sm:text-h6-sm`}>
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
@@ -105,7 +110,14 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                             after:rounded-[50%] after:bg-primary
                                      `}>
                                       {content.release_date}
-                                      {content.production_companies[0].origin_country}
+                                  </li>
+                                  <li class={`
+                                            relative mb-[4px] pr-[16px] whitespace-nowrap
+                                            after:content-[''] after:absolute after:right-[5px] 
+                                            after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
+                                            after:rounded-[50%] after:bg-primary
+                                     `}>
+                                      {content.production_companies[0].origin_country || '-'}
                                   </li>
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
@@ -120,7 +132,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                               return <span key={genre.id}
                                                            class={`${isNotLastItem ? 'mr-[4px]' : ''}`}>
                                                      {genre.name}
-                                                  {isNotLastItem ? '-' : ''}
+                                                  {isNotLastItem ? ' - ' : ''}
                                                  </span>
                                           })
                                       }
@@ -134,7 +146,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                       {convertMinutes(content.runtime)}
                                   </li>
                                   <li class={`relative mb-[4px] whitespace-nowrap`}>
-                                      Budget:  {content.budget ? `${'$' + content.budget}` : '-'}
+                                      Budget: {content.budget ? `${'$' + formatterForBudget(content.budget)}` : '-'}
                                   </li>
                               </ul>
 
@@ -153,7 +165,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                       </Button>
                                   </li>
                                   <li>
-                                      <Button customClass={`!pl-[0px]`} type={BUTTON_TYPE.TEXT}>
+                                      <Button onClick={changeModalVisibility} customClass={`!pl-[0px]`} type={BUTTON_TYPE.TEXT}>
                                           <PlaySolidIcon class={`mr-[4px] translate-y-[-1px]`}/>
                                           Play
                                       </Button>
@@ -174,5 +186,8 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                   }}
                   onPending={() => <Loader isVisible={true}/>}
                   onRejected={() => <EmptyList isVisible={true}/>}/>
+
+
+        <Modal isVisible={isModalVisibility.value} action={changeModalVisibility}/>
     </section>
 })

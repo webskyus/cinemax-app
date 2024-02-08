@@ -2,71 +2,35 @@ import {component$} from "@builder.io/qwik";
 
 interface ModalProps {
     isVisible: boolean
+    action: () => unknown
 }
 
 export const Modal = component$((props: ModalProps) => {
-    const {isVisible} = props
+    const {isVisible, action} = props
 
     return <>
         {
             isVisible
-                ? <div data-te-modal-init=""
-                       data-te-modal-non-invasive="true"
-                       class="pointer-events-none fixed left-0 top-0 z-[1055] hidden w-full overflow-y-auto overflow-x-hidden outline-none"
-                       id="exampleModalNonInvasive"
-                       tab-index="-1"
-                       aria-labelledby="exampleModalLabel"
-                       aria-hidden="true">
-                    <div data-te-modal-dialog-ref
-                         class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:my-7 min-[576px]:max-w-[500px]">
-                        <div
-                            class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-                            <div
-                                class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                                <h5
-                                    class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-                                    id="exampleModalLabel">
-                                    Modal title
-                                </h5>
-                                <button
-                                    type="button"
-                                    class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-                                    data-te-modal-dismiss
-                                    aria-label="Close">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="h-6 w-6">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
+                ? <div id="defaultModal" tab-index="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                    <div class="relative mx-[auto] my-[0] mt-[108px] w-full h-full max-w-4xl md:h-auto">
+                        <div class="relative bg-white rounded-[6px] bg-grayscale-10 dark:bg-additional-dark-smooth">
+                            <div class="flex items-start justify-between p-4 rounded-[6px] dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Content trailer
+                                </h3>
+                                <button onClick$={action} type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-[6px] text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Close modal</span>
                                 </button>
                             </div>
-                            <div class="relative flex-auto p-4" data-te-modal-body-ref>
-                                Modal body text goes here.
-                            </div>
-                            <div
-                                class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                                <button
-                                    type="button"
-                                    class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                                    data-te-modal-dismiss
-                                    data-te-ripple-init
-                                    data-te-ripple-color="light">
-                                    Close
-                                </button>
-                                <button
-                                    type="button"
-                                    class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                    data-te-ripple-init
-                                    data-te-ripple-color="light">
-                                    Save changes
-                                </button>
+                            <div>
+                                <iframe width="100%" height="500"
+                                        src="https://www.youtube.com/embed/sKDeTRlEVTE?si=9-nYglgXy1JYDr0d"
+                                        title="YouTube video player"
+                                        frame-border="0"
+                                        class={"bg-grayscale-10 dark:bg-additional-dark-smooth"}
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allow-full-screen/>
                             </div>
                         </div>
                     </div>

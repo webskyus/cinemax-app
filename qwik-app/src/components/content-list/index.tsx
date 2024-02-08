@@ -1,10 +1,11 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
-import {Movie, ContentCardXL, People} from "../contend-card-xl";
+import {ContentCardXL} from "../contend-card-xl";
 import {EmptyList} from "../ui/empty-list";
 import {Loader} from "~/components/ui/loader";
 import {API_URL, API_REQUEST_URLS, OPTIONS} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {URLS} from "~/utils/urls";
+import {Movie, People} from "~/api/models";
 
 interface ContentListProps {
     type: keyof typeof CONTENT_TYPE,
@@ -123,7 +124,9 @@ export const ContentList = component$((props: ContentListProps) => {
         </nav>
 
         <section class={`
+               relative
                grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
+               min-h-[500px]
                
                [@media(min-width:1600px)]:grid-cols-5
                [@media(min-width:1919px)]:grid-cols-6

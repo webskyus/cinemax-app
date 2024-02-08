@@ -1,7 +1,6 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {API_REQUEST_URLS, API_URL, OPTIONS} from "~/api";
-import {ContentCardXL, Movie, People} from "~/components/contend-card-xl";
-import {CONTENT_TYPE, CONTENT_TYPE_ITEMS} from "~/components/content-list";
+import {CONTENT_TYPE_ITEMS} from "~/components/content-list";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
 import {Link} from "@builder.io/qwik-city";
@@ -49,8 +48,8 @@ export const ContentGenres = component$((props: ContentGenresProps) => {
     });
 
 
-    return <>
-        <section class={`pt-[24px] pb-[24px]`}>
+    return <section>
+        <section class={`relative pt-[24px] pb-[24px] min-h-[200px]`}>
             <nav class={`
             flex items-center justify-between  
             mb-[12px] 
@@ -85,5 +84,5 @@ export const ContentGenres = component$((props: ContentGenresProps) => {
                       onRejected={() => <EmptyList isVisible={true}/>}
             />
         </section>
-    </>
+    </section>
 })

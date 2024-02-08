@@ -27,3 +27,9 @@ export const convertMinutes = (time: number) => {
 
     return `${hours}h ${min}m`
 }
+
+export const formatterForBudget = (numb: number) => {
+    const formatter = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
+
+    return formatter.format(numb)
+}
