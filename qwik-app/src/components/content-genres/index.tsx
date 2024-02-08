@@ -38,11 +38,11 @@ const GENRES_TYPE: GENRES_TYPE_ITEMS = {
 
 export const ContentGenres = component$((props: ContentGenresProps) => {
     const {type} = props;
-    const getApiRequestUrl = GENRES_TYPE[type].API_URL;
+    const apiRequestUrl = GENRES_TYPE[type].API_URL;
     const pageTitle= GENRES_TYPE[type].TITLE;
     const pageUrl = GENRES_TYPE[type].PAGE_URL;
     const genresList = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${getApiRequestUrl}`, OPTIONS);
+        const res = await fetch(`${API_URL}/${apiRequestUrl}`, OPTIONS);
         const json = await res.json();
 
         return json.genres as Genres[];

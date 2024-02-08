@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Watchlist = component$(({
+export const WatchlistIcon = component$(({
                                          width = 24,
                                          height = 24,
                                          class: className = ''

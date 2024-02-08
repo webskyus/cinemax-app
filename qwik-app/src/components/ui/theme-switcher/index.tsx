@@ -1,7 +1,7 @@
 import {$, component$, Signal, useSignal, useStylesScoped$, useVisibleTask$} from "@builder.io/qwik";
 import styles from "./style.css?inline";
-import {Moon} from "~/components/icons/moon";
-import {Sun} from "~/components/icons/sun";
+import {MoonIcon} from "~/components/icons/moon-icon";
+import {SunIcon} from "~/components/icons/sun-icon";
 
 const enum ThemeIndex {
     LIGHT = 0,
@@ -67,7 +67,7 @@ export const ThemeSwitch = component$(() => {
                     font-medium 
                     rounded-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.LIGHT, 'text-white', '')}
                 `}>
-                    <Sun
+                    <SunIcon
                         class={`mr-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.LIGHT, 'animate-spin', '')}`}/>
                     Light
                 </button>
@@ -80,7 +80,7 @@ export const ThemeSwitch = component$(() => {
                     font-medium
                     rounded-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'text-white', '')}
                 `}>
-                    <Moon
+                    <MoonIcon
                         class={`mr-[6px] ${getStylesForCurrentTheme(activeThemeIndex, ThemeIndex.DARK, 'animate-pulse', '')}`}/>
                     Dark
                 </button>

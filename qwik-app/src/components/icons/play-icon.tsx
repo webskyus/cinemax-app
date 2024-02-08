@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const AiringToday = component$(({
+export const PlayIcon = component$(({
                                          width = 24,
                                          height = 24,
                                          class: className = ''
@@ -19,8 +19,7 @@ export const AiringToday = component$(({
              class={className}
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              xmlns="http://www.w3.org/2000/svg">
-            <path xmlns="http://www.w3.org/2000/svg"
-                  d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+            <polygon points="5 3 19 12 5 21 5 3"/>
         </svg>
     )
 });

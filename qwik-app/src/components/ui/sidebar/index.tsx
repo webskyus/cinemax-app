@@ -1,12 +1,12 @@
 import {component$, QwikJSX, useStore} from "@builder.io/qwik";
-import {Discovery} from "~/components/icons/discovery";
-import {TopRated} from "~/components/icons/top-rated";
-import {NowPlaying} from "~/components/icons/now-playing";
-import {Popular} from "~/components/icons/popular";
-import {ComingSoon} from "~/components/icons/coming-soon";
-import {Trending} from "~/components/icons/trending";
-import {OnTV} from "~/components/icons/on-tv";
-import {AiringToday} from "~/components/icons/airing-today";
+import {DiscoveryIcon} from "~/components/icons/discovery-icon";
+import {TopRatedIcon} from "~/components/icons/top-rated-icon";
+import {NowPlayingIcon} from "~/components/icons/now-playing-icon";
+import {PopularIcon} from "~/components/icons/popular-icon";
+import {ComingSoonIcon} from "~/components/icons/coming-soon-icon";
+import {TrendingIcon} from "~/components/icons/trending-icon";
+import {OnTvIcon} from "~/components/icons/on-tv-icon";
+import {AiringTodayIcon} from "~/components/icons/airing-today-icon";
 import {URLS} from "~/utils/urls";
 import {Link, useLocation} from "@builder.io/qwik-city";
 import {CATEGORY} from "~/components/ui/label";
@@ -24,43 +24,43 @@ export const Sidebar = component$(() => {
         {
             id: 1,
             name: CATEGORY.TOP_RATED,
-            icon: <TopRated width={28} height={28}/>,
+            icon: <TopRatedIcon width={28} height={28}/>,
             link: URLS.TOP_RATED
         },
         {
             id: 2,
             name: CATEGORY.POPULAR,
-            icon: <Popular width={28} height={28}/>,
+            icon: <PopularIcon width={28} height={28}/>,
             link: URLS.POPULAR
         },
         {
             id: 3,
             name: CATEGORY.NOW_PLAYING,
-            icon: <NowPlaying width={28} height={28}/>,
+            icon: <NowPlayingIcon width={28} height={28}/>,
             link: URLS.NOW_PLAYING
         },
         {
             id: 4,
             name: CATEGORY.COMING_SOON,
-            icon: <ComingSoon width={28} height={28}/>,
+            icon: <ComingSoonIcon width={28} height={28}/>,
             link: URLS.COMING_SOON
         },
         {
             id: 5,
             name: CATEGORY.TRENDING,
-            icon: <Trending width={28} height={28}/>,
+            icon: <TrendingIcon width={28} height={28}/>,
             link: URLS.TRENDING
         },
         {
             id: 6,
             name: CATEGORY.ON_THE_AIR,
-            icon: <OnTV width={28} height={28}/>,
+            icon: <OnTvIcon width={28} height={28}/>,
             link: URLS.ON_THE_AIR
         },
         {
             id: 7,
             name: CATEGORY.AIRING_TODAY,
-            icon: <AiringToday width={28} height={28}/>,
+            icon: <AiringTodayIcon width={28} height={28}/>,
             link: URLS.AIRING_TODAY
         }
     ])

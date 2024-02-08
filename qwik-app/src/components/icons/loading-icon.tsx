@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Loading = component$(({
+export const LoadingIcon = component$(({
                                       width = 24,
                                       height = 24,
                                       class: className = ''

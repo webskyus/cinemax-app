@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Moon = component$(({
+export const MoonIcon = component$(({
                                     width = 24,
                                     height = 24,
                                     class: className = ''

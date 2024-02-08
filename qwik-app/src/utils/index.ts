@@ -19,3 +19,11 @@ export const generateRandomLetter = () => {
 
     return letters.charAt(random);
 }
+
+
+export const convertMinutes = (time: number) => {
+    const hours = Math.round(time / 60);
+    const min = time % 60;
+
+    return `${hours}h ${min}m`
+}

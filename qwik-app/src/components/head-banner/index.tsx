@@ -1,13 +1,13 @@
 import {$, component$, Resource, useResource$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
-import {Play} from "~/components/icons/play";
+import {PlayIcon} from "~/components/icons/play-icon";
 import {Button} from "~/components/ui/button";
 import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
-import {Movie, TV} from "~/components/contend-card-xl";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
+import {Movie, TV} from "~/api/models";
 
 interface HeadBannerProps {
     type: CATEGORY.MOVIE | CATEGORY.TV_SHOW
@@ -15,11 +15,12 @@ interface HeadBannerProps {
 
 export const HeadBanner = component$((props: HeadBannerProps) => {
     const {type} = props;
+    const apiRequestUrl = CONTENT_TYPE[type].API_URL;
+    const pageUrl = CONTENT_TYPE[type].PAGE_URL;
     const random = Math.floor(Math.random()*(10-1))+1;
-    const getApiRequestUrl = CONTENT_TYPE[type].API_URL;
 
     const singleContentItem = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${getApiRequestUrl}`, OPTIONS);
+        const res = await fetch(`${API_URL}/${apiRequestUrl}`, OPTIONS);
         const json = await res.json();
 
         if (type === CATEGORY.TV_SHOW) return json.results[random] as TV;
@@ -55,9 +56,9 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                              </article>
 
                              <nav class={`relative z-10 flex items-center`}>
-                                 <Link href={`${getApiRequestUrl}/${content.id}`}>
+                                 <Link href={`${pageUrl}/${content.id}`}>
                                      <Button>
-                                         <Play width={20} height={20} class={`mr-[12px]`}/>
+                                         <PlayIcon width={20} height={20} class={`mr-[12px]`}/>
                                          Watch
                                      </Button>
                                  </Link>

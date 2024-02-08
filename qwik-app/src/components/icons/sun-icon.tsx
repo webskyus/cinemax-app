@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Sun = component$(({
+export const SunIcon = component$(({
                                     width = 24,
                                     height = 24,
                                     class: className = ''

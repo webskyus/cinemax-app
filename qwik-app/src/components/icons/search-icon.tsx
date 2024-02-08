@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Search = component$(({
+export const SearchIcon = component$(({
                                     width = 24,
                                     height = 24,
                                     class: className = ''

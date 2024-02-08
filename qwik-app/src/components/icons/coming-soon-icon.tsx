@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Trending = component$(({
+export const ComingSoonIcon = component$(({
                                          width = 24,
                                          height = 24,
                                          class: className = ''
@@ -19,11 +19,8 @@ export const Trending = component$(({
              class={className}
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-            <line x1="6" y1="1" x2="6" y2="4"/>
-            <line x1="10" y1="1" x2="10" y2="4"/>
-            <line x1="14" y1="1" x2="14" y2="4"/>
+            <polygon points="13 19 22 12 13 5 13 19"/>
+            <polygon points="2 19 11 12 2 5 2 19"/>
         </svg>
     )
 });

@@ -1,9 +1,9 @@
 import {component$, useStore, useVisibleTask$} from "@builder.io/qwik";
 import {Link, useLocation} from "@builder.io/qwik-city";
 
-import {Logo} from "~/components/icons/logo";
+import {LogoIcon} from "~/components/icons/logo-icon";
 import {URLS} from "~/utils/urls";
-import {Search} from "~/components/icons/search";
+import {SearchIcon} from "~/components/icons/search-icon";
 import {ThemeSwitch} from "../theme-switcher";
 import {CATEGORY} from "../label";
 
@@ -34,9 +34,9 @@ export default component$(() => {
         bg-grayscale-10 dark:bg-additional-dark-smooth
     `}>
             <Link href={URLS.MAIN} title="CineMax Logo">
-                <Logo width={86}
-                      height={28}
-                      class={`fill-grayscale-100 dark:fill-grayscale-10`}
+                <LogoIcon width={86}
+                          height={28}
+                          class={`fill-grayscale-100 dark:fill-grayscale-10`}
                 />
             </Link>
 
@@ -67,7 +67,7 @@ export default component$(() => {
                 <ul class={`flex flex-row items-center ml-auto`}>
                     <li class={`sm:mr-[20px]`}>
                         <Link href={URLS.SEARCH} title={"Search..."}>
-                            <Search class={`fill-grayscale-100 dark:fill-grayscale-10 ${pathname.includes(URLS.SEARCH) ? '!fill-primary' : ''}`}/>
+                            <SearchIcon class={`fill-grayscale-100 dark:fill-grayscale-10 ${pathname.includes(URLS.SEARCH) ? '!fill-primary' : ''}`}/>
                         </Link>
                     </li>
                     <li class={`hidden sm:flex`}>

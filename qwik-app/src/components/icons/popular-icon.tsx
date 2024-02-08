@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const NowPlaying = component$(({
+export const PopularIcon = component$(({
                                          width = 24,
                                          height = 24,
                                          class: className = ''
@@ -19,9 +19,8 @@ export const NowPlaying = component$(({
              class={className}
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              xmlns="http://www.w3.org/2000/svg">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-            <polyline points="2 17 12 22 22 17"/>
-            <polyline points="2 12 12 17 22 12"/>
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
         </svg>
     )
 });

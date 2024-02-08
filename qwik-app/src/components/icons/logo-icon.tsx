@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const Logo = component$(({
+export const LogoIcon = component$(({
                                     width = 100,
                                     height = 35,
                                     class: className = ''

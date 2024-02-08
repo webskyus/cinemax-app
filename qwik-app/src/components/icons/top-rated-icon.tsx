@@ -6,7 +6,7 @@ interface Props {
     class?: string
 }
 
-export const OnTV = component$(({
+export const TopRatedIcon = component$(({
                                          width = 24,
                                          height = 24,
                                          class: className = ''
@@ -19,8 +19,8 @@ export const OnTV = component$(({
              class={className}
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
-            <polyline points="17 2 12 7 7 2"/>
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
         </svg>
     )
 });
