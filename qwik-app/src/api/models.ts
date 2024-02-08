@@ -12,6 +12,8 @@ export interface Movie {
     popularity: number,
     poster_path: string,
     release_date: string,
+    tagline: string,
+    status: string,
     title: string,
     video: boolean,
     media_type: API_MEDIA_TYPE,
@@ -20,6 +22,7 @@ export interface Movie {
     genres: Genres[],
     production_companies: ProductionCompanies[],
     runtime: number
+    budget: number
 }
 
 export interface TV extends Exclude<Movie, "title"> {
