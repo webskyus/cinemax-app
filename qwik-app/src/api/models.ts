@@ -29,6 +29,8 @@ export interface Movie {
 export interface TV extends Exclude<Movie, "title"> {
     name: string,
     origin_country: string[]
+    first_air_date: string
+    episode_run_time: number[]
 }
 
 export interface People {

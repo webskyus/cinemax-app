@@ -8,8 +8,6 @@ interface ModalProps {
 
 export const Modal = component$((props: ModalProps) => {
     const {isVisible, action, id} = props
-
-    console.log('dd', id)
     return <>
         {
             isVisible

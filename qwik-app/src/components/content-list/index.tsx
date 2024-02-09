@@ -2,7 +2,7 @@ import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {ContentCardXL} from "../contend-card-xl";
 import {EmptyList} from "../ui/empty-list";
 import {Loader} from "~/components/ui/loader";
-import {API_URL, API_REQUEST_URLS, OPTIONS} from '~/api';
+import {API_REQUEST_URLS, API} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {URLS} from "~/utils/urls";
 import {Movie, People} from "~/api/models";
@@ -18,7 +18,9 @@ export type CONTENT_TYPE_ITEMS = {
     PAGE_URL: URLS
 }
 
-type CONTENT_TYPES = Record<Exclude<CATEGORY, CATEGORY.POPULAR | CATEGORY.TOP_RATED | CATEGORY.TRENDING | CATEGORY.GENRES_MOVIE | CATEGORY.GENRES_TV_SHOW>, CONTENT_TYPE_ITEMS>;
+type ExcludedCategoryTypes = CATEGORY.POPULAR | CATEGORY.TOP_RATED | CATEGORY.TRENDING | CATEGORY.GENRES_MOVIE | CATEGORY.GENRES_TV_SHOW;
+
+type CONTENT_TYPES = Record<Exclude<CATEGORY, ExcludedCategoryTypes>, CONTENT_TYPE_ITEMS>;
 
 export const CONTENT_TYPE: CONTENT_TYPES  = {
     [CATEGORY.MOVIE]: {
@@ -103,7 +105,7 @@ export const ContentList = component$((props: ContentListProps) => {
     const getContentApiType = CONTENT_TYPE[type].API_URL;
     const pageTitle = CONTENT_TYPE[type].TITLE;
     const contentList = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${getContentApiType}?page=${page}`, OPTIONS);
+        const res = await fetch(`${API.URL}/${getContentApiType}?page=${page}`, API.OPTIONS);
         const json = await res.json();
 
         return json.results as Movie[] | People[];

@@ -1,4 +1,4 @@
-import {$, component$, Resource, ResourceReturn, useResource$, useSignal} from "@builder.io/qwik";
+import {$, component$, Resource, useResource$, useSignal} from "@builder.io/qwik";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {StarIcon} from "~/components/icons/star-icon";
@@ -15,7 +15,7 @@ import {Movie, TV} from "~/api/models";
 
 interface ContentViewHeadProps {
     contentId: string
-    type: CATEGORY.MOVIE | CATEGORY.TV_SHOW
+    type: CATEGORY.TV_SHOW | CATEGORY.MOVIE
 }
 
 const CONTENT_VIEW_TYPE = {
@@ -37,7 +37,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
         const videoJson = await videoRes.json();
         videoTrailerId.value = videoJson.results[0].key;
 
-        return json
+        return json as TV | Movie;
     });
 
     const changeModalVisibility = $(() => isModalVisibility.value = !isModalVisibility.value)
@@ -59,7 +59,10 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
     return <section class={`relative min-h-[500px]`}>
         <Resource value={content}
                   onResolved={(content) => {
-                      const title = type === CATEGORY.MOVIE ? content.title : content.name;
+                      const contentType = type === CATEGORY.MOVIE;
+                      const title = contentType ? content.title : (content as TV).name;
+                      const releaseDate = contentType ? content.release_date : (content as TV).first_air_date;
+                      const runTime = contentType ? content.runtime : (content as TV).episode_run_time[0]
 
                       return <section
                           style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
@@ -118,7 +121,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                             after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
                                             after:rounded-[50%] after:bg-primary
                                      `}>
-                                      {content.release_date}
+                                      {convertMinutes(runTime)}
                                   </li>
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
@@ -152,7 +155,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                             after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
                                             after:rounded-[50%] after:bg-primary
                                      `}>
-                                      {convertMinutes(content.runtime)}
+                                      {runTime}
                                   </li>
                                   <li class={`relative mb-[4px] whitespace-nowrap`}>
                                       Budget: {content.budget ? `${'$' + formatterForBudget(content.budget)}` : '-'}

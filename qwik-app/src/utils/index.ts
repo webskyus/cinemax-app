@@ -22,9 +22,11 @@ export const generateRandomLetter = () => {
 
 
 export const convertMinutes = (time: number) => {
-    const hours = Math.round(time / 60);
+    const hours = time >= 60 ? Math.round(time / 60) : 0;
     const min = time % 60;
 
+
+    console.log('dd.time', time, `${hours}h ${min}m`)
     return `${hours}h ${min}m`
 }
 
