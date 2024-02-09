@@ -4,28 +4,29 @@ import {PlayIcon} from "~/components/icons/play-icon";
 import {Button} from "~/components/ui/button";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
-import {Link} from "@builder.io/qwik-city";
+import {Link, useLocation} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 import {Movie, TV} from "~/api/models";
 import {API} from "~/api";
+import {getContentWithGenresParam} from "~/utils";
 
 interface HeadBannerProps {
     type: CATEGORY.MOVIE | CATEGORY.TV_SHOW
 }
 
 export const HeadBanner = component$((props: HeadBannerProps) => {
+    const {prevUrl} = useLocation();
     const {type} = props;
     const apiRequestUrl = CONTENT_TYPE[type].API_URL;
     const pageUrl = CONTENT_TYPE[type].PAGE_URL;
     const random = Math.floor(Math.random()*(10-1))+1;
 
     const singleContentItem = useResource$(async () => {
-        const res = await fetch(`${API.URL}/${apiRequestUrl}`, API.OPTIONS);
+        const genre = getContentWithGenresParam(prevUrl);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}?${genre}`, API.OPTIONS);
         const json = await res.json();
 
-        if (type === CATEGORY.TV_SHOW) return json.results[random] as TV;
-
-        return json.results[random] as Movie;
+        return json.results[random] as TV | Movie;
     });
 
     return <section class={`relative min-h-[500px]`}>

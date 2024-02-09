@@ -25,12 +25,12 @@ type GENRES_TYPE_ITEMS = Record<Extract<CATEGORY, GenresType>, CONTENT_TYPE_ITEM
 const GENRES_TYPE: GENRES_TYPE_ITEMS = {
     [CATEGORY.GENRES_MOVIE]: {
         API_URL: API_REQUEST_URLS.GENRES_MOVIE,
-        TITLE: CATEGORY.GENRES_MOVIE,
+        TITLE: CATEGORY.MOVIE,
         PAGE_URL: URLS.MOVIE
     },
     [CATEGORY.GENRES_TV_SHOW]: {
-        API_URL: API_REQUEST_URLS.GENRES_TV,
-        TITLE: CATEGORY.GENRES_TV_SHOW,
+        API_URL: API_REQUEST_URLS.GENRES_TV_SHOW,
+        TITLE: CATEGORY.TV_SHOW,
         PAGE_URL: URLS.TV_SHOW
     },
 }
@@ -69,7 +69,7 @@ export const ContentGenres = component$((props: ContentGenresProps) => {
                               {
                                   contentList.map((genre) => {
                                       return <li key={genre.id}>
-                                          <Link href={`${pageUrl}/${genre.id}`}>
+                                          <Link href={`${pageUrl}?genre_id=${genre.id}`}>
                                               <Button
                                                   customClass={`!mr-[12px] !mb-[12px] text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-sm shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10  hover:shadow-lg hover:-translate-y-1`}>
                                                   {genre.name}

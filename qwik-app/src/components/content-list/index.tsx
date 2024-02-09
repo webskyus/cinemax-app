@@ -1,4 +1,4 @@
-import {component$, Resource, useResource$} from "@builder.io/qwik";
+import {component$, Resource, useResource$, useTask$} from "@builder.io/qwik";
 import {ContentCardXL} from "../contend-card-xl";
 import {EmptyList} from "../ui/empty-list";
 import {Loader} from "~/components/ui/loader";
@@ -6,6 +6,8 @@ import {API_REQUEST_URLS, API} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {URLS} from "~/utils/urls";
 import {Movie, People} from "~/api/models";
+import {useLocation} from "@builder.io/qwik-city";
+import {getContentWithGenresParam} from "~/utils";
 
 interface ContentListProps {
     type: keyof typeof CONTENT_TYPE,
@@ -101,11 +103,14 @@ export const CONTENT_TYPE: CONTENT_TYPES  = {
 }
 
 export const ContentList = component$((props: ContentListProps) => {
+    const {url} = useLocation();
     const {type, page = 1} = props;
     const getContentApiType = CONTENT_TYPE[type].API_URL;
     const pageTitle = CONTENT_TYPE[type].TITLE;
-    const contentList = useResource$(async () => {
-        const res = await fetch(`${API.URL}/${getContentApiType}?page=${page}`, API.OPTIONS);
+    const genre = getContentWithGenresParam(url);
+
+    const contentList = useResource$(async ({track}) => {
+        const res = await fetch(`${API.URL}/${getContentApiType}?page=${page}${genre}`, API.OPTIONS);
         const json = await res.json();
 
         return json.results as Movie[] | People[];

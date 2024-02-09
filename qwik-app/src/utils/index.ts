@@ -25,8 +25,6 @@ export const convertMinutes = (time: number) => {
     const hours = time >= 60 ? Math.round(time / 60) : 0;
     const min = time % 60;
 
-
-    console.log('dd.time', time, `${hours}h ${min}m`)
     return `${hours}h ${min}m`
 }
 
@@ -34,4 +32,12 @@ export const formatterForBudget = (numb: number) => {
     const formatter = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
 
     return formatter.format(numb)
+}
+
+
+export const getContentWithGenresParam = (prevUrl: URL | undefined) => {
+    const params = new URLSearchParams(prevUrl?.searchParams);
+    const genreId = params?.get('genre_id');
+
+    return  genreId ? `&with_genres=${genreId}` : '';
 }

@@ -24,7 +24,7 @@ export enum API_REQUEST_URLS {
     PEOPLE = 'person/popular',
 
     GENRES_MOVIE = 'genre/movie/list',
-    GENRES_TV = 'genre/tv/list',
+    GENRES_TV_SHOW = 'genre/tv/list',
 
     SEARCH = 'search/multi',
 
