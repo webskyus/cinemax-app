@@ -34,7 +34,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
         imageTransformer$,
     });
 
-    return <Link href={`${getContentUrl}/${data.id}`} class={`relative hover:scale-[105%] transition-all`}>
+    return <Link href={`${getContentUrl}/${data.id}`} prefetch={true} replaceState={true} class={`relative hover:scale-[105%] transition-all`}>
             <Image src={poster}
                    layout="constrained"
                    width={400}

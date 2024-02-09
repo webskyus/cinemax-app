@@ -30,14 +30,24 @@ export const CONTENT_TYPE: CONTENT_TYPES  = {
         TITLE: CATEGORY.MOVIE,
         PAGE_URL: URLS.MOVIE
     },
+    [CATEGORY.TV_SHOW]: {
+        API_URL: API_REQUEST_URLS.TV_SHOWS,
+        TITLE: CATEGORY.TV_SHOW,
+        PAGE_URL: URLS.TV_SHOW
+    },
     [CATEGORY.PEOPLE]: {
         API_URL: API_REQUEST_URLS.PEOPLE,
         TITLE: CATEGORY.PEOPLE,
         PAGE_URL: URLS.PEOPLE
     },
-    [CATEGORY.TV_SHOW]: {
+    [CATEGORY.RECOMMENDED_MOVIE]: {
+        API_URL: API_REQUEST_URLS.MOVIE,
+        TITLE: CATEGORY.RECOMMENDED_MOVIE,
+        PAGE_URL: URLS.MOVIE
+    },
+    [CATEGORY.RECOMMENDED_TV_SHOW]: {
         API_URL: API_REQUEST_URLS.TV_SHOWS,
-        TITLE: CATEGORY.TV_SHOW,
+        TITLE: CATEGORY.RECOMMENDED_TV_SHOW,
         PAGE_URL: URLS.TV_SHOW
     },
     [CATEGORY.TOP_RATED_MOVIE]: {
@@ -105,12 +115,12 @@ export const CONTENT_TYPE: CONTENT_TYPES  = {
 export const ContentList = component$((props: ContentListProps) => {
     const {url} = useLocation();
     const {type, page = 1} = props;
-    const getContentApiType = CONTENT_TYPE[type].API_URL;
+    const apiRequestUrl = CONTENT_TYPE[type].API_URL;
     const pageTitle = CONTENT_TYPE[type].TITLE;
     const genre = getContentWithGenresParam(url);
 
     const contentList = useResource$(async ({track}) => {
-        const res = await fetch(`${API.URL}/${getContentApiType}?page=${page}${genre}`, API.OPTIONS);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}?page=${page}${genre}`, API.OPTIONS);
         const json = await res.json();
 
         return json.results as Movie[] | People[];

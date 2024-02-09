@@ -12,28 +12,33 @@ import {VoteCountIcon} from "~/components/icons/vote-count-icon";
 import {Modal} from "~/components/ui/modal";
 import {API, API_REQUEST_URLS} from "~/api";
 import {Movie, TV} from "~/api/models";
+import {useLocation} from "@builder.io/qwik-city";
+
+type ContentViewType = CATEGORY.TV_SHOW | CATEGORY.MOVIE;
 
 interface ContentViewHeadProps {
-    contentId: string
-    type: CATEGORY.TV_SHOW | CATEGORY.MOVIE
+    type: ContentViewType
 }
 
-const CONTENT_VIEW_TYPE = {
+const CONTENT_VIEW_TYPE: Record<ContentViewType, API_REQUEST_URLS> = {
     [CATEGORY.MOVIE]: API_REQUEST_URLS.DETAILS_MOVIE,
     [CATEGORY.TV_SHOW]: API_REQUEST_URLS.DETAILS_TV,
 }
 
 export const ContentViewHead = component$((props: ContentViewHeadProps) => {
+    const {params} = useLocation();
     const isModalVisibility = useSignal(false);
     const videoTrailerId = useSignal('');
-    const {contentId, type} = props;
+    const {type} = props;
     const apiRequestUrl = CONTENT_VIEW_TYPE[type];
 
-    const content = useResource$(async () => {
-        const res = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}`, API.OPTIONS);
+    const content = useResource$(async ({track}) => {
+        track(() => params.id);
+
+        const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}`, API.OPTIONS);
         const json = await res.json();
 
-        const videoRes = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}/videos`, API.OPTIONS);
+        const videoRes = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/videos`, API.OPTIONS);
         const videoJson = await videoRes.json();
 
         if (videoJson.results?.length) {
