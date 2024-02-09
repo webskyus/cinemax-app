@@ -35,7 +35,10 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
 
         const videoRes = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}/videos`, API.OPTIONS);
         const videoJson = await videoRes.json();
-        videoTrailerId.value = videoJson.results[0].key;
+
+        if (videoJson.results?.length) {
+            videoTrailerId.value = videoJson.results[0].key
+        }
 
         return json as TV | Movie;
     });
@@ -73,7 +76,8 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                                         bg bg-label-gradient bg-no-repeat bg-center bg-cover
                                                         rounded-[6px]
                                                         
-                                                after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-70 -z-1
+                                                        after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] 
+                                                        after:bg-grayscale-100 after:opacity-70 -z-1
                                 `}>
                           <aside class={`
                                                     relative z-10 min-w-[280px] h-[400px] mb-[12px] 
@@ -98,7 +102,16 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   {title}
                               </h1>
 
-                              <ul class={`flex flex-wrap xl:flex-nowrap font-semibold text-h6-xs sm:text-h6-sm`}>
+                              <ul class={`flex flex-wrap font-semibold text-h6-xs sm:text-h6-sm`}>
+                                  <li class={`
+                                            relative mb-[4px] pr-[16px] whitespace-nowrap
+                                            after:content-[''] after:absolute after:right-[5px] 
+                                            after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
+                                            after:rounded-[50%] after:bg-primary
+                                     `}>
+                                      {type}
+                                  </li>
+
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
@@ -107,6 +120,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                      `}>
                                       {content.original_language.toUpperCase()}
                                   </li>
+
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
@@ -115,6 +129,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                      `}>
                                       {content.status}
                                   </li>
+
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
@@ -123,14 +138,20 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                      `}>
                                       {convertMinutes(runTime)}
                                   </li>
-                                  <li class={`
+
+                                  {
+                                      content.production_companies[0]?.origin_country
+                                          ? <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
                                             after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
                                             after:rounded-[50%] after:bg-primary
                                      `}>
-                                      {content.production_companies[0].origin_country || '-'}
-                                  </li>
+                                              {content.production_companies[0]?.origin_country}
+                                          </li>
+                                          : ''
+                                  }
+
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
@@ -149,17 +170,25 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                           })
                                       }
                                   </li>
+
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
-                                            after:content-[''] after:absolute after:right-[5px] 
+                                            
+                                            ${content.budget ? "after:content-['']" : 'after:hidden'} 
+                                            after:absolute after:right-[5px] 
                                             after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
                                             after:rounded-[50%] after:bg-primary
                                      `}>
                                       {runTime}
                                   </li>
-                                  <li class={`relative mb-[4px] whitespace-nowrap`}>
-                                      Budget: {content.budget ? `${'$' + formatterForBudget(content.budget)}` : '-'}
-                                  </li>
+
+                                  {
+                                      content.budget
+                                          ? <li class={`relative mb-[4px] whitespace-nowrap`}>
+                                              Budget: {formatterForBudget(content.budget)}
+                                          </li>
+                                          : ''
+                                  }
                               </ul>
 
 
@@ -180,7 +209,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   </li>
 
                                   {
-                                      videoTrailerId
+                                      videoTrailerId.value
                                           ? <li>
                                               <Button onClick={changeModalVisibility} customClass={`!pl-[0px]`}
                                                       type={BUTTON_TYPE.TEXT}>
@@ -192,15 +221,28 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   }
                               </ul>
 
-                              <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Tagline</h5>
-                              <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
-                                  {content.tagline}
-                              </p>
+                              {
+                                  content.tagline
+                                      ? <>
+                                          <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Tagline</h5>
+                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                              {content.tagline}
+                                          </p>
+                                      </>
+                                      : ''
+                              }
 
-                              <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Overview</h5>
-                              <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
-                                  {content.overview}
-                              </p>
+                              {
+                                  content.overview
+                                      ? <>
+                                          <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Overview</h5>
+                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                              {content.overview}
+                                          </p>
+                                      </>
+                                      : ''
+                              }
+
                           </article>
                       </section>
                   }}

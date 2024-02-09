@@ -7,7 +7,7 @@ export const EmptyList = component$((props: {isVisible: boolean}) => {
         {
             isVisible
                 ? <p class={`font-bold text-h6-sm sm:text-h6-lg text-grayscale-50`}>
-                    Empty list
+                    Something went wrong...
                 </p>
                 : ''
         }
