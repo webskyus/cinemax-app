@@ -1,5 +1,6 @@
 import {API_MEDIA_TYPE} from "~/api/index";
 import {Genres} from "~/components/content-genres";
+import {CATEGORY} from "~/components/ui/label";
 
 export interface Movie {
     adult: boolean,
@@ -67,3 +68,9 @@ interface ProductionCompanies {
     name: string,
     origin_country: string,
 }
+
+export const apiMediaType: Record<API_MEDIA_TYPE, CATEGORY.MOVIE | CATEGORY.TV_SHOW | CATEGORY.PEOPLE>  = {
+    [API_MEDIA_TYPE.MOVIE]: CATEGORY.MOVIE,
+    [API_MEDIA_TYPE.TV]: CATEGORY.TV_SHOW,
+    [API_MEDIA_TYPE.PERSON]: CATEGORY.PEOPLE,
+};

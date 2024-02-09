@@ -1,5 +1,4 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
-import {API_REQUEST_URLS, API_URL, OPTIONS} from "~/api";
 import {CONTENT_TYPE_ITEMS} from "~/components/content-list";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
@@ -7,6 +6,7 @@ import {Link} from "@builder.io/qwik-city";
 import {URLS} from "~/utils/urls";
 import {Button} from "~/components/ui/button";
 import {CATEGORY} from "~/components/ui/label";
+import {API, API_REQUEST_URLS} from "~/api";
 
 export interface Genres {
     id: number
@@ -41,7 +41,7 @@ export const ContentGenres = component$((props: ContentGenresProps) => {
     const pageTitle= GENRES_TYPE[type].TITLE;
     const pageUrl = GENRES_TYPE[type].PAGE_URL;
     const genresList = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${apiRequestUrl}`, OPTIONS);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}`, API.OPTIONS);
         const json = await res.json();
 
         return json.genres as Genres[];

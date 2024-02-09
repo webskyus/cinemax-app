@@ -3,7 +3,6 @@ import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {StarIcon} from "~/components/icons/star-icon";
 import {PlaySolidIcon} from "~/components/icons/play-solid-icon";
-import {API_REQUEST_URLS, API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
 import {CATEGORY} from "~/components/ui/label";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
@@ -11,7 +10,8 @@ import {Movie, TV} from "~/api/models";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {convertMinutes, formatterForBudget} from "~/utils";
 import {VoteCountIcon} from "~/components/icons/vote-count-icon";
-import { Modal } from "~/components/ui/modal";
+import {Modal} from "~/components/ui/modal";
+import {API, API_REQUEST_URLS} from "~/api";
 
 interface ContentViewHeadProps {
     contentId: string
@@ -25,10 +25,12 @@ const CONTENT_VIEW_TYPE = {
 
 export const ContentViewHead = component$((props: ContentViewHeadProps) => {
     const isModalVisibility = useSignal(false);
+    const videoTrailerId = useSignal('');
     const {contentId, type} = props;
     const apiRequestUrl = CONTENT_VIEW_TYPE[type];
+
     const content = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${apiRequestUrl}/${contentId}`, OPTIONS);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}`, API.OPTIONS);
         const json = await res.json();
 
         return json as Movie | TV;
@@ -37,23 +39,32 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
     const changeModalVisibility = $(() => isModalVisibility.value = !isModalVisibility.value)
 
     const imageTransformer$ = $(
-        ({ src }: ImageTransformerProps): string => {
-            if (src) return `${CONFIGURATE_IMAGES_API_URL()}/${src}`;
+        ({src}: ImageTransformerProps): string => {
+            if (src) return `${API.CONFIGURATE_IMAGES_URL()}/${src}`;
 
             return errorPlaceholder;
         }
     );
+
+    const getContentTrailer = useResource$(async () => {
+        const res = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}/videos`, API.OPTIONS);
+        const json = await res.json();
+        videoTrailerId.value = json.results.key;
+
+        return json.results;
+    })
 
     useImageProvider({
         resolutions: [960],
         imageTransformer$,
     });
 
+
     return <section class={`relative min-h-[500px]`}>
         <Resource value={content}
                   onResolved={(content) => {
                       return <section
-                          style={{background: `var(--color-alerts-error) url(${CONFIGURATE_IMAGES_API_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
+                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                           class={`
                                                         relative flex flex-col sm:flex-row
                                                         w-[100%] min-h-[500px] p-[24px] 
@@ -158,18 +169,26 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                           {content.vote_average.toFixed(1)}
                                       </Button>
                                   </li>
+
                                   <li>
                                       <Button customClass={`!pl-[0px]`} type={BUTTON_TYPE.TEXT}>
-                                          <VoteCountIcon width={42} height={42} class={`translate-y-[-1px] translate-x-[3px]`}/>
+                                          <VoteCountIcon width={42} height={42}
+                                                         class={`translate-y-[-1px] translate-x-[3px]`}/>
                                           {content.vote_count}
                                       </Button>
                                   </li>
-                                  <li>
-                                      <Button onClick={changeModalVisibility} customClass={`!pl-[0px]`} type={BUTTON_TYPE.TEXT}>
-                                          <PlaySolidIcon class={`mr-[4px] translate-y-[-1px]`}/>
-                                          Play
-                                      </Button>
-                                  </li>
+
+                                  {
+                                      videoTrailerId
+                                          ? <li>
+                                              <Button onClick={changeModalVisibility} customClass={`!pl-[0px]`}
+                                                      type={BUTTON_TYPE.TEXT}>
+                                                  <PlaySolidIcon class={`mr-[4px] translate-y-[-1px]`}/>
+                                                  Video Trailer {videoTrailerId.value}
+                                              </Button>
+                                          </li>
+                                          : ''
+                                  }
                               </ul>
 
                               <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Tagline</h5>
@@ -188,6 +207,6 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                   onRejected={() => <EmptyList isVisible={true}/>}/>
 
 
-        <Modal isVisible={isModalVisibility.value} action={changeModalVisibility}/>
+        <Modal isVisible={isModalVisibility.value} id={videoTrailerId.value} action={changeModalVisibility}/>
     </section>
 })

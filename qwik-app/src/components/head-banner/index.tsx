@@ -2,12 +2,12 @@ import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {CATEGORY, Label} from "../ui/label";
 import {PlayIcon} from "~/components/icons/play-icon";
 import {Button} from "~/components/ui/button";
-import {API_URL, CONFIGURATE_IMAGES_API_URL, OPTIONS} from "~/api";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 import {Movie, TV} from "~/api/models";
+import {API} from "~/api";
 
 interface HeadBannerProps {
     type: CATEGORY.MOVIE | CATEGORY.TV_SHOW
@@ -20,7 +20,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
     const random = Math.floor(Math.random()*(10-1))+1;
 
     const singleContentItem = useResource$(async () => {
-        const res = await fetch(`${API_URL}/${apiRequestUrl}`, OPTIONS);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}`, API.OPTIONS);
         const json = await res.json();
 
         if (type === CATEGORY.TV_SHOW) return json.results[random] as TV;
@@ -34,7 +34,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                       const title = type === CATEGORY.TV_SHOW ? (content as TV).name : content.title;
 
                       return <section
-                          style={{background: `var(--color-alerts-error) url(${CONFIGURATE_IMAGES_API_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
+                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                           class={`
                                                 relative flex flex-col
                                                 w-[100%] min-h-[500px] p-[24px] bg

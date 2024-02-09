@@ -1,10 +1,11 @@
 import {component$, useStore, useTask$} from "@builder.io/qwik";
 import {ContentCardXL} from "~/components/contend-card-xl";
-import {API_MEDIA_TYPE, API_REQUEST_URLS, API_URL, OPTIONS} from "~/api";
 import {debounce, generateRandomLetter} from "~/utils";
 import {CATEGORY} from "~/components/ui/label";
 import {EmptyList} from "~/components/ui/empty-list";
 import {Loader} from "~/components/ui/loader";
+import {apiMediaType} from "~/api/models";
+import {API, API_MEDIA_TYPE, API_REQUEST_URLS} from "~/api";
 
 interface AutoCompleteStoreProps {
     searchInput: string,
@@ -80,12 +81,6 @@ export const SearchResultList = component$((props: {state: AutoCompleteStoreProp
         {
             state.searchResults?.length
                 ? state.searchResults.map((content) => {
-                    const apiMediaType: Record<API_MEDIA_TYPE, Extract<CATEGORY, CATEGORY.MOVIE | CATEGORY.TV_SHOW | CATEGORY.PEOPLE>> = {
-                        [API_MEDIA_TYPE.MOVIE]: CATEGORY.MOVIE,
-                        [API_MEDIA_TYPE.TV]: CATEGORY.TV_SHOW,
-                        [API_MEDIA_TYPE.PERSON]: CATEGORY.PEOPLE,
-                    };
-
                     return <ContentCardXL key={content.id} data={content}
                                           type={apiMediaType[content.media_type as API_MEDIA_TYPE]}/>
                 })
@@ -95,8 +90,8 @@ export const SearchResultList = component$((props: {state: AutoCompleteStoreProp
 })
 
 const getContent = async (state: AutoCompleteStoreProps, controller?: AbortController): Promise<[]> => {
-    const res = await fetch(`${API_URL}/${API_REQUEST_URLS.SEARCH}?query=${state.searchInput}`, {
-        ...OPTIONS,
+    const res = await fetch(`${API.URL}/${API_REQUEST_URLS.SEARCH}?query=${state.searchInput}`, {
+        ...API.OPTIONS,
         signal: controller?.signal,
     });
     const json = await res.json();

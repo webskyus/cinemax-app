@@ -1,10 +1,10 @@
 import {$, component$} from "@builder.io/qwik";
 import {Link} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
-import {CONFIGURATE_IMAGES_API_URL} from "~/api";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {Movie, People} from "~/api/models";
+import {API} from "~/api";
 
 interface ContentCartXLProps {
     data: Movie | People
@@ -23,7 +23,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {
-            if (src) return `${CONFIGURATE_IMAGES_API_URL()}/${src}`;
+            if (src) return `${API.CONFIGURATE_IMAGES_URL()}/${src}`;
 
             return errorPlaceholder;
         }
