@@ -1,4 +1,4 @@
-import {$, component$, Resource, useResource$, useSignal} from "@builder.io/qwik";
+import {$, component$, Resource, ResourceReturn, useResource$, useSignal} from "@builder.io/qwik";
 import {Image, ImageTransformerProps, useImageProvider} from "qwik-image";
 import {Button, BUTTON_TYPE} from "~/components/ui/button";
 import {StarIcon} from "~/components/icons/star-icon";
@@ -6,12 +6,12 @@ import {PlaySolidIcon} from "~/components/icons/play-solid-icon";
 import {CATEGORY} from "~/components/ui/label";
 import {Loader} from "~/components/ui/loader";
 import {EmptyList} from "~/components/ui/empty-list";
-import {Movie, TV} from "~/api/models";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {convertMinutes, formatterForBudget} from "~/utils";
 import {VoteCountIcon} from "~/components/icons/vote-count-icon";
 import {Modal} from "~/components/ui/modal";
 import {API, API_REQUEST_URLS} from "~/api";
+import {Movie, TV} from "~/api/models";
 
 interface ContentViewHeadProps {
     contentId: string
@@ -33,7 +33,11 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
         const res = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}`, API.OPTIONS);
         const json = await res.json();
 
-        return json as Movie | TV;
+        const videoRes = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}/videos`, API.OPTIONS);
+        const videoJson = await videoRes.json();
+        videoTrailerId.value = videoJson.results[0].key;
+
+        return json
     });
 
     const changeModalVisibility = $(() => isModalVisibility.value = !isModalVisibility.value)
@@ -46,14 +50,6 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
         }
     );
 
-    const getContentTrailer = useResource$(async () => {
-        const res = await fetch(`${API.URL}/${apiRequestUrl}/${contentId}/videos`, API.OPTIONS);
-        const json = await res.json();
-        videoTrailerId.value = json.results.key;
-
-        return json.results;
-    })
-
     useImageProvider({
         resolutions: [960],
         imageTransformer$,
@@ -63,6 +59,8 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
     return <section class={`relative min-h-[500px]`}>
         <Resource value={content}
                   onResolved={(content) => {
+                      const title = type === CATEGORY.MOVIE ? content.title : content.name;
+
                       return <section
                           style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                           class={`
@@ -94,7 +92,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
 
                           <article class={`relative z-10 sm:pl-[24px]`}>
                               <h1 class={`font-bold text-h3-sm md:text-h3-sm lg:sm:text-h3-lg mb-[8px]`}>
-                                  {content.title}
+                                  {title}
                               </h1>
 
                               <ul class={`flex flex-wrap xl:flex-nowrap font-semibold text-h6-xs sm:text-h6-sm`}>
@@ -184,7 +182,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                               <Button onClick={changeModalVisibility} customClass={`!pl-[0px]`}
                                                       type={BUTTON_TYPE.TEXT}>
                                                   <PlaySolidIcon class={`mr-[4px] translate-y-[-1px]`}/>
-                                                  Video Trailer {videoTrailerId.value}
+                                                  Video Trailer
                                               </Button>
                                           </li>
                                           : ''
