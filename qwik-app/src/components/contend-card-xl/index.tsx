@@ -40,7 +40,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
                    width={400}
                    height={600}
                    class={` 
-                        h-[100%]
+                        h-[100%] rounded-[6px] shadow-xl
                         [@media(min-width:2419px)]:!max-w-[800px]
                         [@media(min-width:2419px)]:!max-h-[1000px]
                    `}

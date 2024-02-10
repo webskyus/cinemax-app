@@ -21,6 +21,7 @@ export const Button = component$((props: ButtonProps) => {
     })
 
     return <button onClick$={onClick}
+
                    class={`
                         ${defaultStyles[type]}
                         
