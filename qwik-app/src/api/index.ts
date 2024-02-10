@@ -7,7 +7,7 @@ export const API_BASE_SETTING = {
 
 export const API = {
     URL: `${API_BASE_SETTING.API_ROOT_URL}/${API_BASE_SETTING.API_V}`,
-    CONFIGURATE_IMAGES_URL: (size = 'w780') => `https://image.tmdb.org/t/p/${size}`,
+    CONFIGURE_IMAGES_URL: (size = 'w780') => `https://image.tmdb.org/t/p/${size}`,
     OPTIONS: {
         method: 'GET',
         headers: {

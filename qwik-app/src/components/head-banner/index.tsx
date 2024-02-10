@@ -35,7 +35,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                       const title = type === CATEGORY.TV_SHOW ? (content as TV).name : content.title;
 
                       return <section
-                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
+                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                           class={`
                                                 relative flex flex-col
                                                 w-[100%] min-h-[500px] p-[24px] bg

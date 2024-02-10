@@ -23,7 +23,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
 
     const imageTransformer$ = $(
         ({ src }: ImageTransformerProps): string => {
-            if (src) return `${API.CONFIGURATE_IMAGES_URL()}/${src}`;
+            if (src) return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
 
             return errorPlaceholder;
         }

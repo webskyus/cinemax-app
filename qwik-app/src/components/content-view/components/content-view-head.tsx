@@ -52,7 +52,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
 
     const imageTransformer$ = $(
         ({src}: ImageTransformerProps): string => {
-            if (src) return `${API.CONFIGURATE_IMAGES_URL()}/${src}`;
+            if (src) return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
 
             return errorPlaceholder;
         }
@@ -73,7 +73,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                       const runTime = contentType ? content.runtime : (content as TV).episode_run_time[0]
 
                       return <section
-                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURATE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
+                          style={{background: `var(--color-alerts-error) url(${API.CONFIGURE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
                           class={`
                                                         relative flex flex-col sm:flex-row
                                                         w-[100%] min-h-[500px] p-[24px] 
