@@ -36,7 +36,6 @@ export const CombinedContentList = component$(() => {
         <section class={`relative min-h-[500px]`}>
             <Resource value={contentList}
                       onResolved={(contents) => {
-                          console.log('contents', contents)
                           return <section class={`
                                 grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
                                 

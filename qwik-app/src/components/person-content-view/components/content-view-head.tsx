@@ -12,10 +12,11 @@ import {IMBDIcon} from "~/components/icons/imbd-icon";
 import {TwitterIcon} from "~/components/icons/twitter-icon";
 import {InstagramIcon} from "~/components/icons/instagram-icon";
 import {FacebookIcon} from "~/components/icons/facebook-icon";
+import {SocialNetwork} from "~/components/person-content-view/components/social-network";
 
 export const PersonContentViewHead = component$(() => {
     const {params} = useLocation();
-    const externalIds = useSignal<PersonExternalIDS>();
+    const externalIDS = useSignal<PersonExternalIDS>();
 
     const content = useResource$(async ({track}) => {
         track(() => params.id);
@@ -26,7 +27,7 @@ export const PersonContentViewHead = component$(() => {
 
         // GET PERSON EXTERNAL IDS
         const resExtIds = await fetch(`${API.URL}/${API_REQUEST_URLS.PERSON_DETAILS}/${params.id}/${API_REQUEST_URLS.PERSON_EXTERNAL_IDS}`, API.OPTIONS);
-        externalIds.value = await resExtIds.json();
+        externalIDS.value = await resExtIds.json();
 
         return json as PersonDetails;
     });
@@ -129,55 +130,7 @@ export const PersonContentViewHead = component$(() => {
                                       : ''
                               }
 
-                              {
-                                  externalIds.value
-                                      ? <ul class={`flex items-center`}>
-                                          {
-                                              externalIds?.value?.imdb_id
-                                                  ? <li>
-                                                      <Link target={"_blank"}
-                                                            href={`${EXTERNAL_LINK.IMDB}/${externalIds.value?.imdb_id}`}>
-                                                          <IMBDIcon width={32} height={32}/>
-                                                      </Link>
-                                                  </li>
-                                                  : ''
-                                          }
-
-                                          {
-                                              externalIds?.value?.twitter_id
-                                                  ? <li class={`ml-[-4px]`}>
-                                                      <Link target={"_blank"}
-                                                            href={`${EXTERNAL_LINK.TWITTER}/${externalIds.value?.twitter_id}`}>
-                                                          <TwitterIcon width={32} height={32}/>
-                                                      </Link>
-                                                  </li>
-                                                  : ''
-                                          }
-
-                                          {
-                                              externalIds?.value?.instagram_id
-                                                  ? <li class={`ml-[4px]`}>
-                                                      <Link target={"_blank"}
-                                                            href={`${EXTERNAL_LINK.INSTAGRAM}/${externalIds.value?.instagram_id}`}>
-                                                          <InstagramIcon width={26} height={26}/>
-                                                      </Link>
-                                                  </li>
-                                                  : ''
-                                          }
-
-                                          {
-                                              externalIds?.value?.facebook_id
-                                                  ? <li class={`ml-[4px]`}>
-                                                      <Link target={"_blank"}
-                                                            href={`${EXTERNAL_LINK.FACEBOOK}/${externalIds.value?.facebook_id}`}>
-                                                          <FacebookIcon width={32} height={32}/>
-                                                      </Link>
-                                                  </li>
-                                                  : ''
-                                          }
-                                      </ul>
-                                      : ''
-                              }
+                              <SocialNetwork externalIDS={externalIDS.value} />
 
                           </article>
                       </section>
