@@ -34,7 +34,7 @@ export const ContentCardXL = component$((props: ContentCartXLProps) => {
   return (
     <Link
       href={`${getContentUrl}/${data.id}`}
-      class={`relative transition-all hover:scale-[105%]`}
+      class={`relative transition-all hover:scale-[105%] hover:z-10`}
     >
       <Image
         src={poster}
