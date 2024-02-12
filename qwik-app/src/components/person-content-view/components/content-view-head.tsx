@@ -11,7 +11,7 @@ import { Button, BUTTON_TYPE } from "~/components/ui/button";
 import { StarIcon } from "~/components/icons/star-icon";
 import { Loader } from "~/components/ui/loader";
 import { ErrorMessage } from "~/components/ui/error-message";
-import errorPlaceholder from "/img/error-placeholder.svg";
+import errorPlaceholder from "/img/error-placeholder.svg?inline";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { PersonDetails, PersonExternalIDS } from "~/api/models";
 import { useLocation } from "@builder.io/qwik-city";
