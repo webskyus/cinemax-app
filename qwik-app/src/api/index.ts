@@ -65,6 +65,8 @@ export enum API_REQUEST_URLS {
 export const EXTERNAL_LINK = {
     IMDB: 'https://www.imdb.com/name',
     TWITTER: 'https://twitter.com',
+    INSTAGRAM: 'https://www.instagram.com',
+    FACEBOOK: 'https://www.facebook.com',
 }
 
 export enum API_MEDIA_TYPE {
