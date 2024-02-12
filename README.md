@@ -9,6 +9,6 @@ This my pet project with Tailwind, TS and TheMovieDB API for check top popular n
 ----
 
 ### **Used frameworks**
-* [Qwik]()
+* [Qwik](https://cinemax-movie-streaming-qwikjs-app.vercel.app/)
 * [Astro] 
 * SolidJS
