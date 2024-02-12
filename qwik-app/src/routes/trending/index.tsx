@@ -16,7 +16,7 @@ export default component$(() => {
       <ContentList type={CATEGORY.TRENDING_TV_SHOW} />
 
       {/*PEOPLE*/}
-      <ContentList type={CATEGORY.TRENDING_PEOPLE} />
+      <ContentList type={CATEGORY.TRENDING_PERSON} />
     </section>
   );
 });

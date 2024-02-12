@@ -25,7 +25,7 @@ export default component$(() => {
     {
       id: 3,
       name: CATEGORY.PEOPLE,
-      link: URLS.PEOPLE,
+      link: URLS.PERSON,
     },
   ]);
 

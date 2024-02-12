@@ -33,7 +33,7 @@ export enum CATEGORY {
   TRENDING = "Trending",
   TRENDING_MOVIE = "Trending Movie",
   TRENDING_TV_SHOW = "Trending TV Show",
-  TRENDING_PEOPLE = "Trending People",
+  TRENDING_PERSON = "Trending People",
 
   ON_THE_AIR = "On The Air",
   AIRING_TODAY = "Airing Today",

@@ -5,7 +5,7 @@ import type { ImageTransformerProps } from "qwik-image";
 import { Image, useImageProvider } from "qwik-image";
 import type { Cast, Movie, Person } from "~/api/models";
 import { API } from "~/api";
-import errorPlaceholder from "/public/img/error-placeholder.svg";
+import errorPlaceholder from "/public/img/error-placeholder.svg?url";
 
 interface ContentCartXLProps {
   data: Movie | Person | Cast;
