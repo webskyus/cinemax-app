@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap");
 
 /**
  * Tailwind CSS imports
@@ -24,7 +24,8 @@
  *
  */
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -44,7 +45,8 @@ html {
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
-  font-family: 'Inter',
+  font-family:
+    "Inter",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -92,32 +94,35 @@ body {
   overflow: hidden;
 }
 
-
 @layer base {
   :root {
-    --color-primary: #B43FEB;
+    --color-primary: #b43feb;
     --color-bg: #fff;
-    --color-bg-dark: #0D0C0F;
+    --color-bg-dark: #0d0c0f;
 
-    --color-alerts-success: #25DC37;
-    --color-alerts-error: #EB3F5E;
+    --color-alerts-success: #25dc37;
+    --color-alerts-error: #eb3f5e;
 
-    --color-additional-dark-smooth: #1A161F;
-    --color-additional-dark-line: #29282F;
-    --color-additional-line: #E9EBED;
+    --color-additional-dark-smooth: #1a161f;
+    --color-additional-dark-line: #29282f;
+    --color-additional-line: #e9ebed;
 
-    --color-grayscale-10: #F9F9F9;
-    --color-grayscale-20: #ECF1F6;
-    --color-grayscale-30: #E3E9ED;
-    --color-grayscale-40: #D1D8DD;
-    --color-grayscale-50: #BFC6CC;
-    --color-grayscale-60: #9CA4AB;
-    --color-grayscale-70: #78828A;
-    --color-grayscale-80: #66707A;
-    --color-grayscale-90: #434E58;
+    --color-grayscale-10: #f9f9f9;
+    --color-grayscale-20: #ecf1f6;
+    --color-grayscale-30: #e3e9ed;
+    --color-grayscale-40: #d1d8dd;
+    --color-grayscale-50: #bfc6cc;
+    --color-grayscale-60: #9ca4ab;
+    --color-grayscale-70: #78828a;
+    --color-grayscale-80: #66707a;
+    --color-grayscale-90: #434e58;
     --color-grayscale-100: #171725;
 
-    --color-label-gradient: linear-gradient(90deg, hsla(238, 100%, 71%, 1) 0%, hsla(295, 100%, 84%, 1) 100%);
+    --color-label-gradient: linear-gradient(
+      90deg,
+      hsla(238, 100%, 71%, 1) 0%,
+      hsla(295, 100%, 84%, 1) 100%
+    );
 
     --h1-size-sm: 56px;
     --h1-size-md: 60px;

@@ -45,16 +45,15 @@ export default {
         "extra-large-md": "var(--extra-large-size-md)",
         "extra-large-lg": "var(--extra-large-size-lg)",
 
-        "large": "var(--large-size)",
-        "medium": "var(--medium-size)",
-        "small": "var(--small-size)",
+        large: "var(--large-size)",
+        medium: "var(--medium-size)",
+        small: "var(--small-size)",
         "extra-small": "var(--extra-small-size)",
-
       },
       colors: {
-        "background": "var(--color-bg)",
+        background: "var(--color-bg)",
         "background-dark": "var(--color-bg-dark)",
-        "primary": "var(--color-primary)",
+        primary: "var(--color-primary)",
 
         "alerts-success": "var(--color-alerts-success)",
         "alerts-error": "var(--color-alerts-error)",
@@ -73,10 +72,8 @@ export default {
         "grayscale-80": "var(--color-grayscale-80)",
         "grayscale-90": "var(--color-grayscale-90)",
         "grayscale-100": "var(--color-grayscale-100)",
-      }
+      },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar-hide'),
-  ],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
