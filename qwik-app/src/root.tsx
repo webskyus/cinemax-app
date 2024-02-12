@@ -1,28 +1,35 @@
-import {component$, createContextId, Signal, useContextProvider, useSignal} from "@builder.io/qwik";
+import type { Signal } from "@builder.io/qwik";
 import {
-    QwikCityProvider,
-    RouterOutlet,
-    ServiceWorkerRegister,
+  component$,
+  createContextId,
+  useContextProvider,
+  useSignal,
+} from "@builder.io/qwik";
+import {
+  QwikCityProvider,
+  RouterOutlet,
+  ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
-import {RouterHead} from "./components/router-head/router-head";
+import { RouterHead } from "./components/router-head/router-head";
 
 import "./global.css";
 
 export const ThemeContext = createContextId<Signal<string>>("theme");
 
 export default component$(() => {
-    const theme = useSignal("dark");
-    useContextProvider(ThemeContext, theme);
+  const theme = useSignal("dark");
+  useContextProvider(ThemeContext, theme);
 
-    return (
-        <QwikCityProvider>
-            <head>
-                <meta charSet="utf-8"/>
-                <link rel="manifest" href="/manifest.json"/>
-                <RouterHead/>
-                <ServiceWorkerRegister/>
+  return (
+    <QwikCityProvider>
+      <head>
+        <meta charSet="utf-8" />
+        <link rel="manifest" href="/manifest.json" />
+        <RouterHead />
+        <ServiceWorkerRegister />
 
-                <script dangerouslySetInnerHTML={`
+        <script
+          dangerouslySetInnerHTML={`
                          (function() {
                             function setTheme(theme) {
                                 document.documentElement.className = theme;
@@ -37,11 +44,12 @@ export default component$(() => {
                                 setTheme('light');
                             }
                         })();
-                  `}/>
-            </head>
-            <body lang="en">
-                <RouterOutlet/>
-            </body>
-        </QwikCityProvider>
-    );
+                  `}
+        />
+      </head>
+      <body lang="en">
+        <RouterOutlet />
+      </body>
+    </QwikCityProvider>
+  );
 });
