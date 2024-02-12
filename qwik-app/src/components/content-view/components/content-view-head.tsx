@@ -13,7 +13,7 @@ import { PlaySolidIcon } from "~/components/icons/play-solid-icon";
 import { CATEGORY } from "~/components/ui/label";
 import { Loader } from "~/components/ui/loader";
 import { ErrorMessage } from "~/components/ui/error-message";
-import errorPlaceholder from "/img/error-placeholder.svg";
+import errorPlaceholder from "/img/error-placeholder.svg?inline";
 import { convertMinutes, formatterForBudget } from "~/utils";
 import { VoteCountIcon } from "~/components/icons/vote-count-icon";
 import { Modal } from "~/components/ui/modal";

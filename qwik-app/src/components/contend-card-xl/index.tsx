@@ -3,9 +3,9 @@ import { Link } from "@builder.io/qwik-city";
 import { CONTENT_TYPE } from "~/components/content-list";
 import type { ImageTransformerProps } from "qwik-image";
 import { Image, useImageProvider } from "qwik-image";
-import errorPlaceholder from "/img/error-placeholder.svg";
 import type { Cast, Movie, Person } from "~/api/models";
 import { API } from "~/api";
+import errorPlaceholder from "/img/error-placeholder.svg?inline";
 
 interface ContentCartXLProps {
   data: Movie | Person | Cast;
