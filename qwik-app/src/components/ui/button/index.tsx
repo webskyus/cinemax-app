@@ -10,7 +10,7 @@ export enum BUTTON_TYPE {
 interface ButtonProps {
   type?: keyof typeof BUTTON_TYPE;
   customClass?: string;
-  onClick?: QRL<() => void>;
+  onClick?: QRL<() => unknown>;
 }
 
 export const Button = component$((props: ButtonProps) => {
