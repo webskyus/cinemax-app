@@ -5,7 +5,7 @@ import {Loader} from "~/components/ui/loader";
 import {API_REQUEST_URLS, API} from '~/api';
 import {CATEGORY} from "../ui/label";
 import {URLS} from "~/utils/urls";
-import {Movie, People} from "~/api/models";
+import {Movie, Person} from "~/api/models";
 import {useLocation} from "@builder.io/qwik-city";
 import {getContentWithGenresParam} from "~/utils";
 
@@ -52,7 +52,7 @@ export const CONTENT_TYPE: CONTENT_TYPES = {
         PAGE_URL: URLS.TV_SHOW
     },
     [CATEGORY.PEOPLE]: {
-        API_URL: API_REQUEST_URLS.PEOPLE,
+        API_URL: API_REQUEST_URLS.PERSON,
         TITLE: CATEGORY.PEOPLE,
         PAGE_URL: URLS.PEOPLE
     },
@@ -67,42 +67,42 @@ export const CONTENT_TYPE: CONTENT_TYPES = {
         PAGE_URL: URLS.TV_SHOW
     },
     [CATEGORY.TOP_RATED_MOVIE]: {
-        API_URL: API_REQUEST_URLS.TOP_RATED_MOVIE,
+        API_URL: API_REQUEST_URLS.MOVIE_TOP_RATED,
         TITLE: CATEGORY.TOP_RATED_MOVIE,
         PAGE_URL: URLS.TOP_RATED
     },
     [CATEGORY.TOP_RATED_TV_SHOW]: {
-        API_URL: API_REQUEST_URLS.TOP_RATED_TV_SHOW,
+        API_URL: API_REQUEST_URLS.TV_SHOW_TOP_RATED,
         TITLE: CATEGORY.TOP_RATED_TV_SHOW,
         PAGE_URL: URLS.TOP_RATED
     },
     [CATEGORY.POPULAR_MOVIE]: {
-        API_URL: API_REQUEST_URLS.POPULAR_MOVIE,
+        API_URL: API_REQUEST_URLS.MOVIE_POPULAR,
         TITLE: CATEGORY.POPULAR_MOVIE,
         PAGE_URL: URLS.POPULAR
     },
     [CATEGORY.POPULAR_TV_SHOW]: {
-        API_URL: API_REQUEST_URLS.POPULAR_TV_SHOW,
+        API_URL: API_REQUEST_URLS.TV_SHOW_POPULAR,
         TITLE: CATEGORY.POPULAR_TV_SHOW,
         PAGE_URL: URLS.POPULAR
     },
     [CATEGORY.POPULAR_PEOPLE]: {
-        API_URL: API_REQUEST_URLS.PEOPLE,
+        API_URL: API_REQUEST_URLS.PERSON,
         TITLE: CATEGORY.POPULAR_PEOPLE,
         PAGE_URL: URLS.POPULAR
     },
     [CATEGORY.NOW_PLAYING]: {
-        API_URL: API_REQUEST_URLS.NOW_PLAYING,
+        API_URL: API_REQUEST_URLS.MOVIE_NOW_PLAYING,
         TITLE: CATEGORY.NOW_PLAYING,
         PAGE_URL: URLS.NOW_PLAYING
     },
     [CATEGORY.COMING_SOON]: {
-        API_URL: API_REQUEST_URLS.COMING_SOON,
+        API_URL: API_REQUEST_URLS.MOVIE_COMING_SOON,
         TITLE: CATEGORY.COMING_SOON,
         PAGE_URL: URLS.COMING_SOON
     },
     [CATEGORY.TRENDING_MOVIE]: {
-        API_URL: API_REQUEST_URLS.TRENDING_MOVIE,
+        API_URL: API_REQUEST_URLS.TRENDING_MOVIE_TRENDING,
         TITLE: CATEGORY.TRENDING_MOVIE,
         PAGE_URL: URLS.TRENDING
     },
@@ -117,12 +117,12 @@ export const CONTENT_TYPE: CONTENT_TYPES = {
         PAGE_URL: URLS.TRENDING
     },
     [CATEGORY.ON_THE_AIR]: {
-        API_URL: API_REQUEST_URLS.ON_THE_AIR,
+        API_URL: API_REQUEST_URLS.TV_SHOW_ON_THE_AIR,
         TITLE: CATEGORY.ON_THE_AIR,
         PAGE_URL: URLS.ON_THE_AIR
     },
     [CATEGORY.AIRING_TODAY]: {
-        API_URL: API_REQUEST_URLS.AIRING_TODAY,
+        API_URL: API_REQUEST_URLS.TV_SHOW_AIRING_TODAY,
         TITLE: CATEGORY.AIRING_TODAY,
         PAGE_URL: URLS.AIRING_TODAY
     },
@@ -139,7 +139,7 @@ export const ContentList = component$((props: ContentListProps) => {
         const res = await fetch(`${API.URL}/${apiRequestUrl}?page=${page}${genre}`, API.OPTIONS);
         const json = await res.json();
 
-        return json.results as Movie[] | People[];
+        return json.results as Movie[] | Person[];
     });
 
     return <section class={`pt-[24px] pb-[24px]`}>

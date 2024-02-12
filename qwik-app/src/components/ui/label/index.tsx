@@ -14,8 +14,9 @@ export enum CATEGORY {
     SIMILAR_MOVIE = "Similar Movies",
     SIMILAR_TV_SHOW = "Similar TV Show",
 
-    CREDITS_MOVIE = 'Movie Cast',
-    CREDITS_TV_SHOW = 'TV Show Cast',
+    CREDITS_MOVIE = 'Movie Credits',
+    CREDITS_TV_SHOW = 'TV Show Credits',
+    CREDITS_COMBINED = 'Combined Movie and TV Credits',
 
     TOP_RATED = "Top Rated",
     TOP_RATED_MOVIE = "Top Rated Movie",

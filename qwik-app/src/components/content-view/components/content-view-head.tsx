@@ -21,8 +21,8 @@ interface ContentViewHeadProps {
 }
 
 const CONTENT_VIEW_TYPE: Record<ContentViewType, API_REQUEST_URLS> = {
-    [CATEGORY.MOVIE]: API_REQUEST_URLS.DETAILS_MOVIE,
-    [CATEGORY.TV_SHOW]: API_REQUEST_URLS.DETAILS_TV,
+    [CATEGORY.MOVIE]: API_REQUEST_URLS.MOVIE_DETAILS,
+    [CATEGORY.TV_SHOW]: API_REQUEST_URLS.TV_SHOP_DETAILS,
 }
 
 export const ContentViewHead = component$((props: ContentViewHeadProps) => {
@@ -35,9 +35,11 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
     const content = useResource$(async ({track}) => {
         track(() => params.id);
 
+        // GET CONTENT DETAILS
         const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}`, API.OPTIONS);
         const json = await res.json();
 
+        // GET CONTENT TRAILER
         const videoRes = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/videos`, API.OPTIONS);
         const videoJson = await videoRes.json();
 
@@ -232,7 +234,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   content.production_companies
                                       ? <>
                                           <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Production</h5>
-                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                          <p class={`text-h6-sm leading-[24px] sm:text-h6-md mb-[24px]`}>
                                               {
                                                   content.production_companies.map((productionCompany, index) => {
                                                       const isNotLastItem = index < content.production_companies.length - 1;
@@ -252,7 +254,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   content.tagline
                                       ? <>
                                           <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Tagline</h5>
-                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                          <p class={`text-h6-sm leading-[24px] sm:text-h6-md mb-[24px]`}>
                                               {content.tagline}
                                           </p>
                                       </>
@@ -263,7 +265,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   content.overview
                                       ? <>
                                           <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Storyline</h5>
-                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                          <p class={`text-h6-sm leading-[24px] sm:text-h6-md mb-[24px]`}>
                                               {content.overview}
                                           </p>
                                       </>

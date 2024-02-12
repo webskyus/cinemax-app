@@ -1,47 +1,22 @@
-import {component$, Resource, useResource$} from "@builder.io/qwik";
+import {component$, Resource, useResource$, useSignal} from "@builder.io/qwik";
 import {Loader} from "~/components/ui/loader";
-import {API, API_REQUEST_URLS} from '~/api';
-import {Movie, Person} from "~/api/models";
-import {CATEGORY} from "~/components/ui/label";
+import {API, API_MEDIA_TYPE, API_REQUEST_URLS} from '~/api';
+import {apiMediaType, Movie, TV} from "~/api/models";
 import {ContentCardXL} from "~/components/contend-card-xl";
 import {ErrorMessage} from "~/components/ui/error-message";
 import {useLocation} from "@builder.io/qwik-city";
+import {CATEGORY} from "~/components/ui/label";
 
-type RecommendationContentType = CATEGORY.MOVIE | CATEGORY.TV_SHOW;
-
-type RecommendationContentProps = {
-    API: API_REQUEST_URLS,
-    TITLE: CATEGORY
-}
-
-interface RecommendedContentListProps {
-    type: RecommendationContentType
-}
-
-const RECOMMENDATION_CONTENT_TYPE: Record<RecommendationContentType, RecommendationContentProps> = {
-    [CATEGORY.MOVIE]: {
-        API: API_REQUEST_URLS.MOVIE_DETAILS,
-        TITLE: CATEGORY.RECOMMENDED_MOVIE
-    },
-    [CATEGORY.TV_SHOW]: {
-        API: API_REQUEST_URLS.TV_SHOP_DETAILS,
-        TITLE: CATEGORY.RECOMMENDED_TV_SHOW
-    }
-}
-
-export const RecommendedContentList = component$((props: RecommendedContentListProps) => {
+export const CombinedContentList = component$(() => {
     const {params} = useLocation();
-    const {type} = props;
-    const apiRequestUrl = RECOMMENDATION_CONTENT_TYPE[type].API;
-    const pageTitle = RECOMMENDATION_CONTENT_TYPE[type].TITLE;
 
     const contentList = useResource$(async ({track}) => {
         track(() => params.id);
 
-        const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/${API_REQUEST_URLS.RECOMMENDATIONS}`, API.OPTIONS);
+        const res = await fetch(`${API.URL}/${API_REQUEST_URLS.PERSON_DETAILS}/${params.id}/${API_REQUEST_URLS.COMBINED_CREDITS}`, API.OPTIONS);
         const json = await res.json();
 
-        return json.results as Movie[] | Person[];
+        return json.cast as Movie[] | TV[];
     });
 
     return <section class={`pt-[24px] pb-[24px]`}>
@@ -54,13 +29,14 @@ export const RecommendedContentList = component$((props: RecommendedContentListP
                     font-bold text-h3-sm sm:text-h3-lg
                     text-transparent bg-clip-text bg-gradient-to-br from-primary to-grayscale-70
                 `}>
-                {pageTitle}
+                {CATEGORY.CREDITS_COMBINED}
             </h2>
         </nav>
 
         <section class={`relative min-h-[500px]`}>
             <Resource value={contentList}
                       onResolved={(contents) => {
+                          console.log('contents', contents)
                           return <section class={`
                                 grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
                                 
@@ -72,7 +48,7 @@ export const RecommendedContentList = component$((props: RecommendedContentListP
                           `}>
                               {
                                   contents.map((content) => {
-                                      return <ContentCardXL key={content.id} type={type} data={content}/>
+                                      return <ContentCardXL key={content.id} type={apiMediaType[content.media_type as API_MEDIA_TYPE]} data={content}/>
                                   })
                               }
                           </section>

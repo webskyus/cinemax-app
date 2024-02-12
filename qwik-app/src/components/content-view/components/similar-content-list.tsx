@@ -1,7 +1,7 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {Loader} from "~/components/ui/loader";
 import {API, API_REQUEST_URLS} from '~/api';
-import {Movie, People} from "~/api/models";
+import {Movie, Person} from "~/api/models";
 import {CATEGORY} from "~/components/ui/label";
 import {ContentCardXL} from "~/components/contend-card-xl";
 import {ErrorMessage} from "~/components/ui/error-message";
@@ -21,11 +21,11 @@ interface SimilarContentListProps {
 
 const SIMILAR_CONTENT_TYPE: Record<SimilarContentType, SimilarContentProps> = {
     [CATEGORY.MOVIE]: {
-        API: API_REQUEST_URLS.DETAILS_MOVIE,
+        API: API_REQUEST_URLS.MOVIE_DETAILS,
         TITLE: CATEGORY.SIMILAR_MOVIE
     },
     [CATEGORY.TV_SHOW]: {
-        API: API_REQUEST_URLS.DETAILS_TV,
+        API: API_REQUEST_URLS.TV_SHOP_DETAILS,
         TITLE: CATEGORY.SIMILAR_TV_SHOW
     }
 }
@@ -42,7 +42,7 @@ export const SimilarContentList = component$((props: SimilarContentListProps) =>
         const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/${API_REQUEST_URLS.SIMILAR}`, API.OPTIONS);
         const json = await res.json();
 
-        return json.results as Movie[] | People[];
+        return json.results as Movie[] | Person[];
     });
 
     return <section class={`pt-[24px] pb-[24px]`}>

@@ -1,3 +1,4 @@
+
 export const API_BASE_SETTING = {
     API_KEY: 'aba9bfc5921eae7409af946b7e091881',
     API_ACCESS_TOKEN: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmE5YmZjNTkyMWVhZTc0MDlhZjk0NmI3ZTA5MTg4MSIsInN1YiI6IjVmYjQ5ZjJjYWZhMWIwMDA0MGJiOGJkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.D8LpkCuU7-HDU8c4LYbmKCYuaqicz-bVZpRn3UWrfSU',
@@ -21,42 +22,49 @@ export const API = {
 export enum API_REQUEST_URLS {
     MOVIE = 'discover/movie',
     TV_SHOWS = 'discover/tv',
-    PEOPLE = 'person/popular',
+    PERSON = 'person/popular',
 
     GENRES_MOVIE = 'genre/movie/list',
     GENRES_TV_SHOW = 'genre/tv/list',
 
     SEARCH = 'search/multi',
 
-    TOP_RATED_MOVIE = 'movie/top_rated',
-    TOP_RATED_TV_SHOW = 'tv/top_rated',
+    MOVIE_TOP_RATED = 'movie/top_rated',
+    TV_SHOW_TOP_RATED = 'tv/top_rated',
 
-    POPULAR_MOVIE = 'movie/popular',
-    POPULAR_TV_SHOW = 'tv/popular',
+    MOVIE_POPULAR = 'movie/popular',
+    TV_SHOW_POPULAR = 'tv/popular',
 
-    NOW_PLAYING = 'movie/now_playing',
+    MOVIE_NOW_PLAYING = 'movie/now_playing',
 
-    COMING_SOON = 'movie/upcoming',
+    MOVIE_COMING_SOON = 'movie/upcoming',
 
-    TRENDING_MOVIE = 'trending/movie/week',
+    TRENDING_MOVIE_TRENDING = 'trending/movie/week',
     TRENDING_TV_SHOW = 'trending/tv/week',
     TRENDING_PEOPLE = 'trending/person/week',
 
-    ON_THE_AIR = 'tv/on_the_air',
-    AIRING_TODAY = 'tv/airing_today',
+    TV_SHOW_ON_THE_AIR = 'tv/on_the_air',
+    TV_SHOW_AIRING_TODAY = 'tv/airing_today',
 
-    DETAILS_MOVIE = 'movie',
-    DETAILS_TV = 'tv',
+    MOVIE_DETAILS = 'movie',
+    TV_SHOP_DETAILS = 'tv',
+    PERSON_DETAILS = 'person',
 
     CREDITS = 'credits',
-    CREDIT_MOVIE = 'movie',
-    CREDIT_TV = 'tv',
+    MOVIE_CREDITS = 'movie',
+    TV_CREDITS = 'tv',
+    COMBINED_CREDITS = 'combined_credits',
 
     SIMILAR = 'similar',
 
     RECOMMENDATIONS = 'recommendations',
 
-    DETAILS_PERSON = 'person',
+    PERSON_EXTERNAL_IDS = 'external_ids'
+}
+
+export const EXTERNAL_LINK = {
+    IMDB: 'https://www.imdb.com/name',
+    TWITTER: 'https://twitter.com',
 }
 
 export enum API_MEDIA_TYPE {

@@ -21,11 +21,11 @@ interface CreditListProps {
 
 const CREDIT_TYPE: Record<CreditListType, CastListTypeProps> = {
     [CATEGORY.MOVIE]: {
-        API: API_REQUEST_URLS.CREDIT_MOVIE,
+        API: API_REQUEST_URLS.MOVIE_CREDITS,
         TITLE: CATEGORY.CREDITS_MOVIE
     },
     [CATEGORY.TV_SHOW]: {
-        API: API_REQUEST_URLS.CREDIT_TV,
+        API: API_REQUEST_URLS.TV_CREDITS,
         TITLE: CATEGORY.CREDITS_TV_SHOW
     }
 }
