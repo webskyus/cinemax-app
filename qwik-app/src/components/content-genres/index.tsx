@@ -1,7 +1,7 @@
 import {component$, Resource, useResource$} from "@builder.io/qwik";
 import {CONTENT_TYPE_ITEMS} from "~/components/content-list";
 import {Loader} from "~/components/ui/loader";
-import {EmptyList} from "~/components/ui/empty-list";
+import {ErrorMessage} from "~/components/ui/error-message";
 import {Link} from "@builder.io/qwik-city";
 import {URLS} from "~/utils/urls";
 import {Button} from "~/components/ui/button";
@@ -25,12 +25,12 @@ type GENRES_TYPE_ITEMS = Record<Extract<CATEGORY, GenresType>, CONTENT_TYPE_ITEM
 const GENRES_TYPE: GENRES_TYPE_ITEMS = {
     [CATEGORY.GENRES_MOVIE]: {
         API_URL: API_REQUEST_URLS.GENRES_MOVIE,
-        TITLE: CATEGORY.MOVIE,
+        TITLE: CATEGORY.GENRES_MOVIE,
         PAGE_URL: URLS.MOVIE
     },
     [CATEGORY.GENRES_TV_SHOW]: {
         API_URL: API_REQUEST_URLS.GENRES_TV_SHOW,
-        TITLE: CATEGORY.TV_SHOW,
+        TITLE: CATEGORY.GENRES_TV_SHOW,
         PAGE_URL: URLS.TV_SHOW
     },
 }
@@ -81,7 +81,7 @@ export const ContentGenres = component$((props: ContentGenresProps) => {
                           </ul>
                       }}
                       onPending={() => <Loader isVisible={true}/>}
-                      onRejected={() => <EmptyList isVisible={true}/>}
+                      onRejected={() => <ErrorMessage isVisible={true}/>}
             />
         </section>
     </section>

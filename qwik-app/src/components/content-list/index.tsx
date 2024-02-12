@@ -1,6 +1,6 @@
 import {component$, Resource, useResource$, useTask$} from "@builder.io/qwik";
 import {ContentCardXL} from "../contend-card-xl";
-import {EmptyList} from "../ui/empty-list";
+import {ErrorMessage} from "../ui/error-message";
 import {Loader} from "~/components/ui/loader";
 import {API_REQUEST_URLS, API} from '~/api';
 import {CATEGORY} from "../ui/label";
@@ -20,11 +20,27 @@ export type CONTENT_TYPE_ITEMS = {
     PAGE_URL: URLS
 }
 
-type ExcludedCategoryTypes = CATEGORY.POPULAR | CATEGORY.TOP_RATED | CATEGORY.TRENDING | CATEGORY.GENRES_MOVIE | CATEGORY.GENRES_TV_SHOW;
+type CategoryTypes = CATEGORY.MOVIE |
+    CATEGORY.TV_SHOW |
+    CATEGORY.PEOPLE |
+    CATEGORY.RECOMMENDED_MOVIE |
+    CATEGORY.RECOMMENDED_TV_SHOW |
+    CATEGORY.TOP_RATED_MOVIE |
+    CATEGORY.TOP_RATED_TV_SHOW |
+    CATEGORY.POPULAR_MOVIE |
+    CATEGORY.POPULAR_TV_SHOW |
+    CATEGORY.POPULAR_PEOPLE |
+    CATEGORY.NOW_PLAYING |
+    CATEGORY.COMING_SOON |
+    CATEGORY.TRENDING_MOVIE |
+    CATEGORY.TRENDING_TV_SHOW |
+    CATEGORY.TRENDING_PEOPLE |
+    CATEGORY.ON_THE_AIR |
+    CATEGORY.AIRING_TODAY;
 
-type CONTENT_TYPES = Record<Exclude<CATEGORY, ExcludedCategoryTypes>, CONTENT_TYPE_ITEMS>;
+type CONTENT_TYPES = Record<CategoryTypes, CONTENT_TYPE_ITEMS>;
 
-export const CONTENT_TYPE: CONTENT_TYPES  = {
+export const CONTENT_TYPE: CONTENT_TYPES = {
     [CATEGORY.MOVIE]: {
         API_URL: API_REQUEST_URLS.MOVIE,
         TITLE: CATEGORY.MOVIE,
@@ -140,29 +156,27 @@ export const ContentList = component$((props: ContentListProps) => {
             </h2>
         </nav>
 
-        <section class={`
-               relative
-               grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
-               min-h-[500px]
-               
-               [@media(min-width:1600px)]:grid-cols-5
-               [@media(min-width:1919px)]:grid-cols-6
-               [@media(min-width:2419px)]:grid-cols-8
-               [@media(min-width:2619px)]:grid-cols-9
-               [@media(min-width:3000px)]:grid-cols-10
-        `}>
+        <section class={`relative min-h-[500px]`}>
             <Resource value={contentList}
                       onResolved={(contents) => {
-                          return <>
+                          return <section class={`
+                                grid grid-cols-2 sm:grid-cols-4 grid-rows-4 gap-2
+                                
+                                [@media(min-width:1600px)]:grid-cols-5
+                                [@media(min-width:1919px)]:grid-cols-6
+                                [@media(min-width:2419px)]:grid-cols-8
+                                [@media(min-width:2619px)]:grid-cols-9
+                                [@media(min-width:3000px)]:grid-cols-10
+                          `}>
                               {
                                   contents.map((content) => {
                                       return <ContentCardXL key={content.id} type={type} data={content}/>
                                   })
                               }
-                          </>
+                          </section>
                       }}
                       onPending={() => <Loader isVisible={true}/>}
-                      onRejected={() => <EmptyList isVisible={true}/>}
+                      onRejected={() => <ErrorMessage isVisible={true}/>}
             />
         </section>
     </section>

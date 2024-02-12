@@ -6,39 +6,40 @@ import {CATEGORY} from "~/components/ui/label";
 import {ContentCardXL} from "~/components/contend-card-xl";
 import {ErrorMessage} from "~/components/ui/error-message";
 import {useLocation} from "@builder.io/qwik-city";
+import {EmptyMessage} from "~/components/ui/empty-message";
 
-type RecommendationContentType = CATEGORY.MOVIE | CATEGORY.TV_SHOW;
+type SimilarContentType = CATEGORY.MOVIE | CATEGORY.TV_SHOW;
 
-type RecommendationContentProps = {
+type SimilarContentProps = {
     API: API_REQUEST_URLS,
     TITLE: CATEGORY
 }
 
-interface RecommendedContentListProps {
-    type: RecommendationContentType
+interface SimilarContentListProps {
+    type: SimilarContentType
 }
 
-const RECOMMENDATION_CONTENT_TYPE: Record<RecommendationContentType, RecommendationContentProps> = {
+const SIMILAR_CONTENT_TYPE: Record<SimilarContentType, SimilarContentProps> = {
     [CATEGORY.MOVIE]: {
         API: API_REQUEST_URLS.DETAILS_MOVIE,
-        TITLE: CATEGORY.RECOMMENDED_MOVIE
+        TITLE: CATEGORY.SIMILAR_MOVIE
     },
     [CATEGORY.TV_SHOW]: {
         API: API_REQUEST_URLS.DETAILS_TV,
-        TITLE: CATEGORY.RECOMMENDED_TV_SHOW
+        TITLE: CATEGORY.SIMILAR_TV_SHOW
     }
 }
 
-export const RecommendedContentList = component$((props: RecommendedContentListProps) => {
+export const SimilarContentList = component$((props: SimilarContentListProps) => {
     const {params} = useLocation();
     const {type} = props;
-    const apiRequestUrl = RECOMMENDATION_CONTENT_TYPE[type].API;
-    const pageTitle = RECOMMENDATION_CONTENT_TYPE[type].TITLE;
+    const apiRequestUrl = SIMILAR_CONTENT_TYPE[type].API;
+    const pageTitle = SIMILAR_CONTENT_TYPE[type].TITLE;
 
     const contentList = useResource$(async ({track}) => {
         track(() => params.id);
 
-        const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/${API_REQUEST_URLS.RECOMMENDATIONS}`, API.OPTIONS);
+        const res = await fetch(`${API.URL}/${apiRequestUrl}/${params.id}/${API_REQUEST_URLS.SIMILAR}`, API.OPTIONS);
         const json = await res.json();
 
         return json.results as Movie[] | People[];
@@ -71,9 +72,11 @@ export const RecommendedContentList = component$((props: RecommendedContentListP
                                 [@media(min-width:3000px)]:grid-cols-10
                           `}>
                               {
-                                  contents.map((content) => {
-                                      return <ContentCardXL key={content.id} type={type} data={content}/>
-                                  })
+                                  contents.length
+                                      ? contents.map((content) => {
+                                          return <ContentCardXL key={content.id} type={type} data={content}/>
+                                      })
+                                      : <EmptyMessage/>
                               }
                           </section>
                       }}

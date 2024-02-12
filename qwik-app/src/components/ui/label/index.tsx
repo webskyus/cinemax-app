@@ -5,11 +5,17 @@ export enum CATEGORY {
     MOVIE = "Movies",
     PEOPLE = "People",
 
-    GENRES_MOVIE = "Genres for Movie",
-    GENRES_TV_SHOW = "Genres for TV Show",
+    GENRES_MOVIE = "Movie Genres",
+    GENRES_TV_SHOW = "TV Show Genres",
 
     RECOMMENDED_MOVIE = "Recommended Movies",
     RECOMMENDED_TV_SHOW = "Recommended TV Show",
+
+    SIMILAR_MOVIE = "Similar Movies",
+    SIMILAR_TV_SHOW = "Similar TV Show",
+
+    CREDITS_MOVIE = 'Movie Cast',
+    CREDITS_TV_SHOW = 'TV Show Cast',
 
     TOP_RATED = "Top Rated",
     TOP_RATED_MOVIE = "Top Rated Movie",

@@ -31,6 +31,9 @@ export interface TV extends Exclude<Movie, "title"> {
     origin_country: string[]
     first_air_date: string
     episode_run_time: number[]
+    last_episode_to_air: {
+        runtime: number
+    }
 }
 
 export interface People {
@@ -62,6 +65,21 @@ export interface PeopleKnownFor {
     video: boolean | string
     vote_average: number
     vote_count: number
+}
+
+export interface Cast {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    order: number
 }
 
 interface ProductionCompanies {

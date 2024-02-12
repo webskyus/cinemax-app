@@ -47,6 +47,15 @@ export enum API_REQUEST_URLS {
 
     DETAILS_MOVIE = 'movie',
     DETAILS_TV = 'tv',
+
+    CREDITS = 'credits',
+    CREDIT_MOVIE = 'movie',
+    CREDIT_TV = 'tv',
+
+    SIMILAR = 'similar',
+
+    RECOMMENDATIONS = 'recommendations',
+
     DETAILS_PERSON = 'person',
 }
 

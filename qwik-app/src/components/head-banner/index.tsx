@@ -3,7 +3,7 @@ import {CATEGORY, Label} from "../ui/label";
 import {PlayIcon} from "~/components/icons/play-icon";
 import {Button} from "~/components/ui/button";
 import {Loader} from "~/components/ui/loader";
-import {EmptyList} from "~/components/ui/empty-list";
+import {ErrorMessage} from "~/components/ui/error-message";
 import {Link, useLocation} from "@builder.io/qwik-city";
 import {CONTENT_TYPE} from "~/components/content-list";
 import {Movie, TV} from "~/api/models";
@@ -40,7 +40,7 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                                                 relative flex flex-col
                                                 w-[100%] min-h-[500px] p-[24px] bg
                                                 bg-label-gradient bg-no-repeat bg-center bg-cover
-                                                rounded-[6px]
+                                                rounded-[6px] overflow-hidden
                                                 
                                                 after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] after:bg-grayscale-100 after:opacity-70 -z-1
                                                 
@@ -68,6 +68,6 @@ export const HeadBanner = component$((props: HeadBannerProps) => {
                       </section>
                   }}
                   onPending={() => <Loader isVisible={true}/>}
-                  onRejected={() => <EmptyList isVisible={true}/>}/>
+                  onRejected={() => <ErrorMessage isVisible={true}/>}/>
     </section>
 })

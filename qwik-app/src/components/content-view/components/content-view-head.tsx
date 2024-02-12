@@ -5,7 +5,7 @@ import {StarIcon} from "~/components/icons/star-icon";
 import {PlaySolidIcon} from "~/components/icons/play-solid-icon";
 import {CATEGORY} from "~/components/ui/label";
 import {Loader} from "~/components/ui/loader";
-import {EmptyList} from "~/components/ui/empty-list";
+import {ErrorMessage} from "~/components/ui/error-message";
 import errorPlaceholder from "/img/error-placeholder.svg";
 import {convertMinutes, formatterForBudget} from "~/utils";
 import {VoteCountIcon} from "~/components/icons/vote-count-icon";
@@ -70,7 +70,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                       const contentType = type === CATEGORY.MOVIE;
                       const title = contentType ? content.title : (content as TV).name;
                       const releaseDate = contentType ? content.release_date : (content as TV).first_air_date;
-                      const runTime = contentType ? content.runtime : (content as TV).episode_run_time[0]
+                      const runTime = contentType ? content.runtime : (content as TV).last_episode_to_air.runtime;
 
                       return <section
                           style={{background: `var(--color-alerts-error) url(${API.CONFIGURE_IMAGES_URL('original')}/${content.backdrop_path}) no-repeat top/cover`}}
@@ -79,7 +79,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                                         w-[100%] min-h-[500px] p-[24px] 
                                                         text-grayscale-100 dark:text-grayscale-10
                                                         bg bg-label-gradient bg-no-repeat bg-center bg-cover
-                                                        rounded-[6px]
+                                                        rounded-[6px] overflow-hidden
                                                         
                                                         after:absolute after:top-[0] after:bottom-[0] after:right-[0] after:left-[0] 
                                                         after:bg-grayscale-100 after:opacity-70 -z-1
@@ -102,7 +102,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                               />
                           </aside>
 
-                          <article class={`relative z-10 sm:pl-[24px]`}>
+                          <article class={`relative z-10 sm:pl-[24px] text-grayscale-10`}>
                               <h1 class={`font-bold text-h3-sm md:text-h3-sm lg:sm:text-h3-lg mb-[8px]`}>
                                   {title}
                               </h1>
@@ -115,6 +115,15 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                             after:rounded-[50%] after:bg-primary
                                      `}>
                                       {type}
+                                  </li>
+
+                                  <li class={`
+                                            relative mb-[4px] pr-[16px] whitespace-nowrap
+                                            after:content-[''] after:absolute after:right-[5px] 
+                                            after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
+                                            after:rounded-[50%] after:bg-primary
+                                     `}>
+                                      {releaseDate}
                                   </li>
 
                                   <li class={`
@@ -160,6 +169,9 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                   <li class={`
                                             relative mb-[4px] pr-[16px] whitespace-nowrap
                                             after:content-[''] after:absolute after:right-[5px] 
+                                            
+                                            ${content.budget ? '' : 'after:hidden'}
+                                            
                                             after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
                                             after:rounded-[50%] after:bg-primary
                                      `}>
@@ -176,16 +188,6 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                                       }
                                   </li>
 
-                                  <li class={`
-                                            relative mb-[4px] pr-[16px] whitespace-nowrap
-                                            
-                                            ${content.budget ? "after:content-['']" : 'after:hidden'} 
-                                            after:absolute after:right-[5px] 
-                                            after:top-[0] after:w-[5px] after:h-[5px] after:mt-[5px] 
-                                            after:rounded-[50%] after:bg-primary
-                                     `}>
-                                      {runTime}
-                                  </li>
 
                                   {
                                       content.budget
@@ -227,6 +229,26 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                               </ul>
 
                               {
+                                  content.production_companies
+                                      ? <>
+                                          <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Production</h5>
+                                          <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
+                                              {
+                                                  content.production_companies.map((productionCompany, index) => {
+                                                      const isNotLastItem = index < content.production_companies.length - 1;
+
+                                                      return <span key={productionCompany.id}>
+                                                          {productionCompany.name}
+                                                          {isNotLastItem ? ', ' : ''}
+                                                      </span>
+                                                  })
+                                              }
+                                          </p>
+                                      </>
+                                      : ''
+                              }
+
+                              {
                                   content.tagline
                                       ? <>
                                           <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Tagline</h5>
@@ -240,7 +262,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                               {
                                   content.overview
                                       ? <>
-                                          <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Overview</h5>
+                                          <h5 class={`font-semibold text-h5-sm sm:text-h5-md mb-[8px]`}>Storyline</h5>
                                           <p class={`text-h6-sm leading-[24px] line-he sm:text-h6-md mb-[24px]`}>
                                               {content.overview}
                                           </p>
@@ -252,7 +274,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                       </section>
                   }}
                   onPending={() => <Loader isVisible={true}/>}
-                  onRejected={() => <EmptyList isVisible={true}/>}/>
+                  onRejected={() => <ErrorMessage isVisible={true}/>}/>
 
 
         <Modal isVisible={isModalVisibility.value} id={videoTrailerId.value} action={changeModalVisibility}/>

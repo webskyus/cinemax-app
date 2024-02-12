@@ -1,11 +1,9 @@
 import {component$, useStore, useTask$} from "@builder.io/qwik";
 import {ContentCardXL} from "~/components/contend-card-xl";
 import {debounce, generateRandomLetter} from "~/utils";
-import {CATEGORY} from "~/components/ui/label";
-import {EmptyList} from "~/components/ui/empty-list";
-import {Loader} from "~/components/ui/loader";
 import {apiMediaType} from "~/api/models";
 import {API, API_MEDIA_TYPE, API_REQUEST_URLS} from "~/api";
+import {EmptyMessage} from "~/components/ui/empty-message";
 
 interface AutoCompleteStoreProps {
     searchInput: string,
@@ -68,7 +66,7 @@ export const AutoComplete = component$(() => {
                [@media(min-width:2619px)]:grid-cols-9
                [@media(min-width:3000px)]:grid-cols-10
         `}>
-            <EmptyList isVisible={state.emptyList}/>
+            <EmptyMessage isVisible={state.emptyList}/>
             <SearchResultList state={state}/>
         </section>
     </>
