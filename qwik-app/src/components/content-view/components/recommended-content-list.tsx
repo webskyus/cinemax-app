@@ -3,7 +3,7 @@ import { Loader } from "~/components/ui/loader";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { Movie, Person } from "~/api/models";
 import { CATEGORY } from "~/components/ui/label";
-import { ContentCardXL } from "~/components/contend-card-xl";
+import { ContentCard } from "~/components/contend-card";
 import { ErrorMessage } from "~/components/ui/error-message";
 import { useLocation } from "@builder.io/qwik-city";
 
@@ -88,7 +88,7 @@ export const RecommendedContentList = component$(
                 >
                   {contents.map((content) => {
                     return (
-                      <ContentCardXL
+                      <ContentCard
                         key={content.id}
                         type={type}
                         data={content}

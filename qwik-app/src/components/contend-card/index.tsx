@@ -7,12 +7,12 @@ import type { Cast, Movie, Person } from "~/api/models";
 import { API } from "~/api";
 import errorPlaceholder from "/public/img/error-placeholder.svg?url";
 
-interface ContentCartXLProps {
+interface ContentCardProps {
   data: Movie | Person | Cast;
   type: keyof typeof CONTENT_TYPE;
 }
 
-export const ContentCardXL = component$((props: ContentCartXLProps) => {
+export const ContentCard = component$((props: ContentCardProps) => {
   const { type, data } = props;
   const getContentUrl = CONTENT_TYPE[type].PAGE_URL;
   const getContentTitle = CONTENT_TYPE[type].TITLE;

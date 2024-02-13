@@ -1,5 +1,5 @@
 import { component$, useStore, useTask$ } from "@builder.io/qwik";
-import { ContentCardXL } from "~/components/contend-card-xl";
+import { ContentCard } from "~/components/contend-card";
 import { debounce, generateRandomLetter } from "~/utils";
 import { apiMediaType } from "~/api/models";
 import type { API_MEDIA_TYPE } from "~/api";
@@ -88,7 +88,7 @@ export const SearchResultList = component$(
         {state.searchResults.length
           ? state.searchResults.map((content) => {
               return (
-                <ContentCardXL
+                <ContentCard
                   key={content.id}
                   data={content}
                   type={apiMediaType[content.media_type as API_MEDIA_TYPE]}
