@@ -8,7 +8,7 @@ import type { API_MEDIA_TYPE } from "~/api";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { Movie, TV } from "~/api/models";
 import { apiMediaType } from "~/api/models";
-import { ContentCardXL } from "~/components/contend-card-xl";
+import { ContentCard } from "~/components/contend-card";
 import { ErrorMessage } from "~/components/ui/error-message";
 import { useLocation } from "@builder.io/qwik-city";
 import { CATEGORY } from "~/components/ui/label";
@@ -65,7 +65,7 @@ export const CombinedContentList = component$(() => {
               >
                 {contents.map((content) => {
                   return (
-                    <ContentCardXL
+                    <ContentCard
                       key={content.id}
                       type={apiMediaType[content.media_type as API_MEDIA_TYPE]}
                       data={content}

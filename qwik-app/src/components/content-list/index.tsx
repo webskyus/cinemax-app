@@ -1,5 +1,5 @@
 import { component$, Resource, useResource$ } from "@builder.io/qwik";
-import { ContentCardXL } from "../contend-card-xl";
+import { ContentCard } from "../contend-card";
 import { ErrorMessage } from "../ui/error-message";
 import { Loader } from "~/components/ui/loader";
 import { API_REQUEST_URLS, API } from "~/api";
@@ -183,7 +183,7 @@ export const ContentList = component$((props: ContentListProps) => {
               >
                 {contents.map((content) => {
                   return (
-                    <ContentCardXL
+                    <ContentCard
                       key={content.id}
                       type={type}
                       data={content}

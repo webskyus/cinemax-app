@@ -4,7 +4,7 @@ import { CATEGORY } from "~/components/ui/label";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { Cast } from "~/api/models";
 import { useLocation } from "@builder.io/qwik-city";
-import { ContentCardXL } from "~/components/contend-card-xl";
+import { ContentCard } from "~/components/contend-card";
 import { EmptyMessage } from "~/components/ui/empty-message";
 import { ErrorMessage } from "~/components/ui/error-message";
 
@@ -89,7 +89,7 @@ export const CreditList = component$((props: CreditListProps) => {
                 {casts.length ? (
                   casts.map((cast) => {
                     return (
-                      <ContentCardXL
+                      <ContentCard
                         data={cast}
                         type={CATEGORY.PEOPLE}
                         key={cast.id}
