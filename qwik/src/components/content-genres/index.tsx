@@ -5,7 +5,7 @@ import { ErrorMessage } from "~/components/ui/error-message";
 import { Link } from "@builder.io/qwik-city";
 import { URLS } from "~/utils/urls";
 import { Button } from "~/components/ui/button";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { API, API_REQUEST_URLS } from "~/api";
 
 export interface Genres {

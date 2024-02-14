@@ -1,6 +1,6 @@
 import { component$, Resource, useResource$ } from "@builder.io/qwik";
 import { Loader } from "~/components/ui/loader";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { Cast } from "~/api/models";
 import { useLocation } from "@builder.io/qwik-city";

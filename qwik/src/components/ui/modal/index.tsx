@@ -1,10 +1,10 @@
-import type { QRL} from "@builder.io/qwik";
-import {component$} from "@builder.io/qwik";
+import type { QRL } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 
 interface ModalProps {
   isVisible: boolean;
   id: string;
-  action:  QRL<() => boolean>
+  action: QRL<() => boolean>;
 }
 
 export const Modal = component$((props: ModalProps) => {

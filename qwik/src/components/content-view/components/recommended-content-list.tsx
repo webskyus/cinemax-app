@@ -2,7 +2,7 @@ import { component$, Resource, useResource$ } from "@builder.io/qwik";
 import { Loader } from "~/components/ui/loader";
 import { API, API_REQUEST_URLS } from "~/api";
 import type { Movie, Person } from "~/api/models";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { ContentCard } from "~/components/contend-card";
 import { ErrorMessage } from "~/components/ui/error-message";
 import { useLocation } from "@builder.io/qwik-city";

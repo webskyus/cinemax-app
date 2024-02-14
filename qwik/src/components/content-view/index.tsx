@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { ContentViewHead } from "~/components/content-view/components/content-view-head";
-import type { CATEGORY } from "~/components/ui/label";
+import type { CATEGORY } from "~/components/ui/header";
 import { RecommendedContentList } from "~/components/content-view/components/recommended-content-list";
 import { CreditList } from "~/components/content-view/components/credit-list";
 import { SimilarContentList } from "~/components/content-view/components/similar-content-list";

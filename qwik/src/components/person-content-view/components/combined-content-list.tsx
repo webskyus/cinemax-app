@@ -1,8 +1,4 @@
-import {
-  component$,
-  Resource,
-  useResource$,
-} from "@builder.io/qwik";
+import { component$, Resource, useResource$ } from "@builder.io/qwik";
 import { Loader } from "~/components/ui/loader";
 import type { API_MEDIA_TYPE } from "~/api";
 import { API, API_REQUEST_URLS } from "~/api";
@@ -11,7 +7,7 @@ import { apiMediaType } from "~/api/models";
 import { ContentCard } from "~/components/contend-card";
 import { ErrorMessage } from "~/components/ui/error-message";
 import { useLocation } from "@builder.io/qwik-city";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 
 export const CombinedContentList = component$(() => {
   const { params } = useLocation();

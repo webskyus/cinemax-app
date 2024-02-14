@@ -9,7 +9,7 @@ import { OnTvIcon } from "~/components/icons/on-tv-icon";
 import { AiringTodayIcon } from "~/components/icons/airing-today-icon";
 import { URLS } from "~/utils/urls";
 import { Link, useLocation } from "@builder.io/qwik-city";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 
 interface Menu {
   id: number;

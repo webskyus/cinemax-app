@@ -10,7 +10,7 @@ import { Image, useImageProvider } from "qwik-image";
 import { Button, BUTTON_TYPE } from "~/components/ui/button";
 import { StarIcon } from "~/components/icons/star-icon";
 import { PlaySolidIcon } from "~/components/icons/play-solid-icon";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { Loader } from "~/components/ui/loader";
 import { ErrorMessage } from "~/components/ui/error-message";
 import errorPlaceholder from "/public/img/error-placeholder.svg?url";

@@ -3,7 +3,7 @@ import { ContentCard } from "../contend-card";
 import { ErrorMessage } from "../ui/error-message";
 import { Loader } from "~/components/ui/loader";
 import { API_REQUEST_URLS, API } from "~/api";
-import { CATEGORY } from "../ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { URLS } from "~/utils/urls";
 import type { Movie, Person } from "~/api/models";
 import { useLocation } from "@builder.io/qwik-city";
@@ -183,11 +183,7 @@ export const ContentList = component$((props: ContentListProps) => {
               >
                 {contents.map((content) => {
                   return (
-                    <ContentCard
-                      key={content.id}
-                      type={type}
-                      data={content}
-                    />
+                    <ContentCard key={content.id} type={type} data={content} />
                   );
                 })}
               </section>

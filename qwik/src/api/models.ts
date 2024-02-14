@@ -1,6 +1,6 @@
 import { API_MEDIA_TYPE } from "~/api/index";
 import type { Genres } from "~/components/content-genres";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 
 export interface Movie {
   adult: boolean;

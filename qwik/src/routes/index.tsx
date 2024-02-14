@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import { HeadBanner } from "~/components/head-banner";
 import { ContentList } from "~/components/content-list";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { ContentGenres } from "~/components/content-genres";
 
 export default component$(() => {

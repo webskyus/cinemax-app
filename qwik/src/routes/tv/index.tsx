@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { HeadBanner } from "~/components/head-banner";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { ContentList } from "~/components/content-list";
 
 export default component$(() => {

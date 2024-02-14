@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { CATEGORY } from "~/components/ui/label";
+import { CATEGORY } from "~/components/ui/header";
 import { ContentView } from "~/components/content-view";
 
 export default component$(() => {

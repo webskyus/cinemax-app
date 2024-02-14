@@ -1,5 +1,5 @@
-import type { QRL} from "@builder.io/qwik";
-import {component$, Slot, useStore} from "@builder.io/qwik";
+import type { QRL } from "@builder.io/qwik";
+import { component$, Slot, useStore } from "@builder.io/qwik";
 
 export enum BUTTON_TYPE {
   PRIMARY = "PRIMARY",

@@ -34,7 +34,7 @@ export const ContentCard = component$((props: ContentCardProps) => {
   return (
     <Link
       href={`${getContentUrl}/${data.id}`}
-      class={`relative transition-all hover:scale-[105%] hover:z-10`}
+      class={`relative transition-all hover:z-10 hover:scale-[105%]`}
     >
       <Image
         src={poster}

@@ -1,5 +1,5 @@
 import { component$, Resource, useResource$ } from "@builder.io/qwik";
-import { CATEGORY, Label } from "../ui/label";
+import { Label } from "../ui/label";
 import { PlayIcon } from "~/components/icons/play-icon";
 import { Button } from "~/components/ui/button";
 import { Loader } from "~/components/ui/loader";
@@ -9,6 +9,7 @@ import { CONTENT_TYPE } from "~/components/content-list";
 import type { Movie, TV } from "~/api/models";
 import { API } from "~/api";
 import { getContentWithGenresParam } from "~/utils";
+import { CATEGORY } from "~/components/ui/header";
 
 interface HeadBannerProps {
   type: CATEGORY.MOVIE | CATEGORY.TV_SHOW;
