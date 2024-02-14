@@ -10,12 +10,15 @@
     "astro": "astro",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
-    "lint": "eslint \"src/**/*.{ts, astro}*\"",
-    "lint.fix": "eslint --fix \"src/**/*.{ts, astro}*\""
+    "lint": "eslint .",
+    "lint.fix": "eslint . --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.4",
+    "@typescript-eslint/parser": "^7.0.1",
     "astro": "^4.3.6",
+    "eslint": "^8.56.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "tailwind": "^4.0.0",
     "typescript": "^5.3.3"
   },

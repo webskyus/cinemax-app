@@ -1,13 +1,14 @@
 **/*.log
 **/.DS_Store
 *.
+.astro/
 .vscode/settings.json
 .history
 .yarn
 bazel-*
 bazel-bin
 bazel-out
-bazel-qwik
+bazel-astro
 bazel-testlogs
 dist
 dist-dev

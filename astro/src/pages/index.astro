@@ -1,10 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from "~/layouts/Layout.astro";
+import HeadBanner from "~/components/ui/HeadBanner.astro";
+import { CATEGORY } from "~/types/category";
 ---
 
 <Layout>
-	<section class={"pb-[96px] text-white"}>
-		fff 333
-	</section>
+  <section class={"pb-[96px] text-white"}>
+    {/*POPULAR TV BANNER*/}
+    <HeadBanner type={CATEGORY.TV_SHOW} />
+  </section>
 </Layout>
-
