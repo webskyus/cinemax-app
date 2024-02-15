@@ -7,7 +7,7 @@ export const debounce = <F extends (...args: any) => any>(
   return (...args: Parameters<F>): Promise<ReturnType<F>> => {
     return new Promise((resolve) => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (timeoutId) clearTimeout(timeoutId);
+      if (timeoutId) {clearTimeout(timeoutId);}
 
       timeoutId = setTimeout(() => {
         resolve(fn(...(args as any[])));

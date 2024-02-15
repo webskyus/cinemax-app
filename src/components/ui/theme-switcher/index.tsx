@@ -25,7 +25,6 @@ export const ThemeSwitch = component$(() => {
 
   useStylesScoped$(styles);
 
-  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
     async () => {
       const theme = document.documentElement.className;

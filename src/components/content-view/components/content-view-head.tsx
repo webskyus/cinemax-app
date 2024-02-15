@@ -68,7 +68,9 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
   );
 
   const imageTransformer$ = $(({ src }: ImageTransformerProps): string => {
-    if (src) return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
+    if (src) {
+        return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
+    }
 
     return errorPlaceholder;
   });

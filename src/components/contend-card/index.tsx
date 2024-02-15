@@ -21,7 +21,9 @@ export const ContentCard = component$((props: ContentCardProps) => {
   const title = (data as Person | Cast).name || (data as Movie).title;
 
   const imageTransformer$ = $(({ src }: ImageTransformerProps): string => {
-    if (src) return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
+    if (src) {
+      return `${API.CONFIGURE_IMAGES_URL()}/${src}`;
+    }
 
     return errorPlaceholder;
   });

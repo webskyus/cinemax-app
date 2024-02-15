@@ -23,18 +23,18 @@ export const AutoComplete = component$(() => {
 
   useTask$(async ({ track }) => {
     const searchInput = track(() => state.searchInput);
-  
+
     if (!searchInput) {
       state.searchResults = [];
       state.emptyList = true;
       return;
     }
-  
+
     const controller = new AbortController();
     state.searchResults = await debouncedGetContent(state, controller);
-    state.emptyList = false;
- 
-    if (!state.searchResults.length) state.emptyList = true;
+
+
+    state.emptyList = !state.searchResults.length;
 
     return () => {
       controller.abort();
@@ -75,7 +75,7 @@ export const AutoComplete = component$(() => {
         {
           state.emptyList && <EmptyMessage />
         }
-        
+
         <SearchResultList state={state} />
       </section>
     </>
