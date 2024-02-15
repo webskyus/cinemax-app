@@ -43,5 +43,6 @@ lerna-debug.log*
 # Vercel
 .vercel
 
-# VSCode History Ext Folder
+# VSCode 
 .history
+.vscode
