@@ -23,19 +23,19 @@ export const AutoComplete = component$(() => {
 
   useTask$(async ({ track }) => {
     const searchInput = track(() => state.searchInput);
-  
+    console.log('dd.emptyList.1', state.emptyList)
     if (!searchInput) {
       state.searchResults = [];
       state.emptyList = true;
       return;
     }
-  
+    console.log('dd.emptyList.1', state.emptyList)
     const controller = new AbortController();
     state.searchResults = await debouncedGetContent(state, controller);
     state.emptyList = false;
- 
-    if (!state.searchResults.length) state.emptyList = true;
 
+    if (!state.searchResults.length) state.emptyList = true;
+    console.log('dd.emptyList.1', state.emptyList)
     return () => {
       controller.abort();
     };
@@ -72,10 +72,7 @@ export const AutoComplete = component$(() => {
                [@media(min-width:3000px)]:grid-cols-10
         `}
       >
-        {
-          state.emptyList && <EmptyMessage />
-        }
-        
+        <EmptyMessage isVisible={state.emptyList} />
         <SearchResultList state={state} />
       </section>
     </>

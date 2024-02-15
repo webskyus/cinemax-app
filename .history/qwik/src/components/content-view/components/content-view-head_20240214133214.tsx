@@ -274,7 +274,7 @@ export const ContentViewHead = component$((props: ContentViewHeadProps) => {
                         type={BUTTON_TYPE.TEXT}
                       >
                         <PlaySolidIcon class={`mr-[4px] translate-y-[-1px]`} />
-                          Trailer
+                        Video Trailer
                       </Button>
                     </li>
                   ) : (

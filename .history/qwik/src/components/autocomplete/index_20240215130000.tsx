@@ -23,7 +23,7 @@ export const AutoComplete = component$(() => {
 
   useTask$(async ({ track }) => {
     const searchInput = track(() => state.searchInput);
-  
+    console.log('dd.emptyList.1', state.emptyList)
     if (!searchInput) {
       state.searchResults = [];
       state.emptyList = true;

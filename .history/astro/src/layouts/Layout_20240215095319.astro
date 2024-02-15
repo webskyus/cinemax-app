@@ -1,5 +1,4 @@
 ---
-import Header from '~/components/ui/Header.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -23,14 +22,12 @@ const {
   </head>
   <body>
     <main
-      class={` 
-                h-[100%] pb-[33px] pl-[24px]
+      class={` h-[100%] 
+                overflow-auto pb-[33px] pl-[24px]
                 pr-[24px] pt-[33px] 
-                overflow-auto
                 scrollbar-hide xl:pl-[104px]
             `}
     >
-      <Header/>
       <slot />
     </main>
   </body>
