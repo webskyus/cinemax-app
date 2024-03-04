@@ -1,6 +1,6 @@
 # CineMax Movie Streaming Qwik City App ⚡️
 
-This is my pet project project with Qwik, Tailwind, TS, and TheMovieDB API.
+This is my pet project with Qwik, Tailwind, TS, and TheMovieDB API.
 
 ---
 
