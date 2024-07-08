@@ -14,6 +14,7 @@
 - 🎭 **Actor Listings**: Complete list of actors featured in the movie.
 - 🧑‍🎤 **Detailed Actor Descriptions**: Information on each actor, including biography, filmography, and awards.
 - 🌗 **Theme Switch**: Option to choose between light and dark themes for comfortable viewing at any time of day.
+- 📱 Responsive Design: Enjoy a seamless browsing experience on any device, whether you're on a desktop, tablet, or smartphone.
 
 ---
 ## Project Structure
