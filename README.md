@@ -1,17 +1,21 @@
 # CineMax Movie Streaming Qwik City App ⚡️
 
-This is my pet project with Qwik, Tailwind, TS, and TheMovieDB API.
+## Stack
+- [Qwik](https://qwik.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [TheMovieDB API](https://developer.themoviedb.org/docs/getting-started)
 
 ---
-
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+## Features 
+- 🎬 **Movie Categories**: Easy navigation through various genres with detailed search options.
+- 🔍 **Category Search**: Quick and efficient search for movies within selected categories.
+- 📄 **Detailed Movie Descriptions**: Comprehensive information on each movie, including plot, reviews, and ratings.
+- 🎭 **Actor Listings**: Complete list of actors featured in the movie.
+- 🧑‍🎤 **Detailed Actor Descriptions**: Information on each actor, including biography, filmography, and awards.
+- 🌗 **Theme Switch**: Option to choose between light and dark themes for comfortable viewing at any time of day.
 
 ---
-
 ## Project Structure
 
 This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
